@@ -18,7 +18,7 @@ def detail(request, post_pk):
     reviews = post.review_set.all()
     context = {
         'post': post,
-        'reviewForm': reviewForm,
+        'review_form': review_form,
         'reviews': reviews,
     }
     return render(request, 'plates/detail.html', context)
