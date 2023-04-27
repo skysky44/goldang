@@ -24,82 +24,84 @@ def detail(request, post_pk):
     return render(request, 'plates/detail.html', context)
 
 
-@login_required
+
+# @login_required
 def create(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
-            article = form.save(commit=False)
-            article.user = request.user
-            article.save()
-            return redirect('articles:detail', article.pk)
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('plates:detail', post.pk)
     else:
-        form = ArticleForm()
+        form = PostForm()
     context = {
         'form': form,
     }
-    return render(request, 'articles/create.html', context)
+    return render(request, 'plates/create.html', context)
 
 
-@login_required
-def delete(request, artilce_pk):
-    article = Article.objects.get(pk=artilce_pk)
-    if request.user == article.user:
-        article.delete()
-    return redirect('articles:index')
+# @login_required
+def delete(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    if request.user == post.user:
+        post.delete()
+    return redirect('plates:index')
 
 
-@login_required
-def update(request, article_pk):
-    article = Article.objects.get(pk=article_pk)
-    if request.user == article.user:
+# @login_required
+def update(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    if request.user == post.user:
         if request.method == 'POST':
-            form = ArticleForm(request.POST, instance=article)
+            form = PostForm(request.POST, instance=post)
             if form.is_valid():
                 form.save()
-                return redirect('articles:detail', article.pk)
+                return redirect('plates:detail', post.pk)
         else:
-            form = ArticleForm(instance=article)
+            form = PostForm(instance=post)
     else:
-        return redirect('articles:index')
+        return redirect('plates:index')
     context = {
-        'article': article,
+        'post': post,
         'form': form,
     }
-    return render(request, 'articles/update.html', context)
+    return render(request, 'plates/update.html', context)
 
 
-@login_required
-def comment_create(request, article_pk):
-    article = Article.objects.get(pk=article_pk)
-    comment_form = CommentForm(request.POST)
-    if comment_form.is_valid():
-        comment = comment_form.save(commit=False)
-        comment.article = article
-        comment.user = request.user
-        comment.save()
-        return redirect('articles:detail', article.pk)
+# @login_required
+def review_create(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    post_form = PostForm(request.POST)
+    if post_form.is_valid():
+        review = post_form.save(commit=False)
+        review.post = post
+        review.user = request.user
+        review.save()
+        return redirect('plates:detail', post.pk)
     context = {
-        'article': article,
-        'comment_form': comment_form,
+        'post': post,
+        'post_form': post_form,
     }
-    return render(request, 'articles/detail.html', context)
+    return render(request, 'plates/detail.html', context)
 
 
-@login_required
-def comment_delete(request, article_pk, comment_pk):
-    comment = Comment.objects.get(pk=comment_pk)
+# @login_required
+def review_delete(request, post_pk, review_pk):
+    review = review.objects.get(pk=review_pk)
 
-    if request.user == comment.user:
-        comment.delete()
-    return redirect('articles:detail', article_pk)
+    if request.user == review.user:
+        review.delete()
+    return redirect('plates:detail', post_pk)
 
 
-def likes(request, article_pk):
-    article = Article.objects.get(pk=article_pk)
+def likes(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
 
-    if request.user in article.like_users.all():
-        article.like_users.remove(request.user)
+    if request.user in post.like_users.all():
+        post.like_users.remove(request.user)
     else:
-        article.like_users.add(request.user)
-    return redirect('articles:index')
+        post.like_users.add(request.user)
+    return redirect('plates:index')
+
