@@ -18,7 +18,7 @@ def detail(request, post_pk):
     reviews = post.review_set.all()
     context = {
         'post': post,
-        'reviewForm': reviewForm,
+        'review_Form': review_Form,
         'reviews': reviews,
     }
     return render(request, 'plates/detail.html', context)
@@ -86,6 +86,18 @@ def review_create(request, post_pk):
     }
     return render(request, 'plates/detail.html', context)
 
+# @login_required
+def review_update(request, post_pk, review_pk):
+    post = Post.objects.get(pk=post_pk)
+    review = Review.objects.get(pk=review_pk)
+    if request.user == review:
+        if request.method == 'POST':
+            form = ReviewForm(request.POST, instance=review)
+            if form.is_valid():
+                form.save()
+                return redirect('plates:detail', post.pk)
+        else:
+            form = ReviewForm(instance=review)
 
 # @login_required
 def review_delete(request, post_pk, review_pk):
