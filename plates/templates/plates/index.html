@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load plates_extras %}
 
 {% block title %}
 Index
@@ -17,6 +18,11 @@ Index
 {% for post in posts %}
   <h4>{{ post.title }}</h4>
   <p>{{ post.content }}</p>
+  {% if post|get_rating is not None %}
+  <p>{{ post|get_rating }}</p>
+  {% else %}
+  <p>평점이 없습니다.</p>
+  {% endif %}
   <hr>
 {% endfor %}
 
