@@ -97,13 +97,14 @@ def profile(request, username):
 
 
 @login_required
-def follow(request, username):
-    user = get_user_model().object.get(username=username)
-    if request.user != user:
-        if request.user in user.followers.all():
+def follow(request, user_pk):
+    user = get_user_model().objects.get(pk=user_pk)
+    me = request.user
+    if me != user:
+        if me in user.followers.all():
             # follow 취소
-            user.followers.remove()
+            user.followers.remove(me)
         else:
             # follow
-            user.followers.add()
-    return redirect('accounts:profile', username)
+            user.followers.add(me)
+    return redirect('accounts:profile', user.username)
