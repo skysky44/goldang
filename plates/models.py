@@ -73,7 +73,7 @@ class Review(models.Model):
     content = models.TextField('내용')
     rating = models.IntegerField('평점')
     visited_date = models.DateField('방문일')
-    created_at = models.DateTimeField('업로드 날짜', auto_now_add=False)
+    created_at = models.DateTimeField('업로드 날짜', auto_now_add=True)
     updated_at = models.DateTimeField('수정 날짜', auto_now=True)
 
     def __str__(self):
