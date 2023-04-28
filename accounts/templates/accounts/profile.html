@@ -5,10 +5,12 @@ Profile
 {% endblock title %}
 
 {% block content %}
-<h1>{{ person }}님 안녕하세요</h1>
+<h1>{{ person }}님의 프로필</h1>
+<p>팔로워 {{ person.followers.count }}</p>
+<p>팔로잉 {{ person.followings.count }}</p>
 <form action="{% url 'accounts:follow' person.pk %}" method="post">
   {% csrf_token %}
-  {% if user in persone.followers.all %}
+  {% if user in person.followers.all %}
     <button type="submit">팔로우 취소</button>
   {% else %}
     <button type="submit">팔로우</button>
