@@ -1,29 +1,52 @@
 {% extends 'base.html' %}
 {% load plates_extras %}
+{% load static %}
+
+{% block style %}
+<style>
+  
+</style>
+{% endblock style %}
 
 {% block title %}
 Index
 {% endblock title %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<h1>{{ user }}님 안녕하세요!</h1>
-<a href="{% url 'accounts:logout' %}">로그아웃</a>
-{% else %}
-<h1>로그인하세요</h1>
-<a href="{% url 'accounts:login' %}">로그인</a>
-<a href="{% url 'accounts:signup' %}">회원가입</a>
-{% endif %}
-
-{% for post in posts %}
-  <h4>{{ post.title }}</h4>
-  <p>{{ post.content }}</p>
-  {% if post|get_rating is not None %}
-  <p>{{ post|get_rating }}</p>
+  {% comment %} {% if user.is_authenticated %}
+  <h1>{{ user }}님 안녕하세요!</h1>
+  <a href="{% url 'accounts:logout' %}">로그아웃</a>
   {% else %}
-  <p>평점이 없습니다.</p>
-  {% endif %}
-  <hr>
-{% endfor %}
+  <h1>로그인하세요</h1>
+  <a href="{% url 'accounts:login' %}">로그인</a>
+  <a href="{% url 'accounts:signup' %}">회원가입</a>
+  {% endif %} {% endcomment %}
+<div>
+  {% for post in posts %}
+  <div class="card" style="width: 18rem;">
+    <div>
+      {% if post.image %}
+        <img class="card-img-top" src="{{ post.image.url }}" alt="img">
+      {% else %}
+        <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <div class="d-flex">
+        <div>{{ post.title }}</div>
+        {% if post|get_rating is not None %}
+          <div>{{ post|get_rating }}</div>
+        {% else %}
+          <div>평점이 없습니다.</div>
+        {% endif %}
+      </div>
+      <div>{{ post.loc }}</div>
+    </div>
+    {% endfor %}
+  </div>
+      
+  
+  
+</div>
 
 {% endblock content %}
