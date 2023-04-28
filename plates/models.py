@@ -81,7 +81,7 @@ class Review(models.Model):
     post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
     title = models.CharField('제목', max_length=50)
     content = models.TextField('내용')
-    rating = models.IntegerField('평점')
+    rating = models.IntegerField('평점') # 활용하기
     taste_evaluation = models.CharField('맛평가', max_length=50, blank=True)
     visited_date = models.DateField('방문일')
     created_at = models.DateTimeField('업로드 날짜', auto_now_add=True)
