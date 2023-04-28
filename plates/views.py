@@ -16,13 +16,11 @@ def detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     review_form = ReviewForm()
     reviews = post.review_set.all()
-    comments = Comment.objects.filter(post=post, review__in=reviews) # 확인필요
     comment_form = CommentForm()
     context = {
         'post': post,
         'review_form': review_form,
         'reviews': reviews,
-        'comments': comments,
         'comment_form': comment_form,
     }
     return render(request, 'plates/detail.html', context)

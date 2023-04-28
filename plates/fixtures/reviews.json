@@ -1,0 +1,562 @@
+[
+{
+  "model": "plates.review",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 1",
+    "content": "내용 1",
+    "rating": 3,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.590Z",
+    "updated_at": "2023-04-28T01:09:47.592Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 2",
+    "content": "내용 2",
+    "rating": 5,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.594Z",
+    "updated_at": "2023-04-28T01:09:47.594Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 3",
+    "content": "내용 3",
+    "rating": 2,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.596Z",
+    "updated_at": "2023-04-28T01:09:47.597Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 4",
+    "content": "내용 4",
+    "rating": 4,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.598Z",
+    "updated_at": "2023-04-28T01:09:47.599Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 5",
+    "content": "내용 5",
+    "rating": 8,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.600Z",
+    "updated_at": "2023-04-28T01:09:47.600Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 6",
+    "content": "내용 6",
+    "rating": 7,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.602Z",
+    "updated_at": "2023-04-28T01:09:47.602Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 7",
+    "content": "내용 7",
+    "rating": 2,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.603Z",
+    "updated_at": "2023-04-28T01:09:47.604Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 8,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 8",
+    "content": "내용 8",
+    "rating": 6,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.605Z",
+    "updated_at": "2023-04-28T01:09:47.605Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 9,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 9",
+    "content": "내용 9",
+    "rating": 9,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.606Z",
+    "updated_at": "2023-04-28T01:09:47.606Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 10,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 10",
+    "content": "내용 10",
+    "rating": 7,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.608Z",
+    "updated_at": "2023-04-28T01:09:47.608Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 11,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 11",
+    "content": "내용 11",
+    "rating": 9,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.609Z",
+    "updated_at": "2023-04-28T01:09:47.609Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 12,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 12",
+    "content": "내용 12",
+    "rating": 7,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.610Z",
+    "updated_at": "2023-04-28T01:09:47.610Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 13,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 13",
+    "content": "내용 13",
+    "rating": 3,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.611Z",
+    "updated_at": "2023-04-28T01:09:47.612Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 14,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 14",
+    "content": "내용 14",
+    "rating": 2,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.613Z",
+    "updated_at": "2023-04-28T01:09:47.613Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 15,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 15",
+    "content": "내용 15",
+    "rating": 8,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.614Z",
+    "updated_at": "2023-04-28T01:09:47.614Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 16,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 16",
+    "content": "내용 16",
+    "rating": 5,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.615Z",
+    "updated_at": "2023-04-28T01:09:47.615Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 17,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 17",
+    "content": "내용 17",
+    "rating": 8,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.616Z",
+    "updated_at": "2023-04-28T01:09:47.616Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 18,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 18",
+    "content": "내용 18",
+    "rating": 5,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.617Z",
+    "updated_at": "2023-04-28T01:09:47.617Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 19,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 19",
+    "content": "내용 19",
+    "rating": 1,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.618Z",
+    "updated_at": "2023-04-28T01:09:47.619Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 20,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 20",
+    "content": "내용 20",
+    "rating": 1,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:09:47.620Z",
+    "updated_at": "2023-04-28T01:09:47.620Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 21,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 1",
+    "content": "내용 1",
+    "rating": 1,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.855Z",
+    "updated_at": "2023-04-28T01:10:31.856Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 22,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 2",
+    "content": "내용 2",
+    "rating": 10,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.858Z",
+    "updated_at": "2023-04-28T01:10:31.858Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 23,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 3",
+    "content": "내용 3",
+    "rating": 3,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.861Z",
+    "updated_at": "2023-04-28T01:10:31.861Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 24,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 4",
+    "content": "내용 4",
+    "rating": 9,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.863Z",
+    "updated_at": "2023-04-28T01:10:31.863Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 25,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 5",
+    "content": "내용 5",
+    "rating": 10,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.865Z",
+    "updated_at": "2023-04-28T01:10:31.865Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 26,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 6",
+    "content": "내용 6",
+    "rating": 3,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.867Z",
+    "updated_at": "2023-04-28T01:10:31.867Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 27,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 7",
+    "content": "내용 7",
+    "rating": 8,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.868Z",
+    "updated_at": "2023-04-28T01:10:31.868Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 28,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 8",
+    "content": "내용 8",
+    "rating": 8,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.870Z",
+    "updated_at": "2023-04-28T01:10:31.870Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 29,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 9",
+    "content": "내용 9",
+    "rating": 2,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.871Z",
+    "updated_at": "2023-04-28T01:10:31.871Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 30,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 10",
+    "content": "내용 10",
+    "rating": 9,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.872Z",
+    "updated_at": "2023-04-28T01:10:31.872Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 31,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 11",
+    "content": "내용 11",
+    "rating": 7,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.873Z",
+    "updated_at": "2023-04-28T01:10:31.873Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 32,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 12",
+    "content": "내용 12",
+    "rating": 6,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.875Z",
+    "updated_at": "2023-04-28T01:10:31.875Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 33,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 13",
+    "content": "내용 13",
+    "rating": 10,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.876Z",
+    "updated_at": "2023-04-28T01:10:31.876Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 34,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 14",
+    "content": "내용 14",
+    "rating": 2,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.877Z",
+    "updated_at": "2023-04-28T01:10:31.877Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 35,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 15",
+    "content": "내용 15",
+    "rating": 9,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.879Z",
+    "updated_at": "2023-04-28T01:10:31.879Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 36,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 16",
+    "content": "내용 16",
+    "rating": 10,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.880Z",
+    "updated_at": "2023-04-28T01:10:31.880Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 37,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 17",
+    "content": "내용 17",
+    "rating": 4,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.881Z",
+    "updated_at": "2023-04-28T01:10:31.881Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 38,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 18",
+    "content": "내용 18",
+    "rating": 9,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.882Z",
+    "updated_at": "2023-04-28T01:10:31.882Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 39,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 19",
+    "content": "내용 19",
+    "rating": 8,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.883Z",
+    "updated_at": "2023-04-28T01:10:31.883Z"
+  }
+},
+{
+  "model": "plates.review",
+  "pk": 40,
+  "fields": {
+    "user": 1,
+    "post": 1,
+    "title": "제목 20",
+    "content": "내용 20",
+    "rating": 9,
+    "visited_date": "2023-04-28",
+    "created_at": "2023-04-28T01:10:31.884Z",
+    "updated_at": "2023-04-28T01:10:31.884Z"
+  }
+}
+]
