@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Post, Review
-from .forms import PostForm, ReviewForm
+from .models import Post, Review, Comment
+from .forms import PostForm, ReviewForm, CommentForm
 
 # Create your views here.
 def index(request):
@@ -16,10 +16,14 @@ def detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     review_form = ReviewForm()
     reviews = post.review_set.all()
+    comments = Comment.objects.filter(post=post, review__in=reviews) # 확인필요
+    comment_form = CommentForm()
     context = {
         'post': post,
-        'review_Form': review_Form,
+        'review_form': review_form,
         'reviews': reviews,
+        'comments': comments,
+        'comment_form': comment_form,
     }
     return render(request, 'plates/detail.html', context)
 
@@ -117,3 +121,34 @@ def likes(request, post_pk):
         post.like_users.add(request.user)
     return redirect('plates:index')
 
+def comment_create(request, post_pk, review_pk):
+    post = Post.objects.get(pk=post_pk)
+    review = Review.objects.get(pk=review_pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.review = review
+            comment.user = request.user
+            comment.save()
+            return redirect('plates:detail', post.pk)
+
+def comment_update(request, post_pk, review_pk, comment_pk):
+    post = Post.objects.get(pk=post_pk)
+    review = Review.objects.get(pk=review_pk)
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        if request.method == 'POST':
+            form = CommentForm(request.POST, instance=comment)
+            if form.is_valid():
+                form.save()
+                return redirect('plates:detail', post.pk)
+        else:
+            form = CommentForm(instance=comment)
+
+def comment_delete(request, post_pk, review_pk, comment_pk):
+    comment = comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('plates:detail', post_pk)

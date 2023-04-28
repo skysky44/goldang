@@ -67,7 +67,8 @@ class Review(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
+    # post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
+    review = models.ForeignKey(to='plates.Review', on_delete=models.CASCADE)
     created_at = models.DateTimeField('업로드 날짜', auto_now_add=False)
     updated_at = models.DateTimeField('수정 날짜', auto_now=True)
     
