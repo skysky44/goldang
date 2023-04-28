@@ -33,14 +33,6 @@ Index
 
 {% block content %}
 
-  {% comment %} {% if user.is_authenticated %}
-  <h1>{{ user }}님 안녕하세요!</h1>
-  <a href="{% url 'accounts:logout' %}">로그아웃</a>
-  {% else %}
-  <h1>로그인하세요</h1>
-  <a href="{% url 'accounts:login' %}">로그인</a>
-  <a href="{% url 'accounts:signup' %}">회원가입</a>
-  {% endif %} {% endcomment %}
 <div>
   <div>
     <a href="{% url 'plates:create' %}">게시글 작성</a>
@@ -72,7 +64,6 @@ Index
       {% endfor %}
     </div>
   </div>    
-  
-  
 </div>
 {% endblock content %}
+

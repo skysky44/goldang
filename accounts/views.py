@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
@@ -85,3 +85,26 @@ def change_password(request):
         'form': form,
     }
     return render(request, 'accounts/change_password.html', context)
+
+
+@login_required
+def profile(request, username):
+    User = get_user_model()
+    context = {
+        'person': User.objects.get(username=username),
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+@login_required
+def follow(request, user_pk):
+    user = get_user_model().objects.get(pk=user_pk)
+    me = request.user
+    if me != user:
+        if me in user.followers.all():
+            # follow 취소
+            user.followers.remove(me)
+        else:
+            # follow
+            user.followers.add(me)
+    return redirect('accounts:profile', user.username)
