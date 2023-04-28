@@ -13,7 +13,7 @@ def signup(request):
         return redirect('plates:index')
 
     if request.method == 'POST':
-        form = CustomUserCreationForm(data=request.POST)
+        form = CustomUserCreationForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
@@ -59,7 +59,7 @@ def delete(request):
 @login_required
 def update(request):
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, instance=request.user, files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('plates:index')
