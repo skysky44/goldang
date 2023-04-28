@@ -6,14 +6,15 @@ Index
 {% endblock title %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<h1>{{ user }}님 안녕하세요!</h1>
-<a href="{% url 'accounts:logout' %}">로그아웃</a>
-{% else %}
-<h1>로그인하세요</h1>
-<a href="{% url 'accounts:login' %}">로그인</a>
-<a href="{% url 'accounts:signup' %}">회원가입</a>
-{% endif %}
+  {% if user.is_authenticated %}
+  <h1>{{ user }}님 안녕하세요!</h1>
+  <a href="{% url 'accounts:logout' %}">로그아웃</a>
+  {% else %}
+  <h1>로그인하세요</h1>
+  <a href="{% url 'accounts:login' %}">로그인</a>
+  <a href="{% url 'accounts:signup' %}">회원가입</a>
+  {% endif %}
+
 
 {% for post in posts %}
   <h4>{{ post.title }}</h4>
@@ -26,4 +27,13 @@ Index
   <hr>
 {% endfor %}
 
+
 {% endblock content %}
+
+
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
