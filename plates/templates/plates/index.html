@@ -14,4 +14,10 @@ Index
 <a href="{% url 'accounts:signup' %}">회원가입</a>
 {% endif %}
 
+{% for post in posts %}
+  <h4>{{ post.title }}</h4>
+  <p>{{ post.content }}</p>
+  <hr>
+{% endfor %}
+
 {% endblock content %}
