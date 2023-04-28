@@ -13,7 +13,6 @@ Index
 {% endblock title %}
 
 {% block content %}
-
   {% if user.is_authenticated %}
   <h1>{{ user }}님 안녕하세요!</h1>
   <a href="{% url 'accounts:logout' %}">로그아웃</a>
@@ -22,20 +21,6 @@ Index
   <a href="{% url 'accounts:login' %}">로그인</a>
   <a href="{% url 'accounts:signup' %}">회원가입</a>
   {% endif %}
-
-
-{% for post in posts %}
-  <h4>{{ post.title }}</h4>
-  <p>{{ post.content }}</p>
-  {% if post|get_rating is not None %}
-  <p>{{ post|get_rating }}</p>
-
-  {% else %}
-  <h1>로그인하세요</h1>
-  <a href="{% url 'accounts:login' %}">로그인</a>
-  <a href="{% url 'accounts:signup' %}">회원가입</a>
-  {% endif %} {% endcomment %}
-<div>
   {% for post in posts %}
   <div class="card" style="width: 18rem;">
     <div>
@@ -56,16 +41,10 @@ Index
       </div>
       <div>{{ post.loc }}</div>
     </div>
-    {% endfor %}
   </div>
-      
-  
-  
 </div>
-
-
+{% endfor %}
 {% endblock content %}
-
 
 <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
