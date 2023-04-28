@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block content %}
+<h1>{{ person }}님 안녕하세요</h1>
+<form action="{% url 'accounts:follow' person.pk %}" method="post">
+  {% csrf_token %}
+  {% if user in persone.followers.all %}
+    <button type="submit">팔로우 취소</button>
+  {% else %}
+    <button type="submit">팔로우</button>
+  {% endif %}
+</form>
+
+{% endblock content %}
