@@ -1,25 +1,74 @@
 {% extends 'base.html' %}
 
 {% load plates_extras %}
+{% load static %}
 
 {% block title %}
 Detail
 {% endblock title %}
 
+{% block style %}
+<style>
+  table {
+    width: 60%;
+    
+  }
+
+  table td {
+    width: 30px;
+    height: 30px;
+  }
+
+  .headimg {
+    width: 25%;
+
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  .detail_sidevar {
+    width: 30%;
+    margin-left: 25px;
+  }
+
+</style>
+{% endblock style %}
+
+
+
 {% block content %}
 <div>
+  <div class="d-flex flex-row">
+    <div class="headimg" style="margin: 5px;">
+      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+    </div>
+    <div class="headimg" style="margin: 5px;">
+      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+    </div>
+    <div class="headimg" style="margin: 5px;">
+      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+    </div>
+    <div class="headimg" style="margin: 5px;">
+      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+    </div>
+  </div>
   <div class="d-flex flex-row">
     <div style="width: 70%;">
       <div>
         <div class="d-flex justify-content-between">
-          <h1> {{ post.title }} </h1>
           <div class="d-flex flex-row">
-            <p class="mx-3">리뷰쓰기</p>
+            <h1> {{ post.title }} </h1>
+            <h2 class="mx-3" style="line-height:55px;"> {{post|get_rating}} </h2>
+          </div>
+          <div class="d-flex flex-row">
+            <a harf="{% url 'plates:review_create' post.pk %}" class="mx-3">리뷰쓰기</a>
             <p>가고싶다</p>
           </div>
         </div>
         <div>
-          방문 수 / 리뷰 수 / 즐겨찾기 수
+          방문 수 / 리뷰 수 {{reviews|length}} / 즐겨찾기 수
         </div>
       </div>
       <hr>
@@ -31,18 +80,70 @@ Detail
               <td>{{ post.loc }}</td>
             </tr>
             <tr>
+              <td>전화번호</td>
+              <td>{{ post.phone_number }}</td>
+            </tr>
+            <tr>
               <td>음식 종류</td>
               <td>{{ post.restaurant_type }}</td>
             </tr>
             <tr>
-              <td>설명</td>
-              <td>{{ post.description }}</td>
+              <td>주차</td>
+              <td>{{ post.parking }}</td>
+            </tr>
+            <tr>
+              <td>가격대</td>
+              <td>{{ post.price_range }}</td>
+            </tr>
+            <tr>
+              <td>휴무일</td>
+              <td>{{ post.closed_days }}</td>
             </tr>
           </tbody>
         </table>
+        <div class="text-end">업데이트:{{ post.updated_at }}</div>
+        <hr>
+        <table>
+          <tr>
+            <td>식당소개</td>
+            <td>{{ post.description }}</td>
+          </tr>
+        </table>
+        <hr>
+        <div>
+          <div class="d-flex justify-content-between">
+            <div>
+            리뷰 ({{ reviews|length }})
+            </div>
+            <div>
+              전체({{ reviews|length }}) / 맛있다() / 괜찮다() / 별로()
+            </div>
+          </div>
+          <br>
+          <div>
+            {% for review in reviews %}
+            <div class="d-flex flex-row">
+              <p>{{ review.title }}</p>
+              <div style="margin-left: 30px;">
+                <p>{{ review.created_at }}
+                <p>{{ review.content }}</p>
+              </div>
+            </div>
+            <hr>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="text-center" style="width: 30%;">지도</div>
+    <div class="text-center detail_sidevar">
+      <div>
+        <p>지도</p>
+        <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+      </div>
+      <div>주변 인기 식당</div>
+      <div>이 식당 관련 태그</div>  
+    </div>
+    
   </div>
 </div>
 {% endblock content %}
