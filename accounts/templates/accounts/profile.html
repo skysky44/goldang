@@ -6,6 +6,7 @@ Profile
 
 {% block content %}
 <h1>{{ person }}님의 프로필</h1>
+<img src="{{ person.picture.url }}" alt="123">
 <p>팔로워 {{ person.followers.count }}</p>
 <p>팔로잉 {{ person.followings.count }}</p>
 <form action="{% url 'accounts:follow' person.pk %}" method="post">

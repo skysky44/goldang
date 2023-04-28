@@ -27,6 +27,7 @@ class CustomUserCreationForm(UserCreationForm):
             'email',
             'first_name',
             'last_name',
+            'picture',
             'address',
             'password1',
             'password2',
@@ -50,4 +51,5 @@ class CustomUserChangeForm(UserChangeForm):
             'email',
             'first_name',
             'last_name',
+            'picture',
         )
