@@ -17,6 +17,7 @@ Index
   {% for post in posts %}
     <h4>{{ post.title }}</h4>
     <p>{{ post.content }}</p>
+    {{ post|get_rating }}
     <hr>
   {% endfor %}
 
