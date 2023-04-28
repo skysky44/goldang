@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load plates_extras %}
+
+{% block title %}
+Detail
+{% endblock title %}
+
+{% block content %}
+<div>
+  <div class="d-flex flex-row">
+    <div style="width: 70%;">
+      <div>
+        <div class="d-flex justify-content-between">
+          <h1> {{ post.title }} </h1>
+          <div class="d-flex flex-row">
+            <p class="mx-3">리뷰쓰기</p>
+            <p>가고싶다</p>
+          </div>
+        </div>
+        <div>
+          방문 수 / 리뷰 수 / 즐겨찾기 수
+        </div>
+      </div>
+      <hr>
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td>주소</td>
+              <td>{{ post.loc }}</td>
+            </tr>
+            <tr>
+              <td>음식 종류</td>
+              <td>{{ post.restaurant_type }}</td>
+            </tr>
+            <tr>
+              <td>설명</td>
+              <td>{{ post.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="text-center" style="width: 30%;">지도</div>
+  </div>
+</div>
+{% endblock content %}
+
+
