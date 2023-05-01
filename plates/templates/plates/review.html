@@ -7,12 +7,15 @@ Review
 {% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static "plates/style.css" %}">
+<link rel="stylesheet" href="{% static "plates/review.css" %}">
 {% endblock style %}
 
 {% block content %}
 <form action="{% url 'plates:review_create' post.pk %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
+  {{review_form.title}}
+  {{review_form.visited_date}}
+
   <div class="ReviewWriting__Container">
     <div class="ReviewWriting__head">
       <strong class="ReviewWriting__RestaurantName">{{ post.title }}</strong>
@@ -41,6 +44,7 @@ Review
           </button>
         </li>
       </ul>
+      {{ review_form.rating }}
       <div class="ReviewWriting__Main__Text">
         {{ review_form.content }}
       </div>
@@ -68,11 +72,12 @@ Review
       <button type="submit" class="Review__Buttons__Continue Review__Buttons__Continue--Deactive">나중에 이어쓰기</button>
       <div class="Review__Buttons">
         <a href="{% url 'plates:detail' post.pk %}"><button type="button" class="Review__Buttons__Cancel">취소</button></a>
-        <button type="submit" class="Review__Buttons__Submit">리뷰 올리기</button>
+          <input type="submit" class="Review__Buttons__Submit" value="리뷰 올리기">         
       </div>
     </div>
   </div>
 </form>
+
 {% comment %} <form class="mb-3" name="ReviewWriting__Main__Rating__Star" id="ReviewWriting__Main__Rating__Star" method="POST">
   <fieldset>
     <span class="text-bold">별점을 선택해 주세요</span>

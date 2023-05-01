@@ -45,20 +45,20 @@ Detail
                 <span class="Detail__Title__ReviewText">리뷰쓰기</span>
               </a>
             </button>
-            
-            <div>
-              <form action="{% url 'plates:likes' post.pk %}" method="POST">
-                {% csrf_token %}
-                {% if request.user in post.like_users.all %}
-                <input class="Detail__Title__BookmarkImg" type="submit" value=''><span class="Detail__Title__BookmarkText">가고싶다</span></input>
-                {% else %}
-                <input class="Detail__Title__BookmarkImg" type="submit" value=''><span class="Detail__Title__BookmarkText">안가고싶다</span></input>
-                {% endif %}
-              </form>
-
-              
-            </div>
-            
+            <form action="{% url 'plates:likes' post.pk %}" method="POST">
+              {% csrf_token %}
+              {% if request.user in post.like_users.all %}
+              <div class="Detail__Title__Bookmark">
+                <button class="Detail__Title__BookmarkImg--Active" type="submit"></button>
+                <span class="Detail__Title__BookmarkText--Active">가고싶다</span>
+              </div>
+              {% else %}
+              <div class="Detail__Title__Bookmark">
+                <button class="Detail__Title__BookmarkImg" type="submit"></button>
+                <span class="Detail__Title__BookmarkText">가고싶다</span>
+              </div>
+              {% endif %}
+            </form>
           </div>
         </div>
         <div class="Detail__Status">
