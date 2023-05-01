@@ -4,18 +4,222 @@
 Profile
 {% endblock title %}
 
-{% block content %}
-<h1>{{ person }}님의 프로필</h1>
-<img src="{{ person.picture.url }}" alt="123">
-<p>팔로워 {{ person.followers.count }}</p>
-<p>팔로잉 {{ person.followings.count }}</p>
-<form action="{% url 'accounts:follow' person.pk %}" method="post">
-  {% csrf_token %}
-  {% if user in person.followers.all %}
-    <button type="submit">팔로우 취소</button>
-  {% else %}
-    <button type="submit">팔로우</button>
-  {% endif %}
-</form>
+{% block style %}
+<style>
+  .profile-container {
+    width: 400px;
+  }
 
+  .logout-font {
+    color: #959595;
+    font-size: 15px;
+    text-align: center;
+    margin: 50px;
+    text-decoration: none;
+  }
+
+  .info {
+    background-color: rgba(243,243,243,0.5);
+    margin: 20px 20px;
+    padding: 20px 16px;
+    border-radius: 10px;  
+  }
+
+  .info-container {
+    display: flex;
+  }
+
+  .info-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #7f7f7f;
+    width: 146px;
+  }
+  .info-content {
+    color: #4f4f4f;
+    font-size: 16px;
+  }
+
+  .profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    object-fit: cover;
+  }
+
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div class="container profile-container justify-content-center">
+  <!--header-->
+  <header class="d-flex border-bottom pt-4 pb-2">
+    <div style="margin-left: 40%;">
+      <h5>내 정보</h5>
+    </div>
+    <div class="ms-auto pe-4"> 
+      <a href="{% url 'accounts:update' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-gear" viewBox="0 0 16 16">
+          <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+          <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!--information-->
+  <div class="info">
+    <div class="d-flex align-items-center mb-4">
+      <div style="margin-left: 40%;">
+        {% if person.picture %}
+          <img class="profile-img" src="{{ person.picture.url }}" alt="profile-img">
+        {% else %}
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
+        {% endif %}
+      </div>
+      <div class="ms-auto">
+        {% if request.user.is_authenticated %}
+          {% if request.user != person %}
+            <form id="follow-form" data-user-id="{{ person.pk }}">
+              {% csrf_token %} 
+              {% if request.user in person.followers.all %}
+                <input class="btn btn-sm btn-outline-dark" type="submit" value="언팔로우">
+              {% else %}
+                <input class="btn btn-sm btn-outline-dark" type="submit" value="팔로우">
+              {% endif %}
+            </form>
+          {% endif %}
+        {% else %}
+          <input class="btn btn-sm btn-outline-dark" type="button" value="팔로우" disabled/>
+        {% endif %}
+      </div>
+    </div>
+    <div>
+      <div class="info-container">
+        <div class="info-title">이름</div>
+        <div class="info-content">{{ user.first_name }}</div>
+      </div>
+      <div class="info-container">
+        <div  class="info-title">Reviews</div>
+        <div class="info-content">{{ person.review_set.all|length }}</div>
+      </div>
+      <div class="info-container">
+        <div class="info-title">Followers</div>
+        <div class="info-content" id="followers-count">{{ person.followers.all|length }}</div>
+      </div>
+      <div class="info-container">
+        <div class="info-title">Followings</div>
+        <div class="info-content" id="followings-count">{{ person.followings.all|length }}</div>
+      </div>
+    </div>  
+  </div>
+
+  <!--footer-->
+  <footer>
+    <div class="d-flex justify-content-center">
+      <div>
+        <a href="{% url 'accounts:delete' %}" class="logout-font">회원탈퇴</a>
+      </div>
+      <div style="color: #959595;">|</div>
+      <div>
+        <a href="{% url 'accounts:logout' %}" class="logout-font">로그아웃</a>
+      </div>
+    </div>
+  </footer>
+</div>
 {% endblock content %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+  const form = document.querySelector('#follow-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  form.addEventListener('submit', function (event) {
+    event.preventDefault()
+    const userId = event.target.dataset.userId
+    axios({
+      method : 'post',
+      url : `/accounts/follow/${userId}/`,
+      headers: {'X-CSRFToken': csrftoken},
+    })
+
+    .then((response) => {
+      const isFollowed = response.data.is_followed
+      const followBtn = document.querySelector('#follow-form > input[type=submit]')
+      if (isFollowed === true) {
+        followBtn.value = '언팔로우'
+      } else {
+        followBtn.value = '팔로우'
+      }
+      const followingsCountTag = document.querySelector('#followings-count')
+      const followersCountTag = document.querySelector('#followers-count')
+
+      const followingsCountData = response.data.followings_count
+      const followersCountData = response.data.followers_count
+
+      followingsCountTag.textContent = followingsCountData
+      followersCountTag.textContent = followersCountData
+    })
+  })
+</script>
+{% endblock script %}
+
+
+
+
+
+
+  {% comment %} <!--information-->
+  <div class="info">
+    <div class="d-flex align-items-center mb-4">
+      <div style="margin-left: 40%;">
+        {% if person.picture %}
+          <img class="profile-img" src="{{ person.picture.url }}" alt="profile-img">
+        {% else %}
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
+        {% endif %}
+      </div>
+      <div class="ms-auto">
+        {% if request.user.is_authenticated %}
+          {% if request.user != person %}
+            <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+              {% csrf_token %} 
+              {% if request.user in person.followers.all %}
+                <input class="btn btn-sm btn-outline-dark" type="submit" value="언팔로우">
+              {% else %}
+                <input class="btn btn-sm btn-outline-dark" type="submit" value="팔로우">
+              {% endif %}
+            </form>
+          {% endif %}
+        {% else %}
+          <input class="btn btn-sm btn-outline-dark" type="button" value="팔로우" disabled/>
+        {% endif %}
+      </div>
+    </div>
+    <div>
+      <div class="info-container">
+        <div class="info-title">이름</div>
+        <div class="info-content">{{ user.first_name }}</div>
+      </div>
+      <div class="info-container">
+        <div  class="info-title">Reviews</div>
+        <div class="info-content">{{ person.review_set.all|length }}</div>
+      </div>
+      <div class="info-container">
+        <div class="info-title">Followers</div>
+        <div class="info-content">{{ person.followers.all|length }}</div>
+      </div>
+      <div class="info-container">
+        <div class="info-title">Following</div>
+        <div class="info-content">{{ person.followings.all|length }}</div>
+      </div>
+    </div>  
+  </div> {% endcomment %}
