@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Review
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "plates/style.css" %}">
+{% endblock style %}
+
+{% block content %}
+<form action="{% url 'plates:review_create' post.pk %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="ReviewWriting__Container">
+    <div class="ReviewWriting__head">
+      <strong class="ReviewWriting__RestaurantName">{{ post.title }}</strong>
+      <div class="ReviewWriting__SubText">
+        <span>에 대한 솔직한 리뷰를 써주세요</span>
+      </div>
+    </div>
+    <div class="ReviewWriting__Main">
+      <ul class="ReviewWriting__Main__Rating">
+        <li>
+          <button type="button" class="ReviewWriting__Main__Rating__DeliciousButton">
+            <i class="ReviewWriting__Main__RatingImage--Delicious ReviewWriting__Main__RatingImage--Delicious--None"></i>
+            <span>맛있다</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="ReviewWriting__Main__Rating__SmileButton">
+            <i class="ReviewWriting__Main__RatingImage--Smile ReviewWriting__Main__RatingImage--Smile--None"></i>
+            <span>괜찮다</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="ReviewWriting__Main__Rating__SadButton">
+            <i class="ReviewWriting__Main__RatingImage--Sad ReviewWriting__Main__RatingImage--Sad--None"></i>
+            <span>별로</span>
+          </button>
+        </li>
+      </ul>
+      <div class="ReviewWriting__Main__Text">
+        {{ review_form.content }}
+      </div>
+    </div>
+    <p class="ReviewWriting__main__TextLengthBox">
+      <span class="ReviewWriting__main__TextLength" id="ReviewWriting__main__TextLength">0</span>
+      <span>/</span>
+      <span>10000</span>
+    </p>
+    <div class="ReviewWriting__Main__Picture">
+      <div class="Review__PictureCounter">
+        <span class="Review__PictureCounter__Length">0</span>
+        <span>/</span>
+        <span>30</span>
+      </div>
+      <ul class="Review__PictureContainer">
+        <li class="Review__PictureItem">
+          <button type="button" class="Review__PictureContainer__AddButton">
+            <i class="Review__PictureContainer__AddButtonImg"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="Review__ButtonsContainer">
+      <button type="submit" class="Review__Buttons__Continue Review__Buttons__Continue--Deactive">나중에 이어쓰기</button>
+      <div class="Review__Buttons">
+        <a href="{% url 'plates:detail' post.pk %}"><button type="button" class="Review__Buttons__Cancel">취소</button></a>
+        <button type="submit" class="Review__Buttons__Submit">리뷰 올리기</button>
+      </div>
+    </div>
+  </div>
+</form>
+{% comment %} <form class="mb-3" name="ReviewWriting__Main__Rating__Star" id="ReviewWriting__Main__Rating__Star" method="POST">
+  <fieldset>
+    <span class="text-bold">별점을 선택해 주세요</span>
+    <input type="radio" name="Review__Rating__Star" value="5" id="Rating__Star5"><label for="Rating__Star5">★</label>
+    <input type="radio" name="Review__Rating__Star" value="4" id="Rating__Star4"><label for="Rating__Star4">★</label>
+    <input type="radio" name="Review__Rating__Star" value="3" id="Rating__Star3"><label for="Rating__Star3">★</label>
+    <input type="radio" name="Review__Rating__Star" value="2" id="Rating__Star2"><label for="Rating__Star2">★</label>
+    <input type="radio" name="Review__Rating__Star" value="1" id="Rating__Star1"><label for="Rating__Star1">★</label>
+  </fieldset>
+</form> {% endcomment %}
+<script type="text/javascript" src="/static/plates/review.js"></script>
+{% endblock content %}

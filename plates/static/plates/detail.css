@@ -1,0 +1,93 @@
+.Detail__Title__Sub {
+}
+
+.Detail__Title__Sub > button {
+  appearance: none;
+  cursor: pointer;
+  border: 0px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.Detail__Title__Review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 19px 0 0;
+}
+
+.Detail__Title__Review > a {
+  text-decoration: none;
+}
+
+.Detail__Title__ReviewImg {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  background-image: url("review_none.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Detail__Title__ReviewText {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #9B9B9B;
+}
+
+.Detail__Title__BookmarkImg {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  background-image: url("bookmark_none.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Detail__Title__BookmarkText {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #9B9B9B;
+}
+
+.Detail__Status {
+  margin: 30px 0 10px;
+  font-size: 0.8rem;
+  margin-left: 2px;
+  color: #9b9b9b;
+}
+.Detail__Status__Review {
+  background-image: url("review_count.png");
+  background-position: -800px -648px;
+  width: 12px;
+  height: 13px;
+}
+
+
+table {
+  width: 60%;
+  
+}
+
+table td {
+  width: 30px;
+  height: 30px;
+}
+
+.headimg {
+  width: 25%;
+
+}
+
+img {
+  object-fit: cover;
+}
+
+.detail_sidevar {
+  width: 30%;
+  margin-left: 25px;
+}
