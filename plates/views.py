@@ -140,7 +140,7 @@ def likes(request, post_pk):
         post.like_users.remove(request.user)
     else:
         post.like_users.add(request.user)
-    return redirect('plates:index')
+    return redirect('plates:detail', post_pk)
 
 def comment_create(request, post_pk, review_pk):
     post = Post.objects.get(pk=post_pk)

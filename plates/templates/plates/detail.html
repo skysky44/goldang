@@ -47,8 +47,16 @@ Detail
             </button>
             
             <div>
-              <i class="Detail__Title__BookmarkImg"></i>
-              <span class="Detail__Title__BookmarkText">가고싶다</span>
+              <form action="{% url 'plates:likes' post.pk %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in post.like_users.all %}
+                <input class="Detail__Title__BookmarkImg" type="submit" value=''><span class="Detail__Title__BookmarkText">가고싶다</span></input>
+                {% else %}
+                <input class="Detail__Title__BookmarkImg" type="submit" value=''><span class="Detail__Title__BookmarkText">안가고싶다</span></input>
+                {% endif %}
+              </form>
+
+              
             </div>
             
           </div>
