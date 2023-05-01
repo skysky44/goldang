@@ -5,24 +5,32 @@
 {% block style %}
 <style>
   .img-size {
-    width: 100%%;
-    height: 200px;
+    width: 220px;
+    height: 150px;
   }
+
   .title-font {
-    font-size: 1.5em;
+    font-size: 1.3rem;
     font-weight: 800;
+    color: #555;
   }
+
   .rating {
     line-height: 36px;
-    font-size: 1.3em;
+    font-size: 1.37rem;
     font-weight: 600;
-    color: orange;
+    color: #ff792a;
   }
+
   .no-rating {
     line-height: 36px;
-    font-size: 1.3em;
-    color: gray;
-    
+    font-size: 1.37rem;
+    color: #e9e9e9;;
+  }
+
+  .loc-font {
+    font-size: 0.9rem;
+    color: #9b9b9b;
   }
 </style>
 {% endblock style %}
@@ -39,26 +47,26 @@ Index
   </div>
 
   <div class="d-flex container">
-    <div class="row row-cols-1 justify-content-center row-cols-sm-2 row-cols-md-4">
+    <div class="row row-cols-2 row-cols-md-4 justify-content-center">
       {% for post in posts %}
-      <div class="card col m-3 p-0" style="width: 18rem;">
-        <div>
+      <div class="col">
+        <div class="card border-0 m-3 p-0" style="width: 18rem;">
           {% if post.image %}
-            <img class="img-size card-img-top" src="{{ post.image.url }}" alt="img">
+            <img class="card-img-top rounded-0 img-size" src="{{ post.image.url }}" alt="img">
           {% else %}
-            <img class="img-size card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+            <img class="card-img-top rounded-0 img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
           {% endif %}
-        </div>
-        <div class="card-body">
-          <div class="d-flex">
-            <div class="me-3 title-font">{{ post.title }}</div>
-            {% if post|get_rating is not None %}
-              <div class="rating">{{ post|get_rating }}</div>
-            {% else %}
-              <div class="no-rating">0.0</div>
-            {% endif %}
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="me-3 title-font text-truncate">{{ post.title }}</div>
+              {% if post|get_rating is not None %}
+                <div class="rating">{{ post|get_rating }}</div>
+              {% else %}
+                <div class="no-rating">0.0</div>
+              {% endif %}
+            </div>
+            <div class="loc-font text-truncate">{{ post.loc }} - {{ post.restaurant_type}}</div>
           </div>
-          <div>{{ post.loc }}</div>
         </div>
       </div>
       {% endfor %}
@@ -66,4 +74,3 @@ Index
   </div>    
 </div>
 {% endblock content %}
-
