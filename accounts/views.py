@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.http import JsonResponse
 
 # Create your views here.
 def signup(request):
@@ -104,7 +105,15 @@ def follow(request, user_pk):
         if me in user.followers.all():
             # follow 취소
             user.followers.remove(me)
+            is_followed = False
         else:
             # follow
             user.followers.add(me)
+            is_followed = True
+        context = {
+            'is_followed': is_followed,
+            'followings_count': user.followings.count(),
+            'followers_count': user.followers.count(),
+        }
+        return JsonResponse(context)
     return redirect('accounts:profile', user.username)
