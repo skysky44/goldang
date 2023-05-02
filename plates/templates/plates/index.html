@@ -50,24 +50,26 @@ Index
     <div class="row row-cols-2 row-cols-md-4 justify-content-center">
       {% for post in posts %}
       <div class="col">
-        <div class="card border-0 m-3 p-0" style="width: 18rem;">
-          {% if post.image %}
-            <img class="card-img-top rounded-0 img-size" src="{{ post.image.url }}" alt="img">
-          {% else %}
-            <img class="card-img-top rounded-0 img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-          {% endif %}
-          <div class="card-body">
-            <div class="d-flex">
-              <div class="me-3 title-font text-truncate">{{ post.title }}</div>
-              {% if post|get_rating is not None %}
-                <div class="rating">{{ post|get_rating }}</div>
-              {% else %}
-                <div class="no-rating">0.0</div>
-              {% endif %}
+        <a href="{% url 'plates:detail' post.pk %}">
+          <div class="card border-0 m-3 p-0" style="width: 18rem;">
+            {% if post.image %}
+              <img class="card-img-top rounded-0 img-size" src="{{ post.image.url }}" alt="img">
+            {% else %}
+              <img class="card-img-top rounded-0 img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+            {% endif %}
+            <div class="card-body">
+              <div class="d-flex">
+                <div class="me-3 title-font text-truncate">{{ post.title }}</div>
+                {% if post|get_rating is not None %}
+                  <div class="rating">{{ post|get_rating }}</div>
+                {% else %}
+                  <div class="no-rating">0.0</div>
+                {% endif %}
+              </div>
+              <div class="loc-font text-truncate">{{ post.loc }} - {{ post.restaurant_type}}</div>
             </div>
-            <div class="loc-font text-truncate">{{ post.loc }} - {{ post.restaurant_type}}</div>
           </div>
-        </div>
+        </a>
       </div>
       {% endfor %}
     </div>
