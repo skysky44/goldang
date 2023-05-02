@@ -155,8 +155,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': 'ph9pfWMBdkqx5Vijx0q9XY9ny4Civ6FC',
             'key': '',
         },
-        'SCOPE': ['account_email', 'gender', 'age_range'],
-        'PROFILE_FIELDS': ['nickname', 'profile_image_url', 'thumbnail_image_url', 'gender', 'age_range', 'email'],
+        'SCOPE': ['account_email', 'profile_image', 'profile_nickname'],# 권한
+        'PROFILE_FIELDS': ['nickname', 'profileImageURL', 'email'], # 요청 정보 종류
         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
     }
 }
