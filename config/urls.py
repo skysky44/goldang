@@ -25,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.IndexRedirectView.as_view()),
     path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),
     path('plates/', include('plates.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

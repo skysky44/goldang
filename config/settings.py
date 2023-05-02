@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 소셜 로그인
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -145,5 +151,21 @@ AUTH_USER_MODEL = 'accounts.User'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
-# 서버에서 Admin 페이지가 Static 파일 쓰도록
-# STATIC_ROOT = BASE_DIR / 'static'
+# 카카오 로그인
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'  # 로그인 후 리다이렉트 될 경로
+
+SOCIALACCOUNT_PROVIDERS = {
+    'kakao': {
+        'APP': {
+            'client_id': 'ebf3ef3af88a14332db7d305424cc5f5',
+            'secret': 'ph9pfWMBdkqx5Vijx0q9XY9ny4Civ6FC',
+            'key': '',
+        },
+        'SCOPE': ['account_email', 'profile_image', 'profile_nickname'],# 권한
+        'PROFILE_FIELDS': ['nickname', 'profileImageURL', 'email'], # 요청 정보 종류
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+    }
+}
