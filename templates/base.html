@@ -55,8 +55,9 @@
           </a>
         </div>
         {% else %}
+        {% load socialaccount %}
         <div class="me-3">
-          <a href="{% url 'accounts:login' %}" class="text-decoration-none text-dark">로그인</a>
+          <a href="{% provider_login_url 'kakao' method='oauth2' %}" class="text-decoration-none text-dark">로그인</a>
         </div>
         <div class="me-3">
           <a href="{% url 'accounts:signup' %}" class="text-decoration-none text-dark">회원가입</a>

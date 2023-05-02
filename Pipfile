@@ -12,6 +12,7 @@ ipython = "*"
 django-extensions = "*"
 pillow = "*"
 django-imagekit = "*"
+gunicorn = "*"
 
 [dev-packages]
 
