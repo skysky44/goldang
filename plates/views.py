@@ -73,20 +73,43 @@ def update(request, post_pk):
 
 
 # @login_required
+# def review_create(request, post_pk):
+#     post = Post.objects.get(pk=post_pk)
+#     post_form = PostForm(request.POST)
+#     if post_form.is_valid():
+#         review = post_form.save(commit=False)
+#         review.post = post
+#         review.user = request.user
+#         review.save()
+#         return redirect('plates:detail', post.pk)
+#     context = {
+#         'post': post,
+#         'post_form': post_form,
+#     }
+#     return render(request, 'plates/detail.html', context)
+
+
 def review_create(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     post_form = PostForm(request.POST)
-    if post_form.is_valid():
-        review = post_form.save(commit=False)
-        review.post = post
-        review.user = request.user
-        review.save()
-        return redirect('plates:detail', post.pk)
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.post = post
+            review.user = request.user
+            review.save()
+            return redirect('plates:detail', post.pk)
+    else:
+        review_form = ReviewForm()
+
     context = {
         'post': post,
         'post_form': post_form,
+        'review_form': review_form,
     }
-    return render(request, 'plates/detail.html', context)
+    return render(request, 'plates/review.html', context)
+
 
 # @login_required
 def review_update(request, post_pk, review_pk):

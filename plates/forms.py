@@ -26,6 +26,15 @@ class ReviewForm(forms.ModelForm):
             'rating',
             'visited_date',
         )
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'id': 'ReviewWriting__Main__Text',
+                'class': 'ReviewWriting__Main__Text',
+                'placeholder': '주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!',
+                'onkeyup': 'TextLength(this)',
+                'onkeydown': 'TextLength(this)',
+            })
+        }
 
 
 class CommentForm(forms.ModelForm):

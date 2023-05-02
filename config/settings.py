@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure--5h2h#a4r$#$sqlxx#g7-$=nara#(ofxdiw8^zy8oq=s^r7!lx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 소셜 로그인
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +86,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    "OPTIONS": {
+        # ...
+        "timeout": 20,
+        # ...
     }
 }
 
@@ -121,9 +132,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',
+        # '/home/ubuntu/goldang/static',
+    ]
+else:
+    # STATIC_ROOT = BASE_DIR / 'static'
+    STATIC_ROOT = '/home/ubuntu/goldang/static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -134,3 +150,22 @@ AUTH_USER_MODEL = 'accounts.User'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+# 카카오 로그인
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'  # 로그인 후 리다이렉트 될 경로
+
+SOCIALACCOUNT_PROVIDERS = {
+    'kakao': {
+        'APP': {
+            'client_id': 'ebf3ef3af88a14332db7d305424cc5f5',
+            'secret': 'ph9pfWMBdkqx5Vijx0q9XY9ny4Civ6FC',
+            'key': '',
+        },
+        'SCOPE': ['account_email', 'profile_image', 'profile_nickname'],# 권한
+        'PROFILE_FIELDS': ['nickname', 'profileImageURL', 'email'], # 요청 정보 종류
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+    }
+}
