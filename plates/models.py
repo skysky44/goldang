@@ -78,6 +78,8 @@ class QuestionAndAnswer(models.Model):
 
 
 class Review(models.Model):
+
+    
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
     content = models.TextField('내용')
@@ -90,7 +92,18 @@ class Review(models.Model):
         ('별로', '별로'),
     )
     taste_evaluation= models.CharField(max_length=10, choices=TASTE_EVALUATION_CHOICES)
+    
+    def post_image_path(instance, filename):
+        return f'posts/{instance.user}/{filename}'
 
+    image = ProcessedImageField(
+        upload_to=post_image_path,
+        processors=[ResizeToFill(230, 230)],
+        format='JPEG',
+        options={'quality': 100},
+        blank=True,
+        null=True,
+    )
 
 
     def __str__(self):
