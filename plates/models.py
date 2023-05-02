@@ -16,14 +16,14 @@ class Post(models.Model):
     address = models.CharField('주소', max_length=200)
     restaurant_type = models.CharField('식당 종류', max_length=50)
     loc = models.CharField('위치', max_length=50)
-    image = ProcessedImageField(
-        upload_to=post_image_path,
-        processors=[ResizeToFill(230, 230)],
-        format='JPEG',
-        options={'quality': 100},
-        blank=True,
-        null=True,
-    )
+    # image = ProcessedImageField(
+    #     upload_to=post_image_path,
+    #     processors=[ResizeToFill(230, 230)],
+    #     format='JPEG',
+    #     options={'quality': 100},
+    #     blank=True,
+    #     null=True,
+    # )
     
     created_at = models.DateTimeField('작성일', auto_now_add=True)
     updated_at = models.DateTimeField('최종수정일', auto_now=True)
@@ -35,11 +35,23 @@ class Post(models.Model):
     closed_days = models.CharField('휴무일',blank=True, max_length=50)
     rating = models.IntegerField('평점', default=0, blank=True)
 
-
+    images = models.ManyToManyField(to='PostImage', verbose_name='다중이미지', blank=True, related_name='post_images')
 
     
     def __str__(self):
         return self.title
+
+class PostImage(models.Model):
+    post = models.ForeignKey(to=Post, on_delete=models.CASCADE, related_name='post_images')
+    image = ProcessedImageField(
+        upload_to='posts/images',
+        processors=[ResizeToFill(800, 800)],
+        format='JPEG',
+        options={'quality': 90},
+    )
+    
+    def __str__(self):
+        return f'{self.post.title} - {self.id}'
 
 
 # class Picture(models.Model):

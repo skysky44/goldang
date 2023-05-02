@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Post, Review, Comment
-from .forms import PostForm, ReviewForm, CommentForm
+from .models import Post, Review, Comment, PostImage
+from .forms import PostForm, ReviewForm, CommentForm, PostImageForm
 
 # Create your views here.
 def index(request):
@@ -17,12 +17,14 @@ def detail(request, post_pk):
     review_form = ReviewForm()
     comment_form = CommentForm()
     taste_evaluation = request.GET.get('taste_evaluation')  # 맛평가 버튼 클릭 시 해당 맛평가를 가져옴
+    post_images = post.post_images.all()
     if taste_evaluation:
         reviews = post.review_set.filter(taste_evaluation=taste_evaluation)
     else:
         reviews = post.review_set.all()
     context = {
         'post': post,
+        'post_images': post_images,
         'review_form': review_form,
         'reviews': reviews,
         'comment_form': comment_form,
@@ -35,15 +37,21 @@ def detail(request, post_pk):
 def create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
+        imageForm = PostImageForm(request.POST, request.FILES)
+        if form.is_valid() and imageForm.is_valid():
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+
+            for image in request.FILES.getlist('image'): # s 없나
+                PostImage.objects.create(post=post, image=image)
             return redirect('plates:detail', post.pk)
     else:
         form = PostForm()
+        imageForm = PostImageForm()
     context = {
         'form': form,
+        'imageForm': imageForm,
     }
     return render(request, 'plates/create.html', context)
 

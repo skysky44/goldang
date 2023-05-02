@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Post, Review, Comment, QuestionAndAnswer
+from .models import Post, Review, PostImage, Comment, QuestionAndAnswer
 
 
 class PostForm(forms.ModelForm):
@@ -12,9 +12,20 @@ class PostForm(forms.ModelForm):
             'description',
             'restaurant_type',
             'loc',
-            'image',
+            # 'image',
         )
+    def save(self, commit=True):
+        instance = super().save(commit)
+        if self.cleaned_data.get('images'):
+            for image in self.cleaned_data.get('images'):
+                PostImage.objects.create(post=instance, image=image)
+        return instance
 
+class PostImageForm(forms.ModelForm):
+    class Meta:
+        model = PostImage
+        fields = ('image',)
+        widgets = {'image': forms.FileInput(attrs={'multiple': True})}
 
 class ReviewForm(forms.ModelForm):
     
