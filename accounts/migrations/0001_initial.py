@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('nickname', models.CharField(max_length=150, verbose_name='닉네임')),
+                ('nickname', models.CharField(blank=True, max_length=150, null=True, verbose_name='닉네임')),
                 ('email', models.EmailField(max_length=150, verbose_name='이메일')),
                 ('profile_image_url', models.URLField(blank=True, null=True)),
                 ('picture', imagekit.models.fields.ProcessedImageField(blank=True, null=True, upload_to=accounts.models.User.get_image_path)),
