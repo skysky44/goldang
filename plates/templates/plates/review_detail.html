@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "plates/detail/detail.css" %}">
+{% endblock style %}
+
+{% block content %}
+<div style="height: 750px; background-color: #F9F9F9;">
+  <div class="Review__Detail__Container">
+    <div class="Review__Detail__Card">
+      <div class="Detail__Review__Detail">
+        <div class="Detail__Review__User">
+          <div class="Detail__Review__User__Img"><img src="{{ user.image.url }}" alt=""></div>
+          <span class="Detail__Review__User__Name">{{ request.user }}</span>
+          <ul class="Detail__Review__User__Stat">
+            <span class="Detail__Review__User__StatItem--Review"></span><li class="Detail__Review__User__StatItem">1</li>
+            <span class="Detail__Review__User__StatItem--Follower"></span><li class="Detail__Review__User__StatItem">1</li>
+          </ul>
+        </div>
+        <div>
+          <span class="Detail__Review__Date">{{ review.created_at }}</span>
+          <p class="Detail__Review__Text">{{ review.content }}</p>
+        </div>
+        <div class="Detail__Review__TasteEvaluationBox">
+          {% if review.taste_evaluation == '맛있다' %}
+            <i class="Detail__Review__TasteEvaluation--Delicious"></i>
+          {% elif review.taste_evaluation == '괜찮다' %}
+            <i class="Detail__Review__TasteEvaluation--Smile"></i>
+          {% elif review.taste_evaluation == '별로' %}
+            <i class="Detail__Review__TasteEvaluation--Sad"></i>
+          {% endif %}                  
+          <span class="Detail__Review__TasteEvaluationText">{{ review.taste_evaluation }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -8,92 +8,103 @@ Detail
 {% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static "plates/detail.css" %}">
+<link rel="stylesheet" href="{% static "plates/detail/detail.css" %}">
 {% endblock style %}
 
 
-
 {% block content %}
-<div>
-  <div class="d-flex flex-row">
-    <div class="headimg" style="margin: 5px;">
-      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-    </div>
-    <div class="headimg" style="margin: 5px;">
-      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-    </div>
-    <div class="headimg" style="margin: 5px;">
-      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-    </div>
-    <div class="headimg" style="margin: 5px;">
-      <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-    </div>
+
+<div class="d-flex flex-row">
+  <div class="headimg" style="margin: 5px;">
+    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
   </div>
-  <div class="d-flex flex-row">
-    <div style="width: 70%;">
-      <div>
-        <div class="d-flex justify-content-between">
-          <div class="d-flex flex-row">
-            <h1> {{ post.title }} </h1>
-            <h2 class="mx-3" style="line-height:55px;"> {{post|get_rating}} </h2>
-          </div>
-          <div class="d-flex flex-row Detail__Title__Sub">
-            
-            <button class="Detail__Title__Review">
-              <a href="{% url 'plates:review_create' post.pk %}" class="mx-3">
-                <i class="Detail__Title__ReviewImg"></i>
-                <span class="Detail__Title__ReviewText">리뷰쓰기</span>
-              </a>
-            </button>
-            
-            <div>
-              <i class="Detail__Title__BookmarkImg"></i>
+  <div class="headimg" style="margin: 5px;">
+    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+  </div>
+  <div class="headimg" style="margin: 5px;">
+    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+  </div>
+  <div class="headimg" style="margin: 5px;">
+    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+  </div>
+</div>
+<div>
+  <div class="d-flex flex-row" style="width:100%; margin-left: 50px;">
+    <div class="Detail__Container">
+    
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-row">
+          <h1> {{ post.title }} </h1>
+          <h2 class="mx-3" style="line-height:55px; color:#ff7100;"> {{post|get_rating}} </h2>
+        </div>
+        <div class="d-flex flex-row Detail__Title__Sub">
+          
+          <button class="Detail__Title__Review">
+            <a class="mx-3 Detail__Title__Review__Link" href="{% url 'plates:review_create' post.pk %}">
+              <span class="Detail__Title__ReviewText" onmouseover="onHover();" onmouseout="offHover();">
+                <i id="ReviewIcon" class="Detail__Title__ReviewImg"></i>
+                <span>리뷰쓰기</span>
+              </span>
+            </a>
+          </button>
+          <form action="{% url 'plates:likes' post.pk %}" method="POST">
+            {% csrf_token %}
+            {% if request.user in post.like_users.all %}
+            <div class="Detail__Title__Bookmark">
+              <button class="Detail__Title__BookmarkImg--Active" type="submit"></button>
+              <span class="Detail__Title__BookmarkText--Active">가고싶다</span>
+            </div>
+            {% else %}
+            <div class="Detail__Title__Bookmark">
+              <button class="Detail__Title__BookmarkImg" type="submit"></button>
               <span class="Detail__Title__BookmarkText">가고싶다</span>
             </div>
-            
-          </div>
-        </div>
-        <div class="Detail__Status">
-          <span>방문 수 /</span>
-          <span>리뷰 수 {{reviews|length}} / </span>
-          <span>즐겨찾기 수</span>
+            {% endif %}
+          </form>
         </div>
       </div>
+      <div class="Detail__Status">
+        <div><span class="Detail__Status__Cnt"><span class="Detail__Status__Visitor"></span></span></div>
+        <div><span class="Detail__Status__Cnt"><span class="Detail__Status__Review"></span>{{reviews|length}}</span></div>
+        <div><span class="Detail__Status__Cnt"><span class="Detail__Status__Bookmark"></span>{{ post.like_users.all.count }}</span></div>
+      </div>
+      
       <hr>
       <div>
         <table>
           <tbody>
             <tr>
-              <td>주소</td>
+              <th>주소</th>
               <td>{{ post.loc }}</td>
             </tr>
             <tr>
-              <td>전화번호</td>
+              <th>전화번호</th>
               <td>{{ post.phone_number }}</td>
             </tr>
             <tr>
-              <td>음식 종류</td>
+              <th>음식 종류</th>
               <td>{{ post.restaurant_type }}</td>
             </tr>
             <tr>
-              <td>주차</td>
+              <th>주차</th>
               <td>{{ post.parking }}</td>
             </tr>
             <tr>
-              <td>가격대</td>
+              <th>가격대</th>
               <td>{{ post.price_range }}</td>
             </tr>
             <tr>
-              <td>휴무일</td>
+              <th>휴무일</th>
               <td>{{ post.closed_days }}</td>
             </tr>
           </tbody>
         </table>
-        <div class="text-end">업데이트:{{ post.updated_at }}</div>
+
+        <div class="Detail__Main__Update">업데이트:{{ post.updated_at }}</div>
         <hr>
         <table>
           <tr>
-            <td>식당소개</td>
+            <th>식당소개</th>
             <td>{{ post.description }}</td>
           </tr>
         </table>
@@ -104,36 +115,146 @@ Detail
             리뷰 ({{ reviews|length }})
             </div>
             <div>
-              전체({{ reviews|length }}) / 맛있다() / 괜찮다() / 별로()
+              전체({{ reviews|length }}) / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=good">맛있다()</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=normal">괜찮다()</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=bad">별로()</a>
+            </div>
+            <div>
+              
             </div>
           </div>
           <br>
-          <div>
+          <ul>
             {% for review in reviews %}
-            <div class="d-flex flex-row">
-              <p>{{ review.title }}</p>
-              <div style="margin-left: 30px;">
-                <p>{{ review.created_at }}
-                <p>{{ review.content }}</p>
-              </div>
-            </div>
-            <hr>
+            <li class="Detail__Review__List">
+              <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link">
+                <div class="Detail__Review__User">
+                  <div class="Detail__Review__User__Img"><img src="{{ user.image.url }}" alt=""></div>
+                  <span class="Detail__Review__User__Name">{{ request.user }}</span>
+                  <ul class="Detail__Review__User__Stat">
+                    <span class="Detail__Review__User__StatItem--Review"></span><li class="Detail__Review__User__StatItem">1</li>
+                    <span class="Detail__Review__User__StatItem--Follower"></span><li class="Detail__Review__User__StatItem">1</li>
+                  </ul>
+                </div>
+                <div>
+                  <span class="Detail__Review__Date">{{ review.created_at }}</span>
+                  <p class="Detail__Review__Text">{{ review.content }}</p>
+                </div>
+                <div class="Detail__Review__TasteEvaluationBox">
+                  {% if review.taste_evaluation == '맛있다' %}
+                    <i class="Detail__Review__TasteEvaluation--Delicious"></i>
+                  {% elif review.taste_evaluation == '괜찮다' %}
+                    <i class="Detail__Review__TasteEvaluation--Smile"></i>
+                  {% elif review.taste_evaluation == '별로' %}
+                    <i class="Detail__Review__TasteEvaluation--Sad"></i>
+                  {% endif %}                  
+                  <span class="Detail__Review__TasteEvaluationText">{{ review.taste_evaluation }}</span>
+                </div>
+              </a>
+            </li>
             {% endfor %}
-          </div>
+          </ul>          
         </div>
       </div>
     </div>
-    <div class="text-center detail_sidevar">
+    <div class="Detail__Sidevar">
       <div id="map" style="width:100%; height:300px;"></div>
-      <div>주변 인기 식당</div>
-      <div>이 식당 관련 태그</div>  
+      <div class="Detail__Sidevar__inner">
+        <div style="padding-top: 30px;">
+          <span class="Detail__Sidevar__innerTitle">주변 인기 식당</span>
+          <ul class="Detail__Sidevar__innerRestaurant">
+            <li class="Detail__Sidevar__innerRestaurant__List">
+              <div class="Detail__Sidevar__innerRestaurant__ImgAndContent">
+                <a href=""><img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{% static 'plates/detail/example.jpg' %}" alt=""></a>
+                <div class="Detail__Sidevar__innerRestaurant__Content">
+                  <div class="Detail__Sidevar__innerRestaurant__NameBox">
+                    <a class="Detail__Sidevar__innerRestaurant__Name" href="">{{ post.title }}</a>
+                    <span class="Detail__Sidevar__innerRestaurant__Rating"> {{post|get_rating}} </span>
+                  </div>
+                  <div class="Detail__Sidevar__innerRestaurant__InfoBox">
+                    <dl class="Detail__Sidevar__innerRestaurant__Info">
+                      <dt class="Detail__Sidevar__innerRestaurant__InfoLabel">음식 종류:</dt>
+                      <dd class="Detail_Sidevar__innerRestaurant__InfoValue">{{ post.restaurant_type }}</dd>
+                    </dl>
+                    <dl class="Detail__Sidevar__innerRestaurant__Info">
+                      <dt class="Detail__Sidevar__innerRestaurant__InfoLabel">위치:</dt>
+                      <dd class="Detail__Sidevar__innerRestaurant__InfoValue">{{ post.loc }}</dd>
+                    </dl>
+                    <dl class="Detail__Sidevar__innerRestaurant__Info">
+                      <dt class="Detail__Sidevar__innerRestaurant__InfoLabel">가격대:</dt>
+                      <dd class="Detail__Sidevar__innerRestaurant__InfoValue">{{ post.price_range }}</dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="Detail__Sidevar__innerRestaurant__TagBox">
+          <span class="Detail__Sidevar__innerRestaurant__TagTitle">이 식당 관련 태그</span>
+        </div>  
+      </div>
     </div>
-    
   </div>
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3a80ca4c67db3a146bfd38d3aeab33b"></script>
-<script type="text/javascript" src="/static/plates/detail.js"></script>
+{% comment %} {% include 'footer.html' %} {% endcomment %}
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3a80ca4c67db3a146bfd38d3aeab33b&libraries=services"></script>
+<script type="text/javascript" src="/static/plates/detail/detail.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.4.js"
+  integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+  crossorigin="anonymous"></script>
+<script>
+  function onHover()
+  {
+      $("#ReviewIcon").attr('class', 'Detail__Title__ReviewImg--Hover')
+  }
+  
+  function offHover()
+  {
+      $("#ReviewIcon").attr('class', 'Detail__Title__ReviewImg')
+  }
+
+  // 카카오 맵 api 이용
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+}
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption)
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder()
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('경기 의정부시 회룡로 185', function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x)
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    })
+
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:6px 0;"> {{ post.title }} </div>'
+    });
+    infowindow.open(map, marker)
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords)
+} 
+})
+</script>
 {% endblock content %}
 
 
