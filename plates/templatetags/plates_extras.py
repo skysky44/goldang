@@ -9,3 +9,7 @@ def get_rating(obj):
     else:
         rating = 0.0
     return round(rating, 1)
+
+@register.filter
+def count_taste_evaluation(reviews, evaluation):
+    return reviews.filter(taste_evaluation=evaluation).count()
