@@ -173,3 +173,25 @@ def comment_delete(request, post_pk, review_pk, comment_pk):
     if request.user == comment.user:
         comment.delete()
     return redirect('plates:detail', post_pk)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def review_detail(request, post_pk, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    context = {
+        'review': review,        
+    }
+    return render(request, 'plates/review_detail.html', context)
