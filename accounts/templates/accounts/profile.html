@@ -10,7 +10,7 @@ Profile
     width: 400px;
   }
 
-  .logout-font {
+  .profile-logout-font {
     color: #959595;
     font-size: 15px;
     text-align: center;
@@ -119,17 +119,17 @@ Profile
   </div>
 
   <!--footer-->
-  <footer>
+  <div>
     <div class="d-flex justify-content-center">
       <div>
-        <a href="{% url 'accounts:delete' %}" class="logout-font">회원탈퇴</a>
+        <a href="{% url 'accounts:delete' %}" class="profile-logout-font">회원탈퇴</a>
       </div>
       <div style="color: #959595;">|</div>
       <div>
-        <a href="{% url 'accounts:logout' %}" class="logout-font">로그아웃</a>
+        <a href="{% url 'accounts:logout' %}" class="profile-logout-font">로그아웃</a>
       </div>
     </div>
-  </footer>
+  </div>
 </div>
 {% endblock content %}
 
