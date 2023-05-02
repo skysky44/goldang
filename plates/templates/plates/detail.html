@@ -112,7 +112,10 @@ Detail
             리뷰 ({{ reviews|length }})
             </div>
             <div>
-              전체({{ reviews|length }}) / 맛있다() / 괜찮다() / 별로()
+              전체({{ reviews|length }}) / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=good">맛있다()</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=normal">괜찮다()</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=bad">별로()</a>
+            </div>
+            <div>
+              
             </div>
           </div>
           <br>
