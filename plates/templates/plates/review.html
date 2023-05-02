@@ -7,7 +7,7 @@ Review
 {% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static "plates/style.css" %}">
+<link rel="stylesheet" href="{% static "plates/review/review.css" %}">
 {% endblock style %}
 
 {% block content %}
@@ -20,27 +20,44 @@ Review
         <span>에 대한 솔직한 리뷰를 써주세요</span>
       </div>
     </div>
+    
     <div class="ReviewWriting__Main">
-      <ul class="ReviewWriting__Main__Rating">
-        <li>
-          <button type="button" class="ReviewWriting__Main__Rating__DeliciousButton">
-            <i class="ReviewWriting__Main__RatingImage--Delicious ReviewWriting__Main__RatingImage--Delicious--None"></i>
-            <span>맛있다</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="ReviewWriting__Main__Rating__SmileButton">
-            <i class="ReviewWriting__Main__RatingImage--Smile ReviewWriting__Main__RatingImage--Smile--None"></i>
-            <span>괜찮다</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="ReviewWriting__Main__Rating__SadButton">
-            <i class="ReviewWriting__Main__RatingImage--Sad ReviewWriting__Main__RatingImage--Sad--None"></i>
-            <span>별로</span>
-          </button>
-        </li>
-      </ul>
+      {% comment %} <div>
+        <input type="rating" name="taste_evaluation" value="4" required="" id="id_grade" min="0" max="5" step="1" style="display: none;">
+      </div> {% endcomment %}
+      {% comment %} <form class="mb-3" name="ReviewWriting__Main__Rating__Star" id="ReviewWriting__Main__Rating__Star" method="POST">
+        <fieldset>
+          <span class="text-bold">별점을 선택해 주세요</span>
+          <input type="radio" name="Review__Rating__Star" value="5" id="Rating__Star5"><label for="Rating__Star5">★</label>
+          <input type="radio" name="Review__Rating__Star" value="4" id="Rating__Star4"><label for="Rating__Star4">★</label>
+          <input type="radio" name="Review__Rating__Star" value="3" id="Rating__Star3"><label for="Rating__Star3">★</label>
+          <input type="radio" name="Review__Rating__Star" value="2" id="Rating__Star2"><label for="Rating__Star2">★</label>
+          <input type="radio" name="Review__Rating__Star" value="1" id="Rating__Star1"><label for="Rating__Star1">★</label>
+        </fieldset>
+      </form> {% endcomment %}
+      {% comment %} <form class="ReviewWriting__Main__Rating" name="taste_evaluation" id="taste_evaluation" method="POST"> {% endcomment %}
+        
+      <select name="taste_evaluation" id="taste_evaluation">
+      
+        <option type="button" class="ReviewWriting__Main__Rating__DeliciousButton" value='맛있다'>
+          <i class="ReviewWriting__Main__RatingImage--Delicious ReviewWriting__Main__RatingImage--Delicious--None"></i>
+          <span>맛있다</span>
+        </option>
+      
+      
+        <option type="button" class="ReviewWriting__Main__Rating__SmileButton" value='괜찮다'>
+          <i class="ReviewWriting__Main__RatingImage--Smile ReviewWriting__Main__RatingImage--Smile--None"></i>
+          <span>괜찮다</span>
+        </option>
+      
+        <option type="button" class="ReviewWriting__Main__Rating__SadButton" value='별로'>
+          <i class="ReviewWriting__Main__RatingImage--Sad ReviewWriting__Main__RatingImage--Sad--None"></i>
+          <span>별로</span>
+        </option>
+      </select>   
+        
+      </form>
+      {{ review_form.rating }}
       <div class="ReviewWriting__Main__Text">
         {{ review_form.content }}
       </div>
@@ -68,20 +85,16 @@ Review
       <button type="submit" class="Review__Buttons__Continue Review__Buttons__Continue--Deactive">나중에 이어쓰기</button>
       <div class="Review__Buttons">
         <a href="{% url 'plates:detail' post.pk %}"><button type="button" class="Review__Buttons__Cancel">취소</button></a>
-        <button type="submit" class="Review__Buttons__Submit">리뷰 올리기</button>
+          <input type="submit" class="Review__Buttons__Submit" value="리뷰 올리기">         
       </div>
     </div>
   </div>
 </form>
-{% comment %} <form class="mb-3" name="ReviewWriting__Main__Rating__Star" id="ReviewWriting__Main__Rating__Star" method="POST">
-  <fieldset>
-    <span class="text-bold">별점을 선택해 주세요</span>
-    <input type="radio" name="Review__Rating__Star" value="5" id="Rating__Star5"><label for="Rating__Star5">★</label>
-    <input type="radio" name="Review__Rating__Star" value="4" id="Rating__Star4"><label for="Rating__Star4">★</label>
-    <input type="radio" name="Review__Rating__Star" value="3" id="Rating__Star3"><label for="Rating__Star3">★</label>
-    <input type="radio" name="Review__Rating__Star" value="2" id="Rating__Star2"><label for="Rating__Star2">★</label>
-    <input type="radio" name="Review__Rating__Star" value="1" id="Rating__Star1"><label for="Rating__Star1">★</label>
-  </fieldset>
-</form> {% endcomment %}
-<script type="text/javascript" src="/static/plates/review.js"></script>
+
+
+<script type="text/javascript" src="/static/plates/review/review.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.6.4.js"
+  integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+  crossorigin="anonymous"></script>
 {% endblock content %}

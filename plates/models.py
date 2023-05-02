@@ -71,21 +71,40 @@ class QuestionAndAnswer(models.Model):
     content = models.TextField('내용')
     created_at = models.DateTimeField('업로드 날짜', auto_now_add=False)
     updated_at = models.DateTimeField('수정 날짜', auto_now=True)
+    
 
     def __str__(self):
         return self.title
 
 
 class Review(models.Model):
+
+    
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
-    title = models.CharField('제목', max_length=50)
     content = models.TextField('내용')
     rating = models.IntegerField('평점') # 활용하기
-    taste_evaluation = models.CharField('맛평가', max_length=50, blank=True)
-    visited_date = models.DateField('방문일')
     created_at = models.DateTimeField('업로드 날짜', auto_now_add=True)
     updated_at = models.DateTimeField('수정 날짜', auto_now=True)
+    TASTE_EVALUATION_CHOICES = (
+        ('맛있다', '맛있다'),
+        ('괜찮다', '괜찮다'),
+        ('별로', '별로'),
+    )
+    taste_evaluation= models.CharField(max_length=10, choices=TASTE_EVALUATION_CHOICES)
+    
+    def post_image_path(instance, filename):
+        return f'posts/{instance.user}/{filename}'
+
+    image = ProcessedImageField(
+        upload_to=post_image_path,
+        processors=[ResizeToFill(230, 230)],
+        format='JPEG',
+        options={'quality': 100},
+        blank=True,
+        null=True,
+    )
+
 
     def __str__(self):
         return self.title

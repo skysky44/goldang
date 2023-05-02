@@ -21,10 +21,10 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = (
-            'title',
             'content',
             'rating',
-            'visited_date',
+            'taste_evaluation',
+            'image',
         )
         widgets = {
             'content': forms.Textarea(attrs={
@@ -33,7 +33,7 @@ class ReviewForm(forms.ModelForm):
                 'placeholder': '주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!',
                 'onkeyup': 'TextLength(this)',
                 'onkeydown': 'TextLength(this)',
-            })
+            }),
         }
 
 

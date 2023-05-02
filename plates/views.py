@@ -15,8 +15,12 @@ def index(request):
 def detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     review_form = ReviewForm()
-    reviews = post.review_set.all()
     comment_form = CommentForm()
+    taste_evaluation = request.GET.get('taste_evaluation')  # 맛평가 버튼 클릭 시 해당 맛평가를 가져옴
+    if taste_evaluation:
+        reviews = post.review_set.filter(taste_evaluation=taste_evaluation)
+    else:
+        reviews = post.review_set.all()
     context = {
         'post': post,
         'review_form': review_form,
@@ -140,7 +144,7 @@ def likes(request, post_pk):
         post.like_users.remove(request.user)
     else:
         post.like_users.add(request.user)
-    return redirect('plates:index')
+    return redirect('plates:detail', post_pk)
 
 def comment_create(request, post_pk, review_pk):
     post = Post.objects.get(pk=post_pk)
@@ -173,3 +177,25 @@ def comment_delete(request, post_pk, review_pk, comment_pk):
     if request.user == comment.user:
         comment.delete()
     return redirect('plates:detail', post_pk)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def review_detail(request, post_pk, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    context = {
+        'review': review,        
+    }
+    return render(request, 'plates/review_detail.html', context)

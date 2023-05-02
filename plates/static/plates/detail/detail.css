@@ -1,0 +1,470 @@
+a {
+  text-decoration: none;
+  color: block;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+img {
+  border: none;
+}
+
+table {
+  width: 60%;
+}
+
+table td {
+  width: 30px;
+  height: 30px;
+}
+
+table tr th {
+  width: 30px;
+  height: 30px;
+  color: #9B9B9B;
+}
+
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+.Detail__Container {
+  width: 70%;
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 45px;
+}
+
+.Review__Detail__Container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 61px auto 40px;
+  padding: 10px 15px;
+}
+
+.Review__Detail__Card {
+  padding: 15px;
+  background-color: #FFFFFF;
+}
+
+.Detail__Title__Sub {
+  border: 0px;
+}
+
+.Detail__Title__Sub > button {
+  appearance: none;
+  cursor: pointer;
+  border: 0px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.Detail__Title__Review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 19px 0 0;
+}
+
+.Detail__Title__Review__Link {
+  text-decoration: none;
+}
+
+.Detail__Title__ReviewImg {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  background-image: url("review_none.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Detail__Title__ReviewImg--Hover {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  background-image: url("review_hover.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Detail__Title__ReviewText {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #9B9B9B;
+}
+
+.Detail__Title__ReviewText:hover {
+  color: #ff7100;
+}
+
+/* a:hover {
+  background-image: url("review_hover.png");
+  color: #ff7100;
+} */
+
+.Detail__Title__Bookmark {
+  display: flex;
+  flex-direction: column;
+}
+
+.Detail__Title__Bookmark button {
+  appearance: none;
+  cursor: pointer;
+  border: 0px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.Detail__Title__BookmarkImg {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  background-image: url("bookmark_none.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Detail__Title__BookmarkImg--Active {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  background-image: url("bookmark_active.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.Detail__Title__BookmarkText {
+  margin-top: 7px;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #9B9B9B;
+}
+
+.Detail__Title__BookmarkText--Active {
+  margin-top: 7px;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #ff7100;
+}
+
+.Detail__Status {
+  display: flex;
+  flex-direction: row;
+  margin: 30px 0 10px;
+  font-size: 0.8rem;
+  margin-left: 2px;
+  color: #9b9b9b;
+}
+
+.Detail__Status__Cnt {
+  display: flex;
+  flex-direction: row;
+  margin-right: 15px; 
+  width: 30px;
+  justify-content: space-between;
+}
+
+.Detail__Status__Visitor {
+  display: block;
+  background-image: url("visitor.png");
+  background-size: cover;
+  width: 15px;
+  height: 15px;
+}
+
+.Detail__Status__Review {
+  display: block;
+  background-image: url("review_none.png");
+  background-size: cover;
+  width: 15px;
+  height: 15px;
+}
+
+.Detail__Status__Bookmark {
+  display: block;
+  background-image: url("bookmark_count.png");
+  background-size: cover;
+  width: 15px;
+  height: 15px;
+}
+
+.Detail__Status__Text {
+  margin-left: 5px;
+}
+
+.headimg {
+  width: 25%;
+}
+
+.Detail__Main__Update {
+  font-size: 12px;
+  text-align: right;
+  color: rgba(79,79,79,0.6);
+}
+
+.Detail__Sidevar {
+  width: 25%;
+  margin-left: 25px;
+  background-color: #F9F9F9;
+}
+
+.Detail__Sidevar__inner {
+  box-sizing: border-box;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+.Detail__Sidevar__innerTitle {
+  font-size: 1.25rem;
+  line-height: 1.2em;
+  color: #ff792a;
+  text-align: left;
+}
+
+.Detail__Sidevar__innerRestaurant {
+  margin-top: 17px;
+}
+
+.Detail__Sidevar__innerRestaurant__List {
+  padding: 15px 0 15px 0;
+  width: 100%;
+  border-bottom: 1px solid #DBDBDB;
+}
+
+.Detail__Sidevar__innerRestaurant__ImgAndContent {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.Detail__Sidevar__innerRestaurant__ImgBox {
+  width: 103px;
+  height: 103px;
+  margin-bottom: 0;
+  border-style: 1px solid black;
+}
+
+.Detail__Sidevar__innerRestaurant__Img {
+  width: 100%;
+  padding-bottom: 0;
+  object-fit: cover;
+  background-color: #E9E9E9;
+  background-size: cover;
+}
+
+.Detail__Sidevar__innerRestaurant__Content {
+  display: flex;
+  flex-direction: column;
+  width: 57%;
+  margin-left: 10px;
+}
+
+.Detail__Sidevar__innerRestaurant__NameBox {
+  display: flex;
+  align-items: center;
+}
+
+.Detail__Sidevar__innerRestaurant__Name {
+  font-size: 18px;
+  line-height: 1.27;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  color: #555555;
+}
+
+.Detail__Sidevar__innerRestaurant__Rating {
+  margin-left: 5px;
+  font-size: 19px;
+  line-height: 1;
+  color: #ff792a;
+}
+
+.Detail__Sidevar__innerRestaurant__InfoBox {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3px;
+}
+
+.Detail__Sidevar__innerRestaurant__Info {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  margin: 0px;
+  margin-top: 6px;
+}
+
+.Detail__Sidevar__innerRestaurant__InfoLabel {
+  color: #9B9B9B;
+  margin: 0;
+  padding: 0;
+}
+
+.Detail__Sidevar__innerRestaurant__InfoValue {
+  color: #555555;
+  margin: 0;
+  padding: 0;
+}
+
+.Detail__Sidevar__innerRestaurant__TagBox {
+  padding: 33px 0 33px 0;
+}
+
+.Detail__Sidevar__innerRestaurant__TagTitle {
+  font-size: 1.25rem;
+  line-height: 1.2em;
+  color: #ff792a;
+  text-align: left;
+}
+
+.Detail__Review__List {
+  position: relative;
+  border-bottom: 1px solid #DBDBDB;
+}
+
+.Detail__Review__Link {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0 52px 0;
+}
+
+.Detail__Review__Detail {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0 52px 0;
+  background-color: #FFFFFF
+}
+
+.Detail__Review__Link:hover {
+  background-color: #F9F9F9;
+}
+
+.Detail__Review__User {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 35px 0 8px;
+}
+
+.Detail__Review__User__ImgBox {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 5px;
+  border-style: solid 1px black;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #DBDBDB;
+}
+
+.Detail__Review__User__Img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0;
+  object-fit: cover;
+}
+
+.Detail__Review__User__Name {
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: center;
+  color: #555555;
+}
+
+.Detail__Review__User__Stat {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Detail__Review__User__StatItem {
+  display: flex;
+  align-items: center;
+  margin-right: 2px;
+  font-size: 10px;
+  color: #CBCBCB;
+}
+
+.Detail__Review__User__StatItem--Review {
+  display: block;
+  background-image: url("review_none.png");
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.Detail__Review__User__StatItem--Follower {
+  display: block;
+  background-image: url("follower.png");
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.Detail__Review__Date {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #9B9B9B;
+}
+
+.Detail__Review__Text {
+  font-size: 15px;
+  line-height: 1.666;
+  word-break: break-all;
+  color: #000000;
+}
+
+.Detail__Review__TasteEvaluationBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+}
+
+.Detail__Review__TasteEvaluationImg {
+  display: block;
+}
+
+.Detail__Review__TasteEvaluationText {
+  font-size: 15px;
+  color: #ff792a;
+}
+
+.Detail__Review__TasteEvaluation--Delicious {
+  display: block;
+  width: 44px;
+  height: 44px;
+  background-size: cover;
+  background-image: url("delicious.png");
+}
+
+.Detail__Review__TasteEvaluation--Smile {
+  display: block;
+  width: 44px;
+  height: 44px;
+  background-size: cover;
+  background-image: url("smile.png");
+}
+
+.Detail__Review__TasteEvaluation--Sad {
+  display: block;
+  width: 44px;
+  height: 44px;
+  background-size: cover;
+  background-image: url("sad.png");
+}
