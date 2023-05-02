@@ -139,3 +139,6 @@ AUTH_USER_MODEL = 'accounts.User'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+# 서버에서 Admin 페이지가 Static 파일 쓰도록
+STATIC_ROOT = BASE_DIR / 'static'
