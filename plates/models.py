@@ -14,6 +14,7 @@ class Post(models.Model):
     title = models.CharField('식당 이름', max_length=100)
     description = models.TextField('설명')
     address = models.CharField('주소', max_length=200)
+    address_city = models.CharField('시군구', max_length=50, blank=True)
     restaurant_type = models.CharField('식당 종류', max_length=50)
     loc = models.CharField('위치', max_length=50)
     image = ProcessedImageField(
@@ -36,7 +37,13 @@ class Post(models.Model):
     rating = models.IntegerField('평점', default=0, blank=True)
 
 
-
+    def save(self, *args, **kwargs):
+        # 주소에서 시군구 정보 추출해서 address_city 필드에 저장
+        if self.address:
+            address_list = self.address.split(' ')
+            if len(address_list) >= 2:
+                self.address_city = ' '.join(address_list[:2])
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return self.title
