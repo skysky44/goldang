@@ -25,7 +25,7 @@ class Post(models.Model):
     price_range = models.IntegerField('가격대', default=0)
     phone_number = models.CharField('전화번호', max_length=20, blank=True)
     closed_days = models.CharField('휴무일',blank=True, max_length=50)
-    rating = models.IntegerField('평점', default=0, blank=True)
+
 
 
 
