@@ -14,10 +14,13 @@ def index(request):
 
 def detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
+    posts = Post.objects.all()
     review_form = ReviewForm()
     comment_form = CommentForm()
     reviews = post.review_set.all()
-    
+
+    nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)
+
     context = {
         'post': post,
         'post_images': post_images,
@@ -27,6 +30,7 @@ def detail(request, post_pk):
         '맛있다': post.review_set.filter(taste_evaluation='맛있다'),
         '괜찮다': post.review_set.filter(taste_evaluation='괜찮다'),
         '별로': post.review_set.filter(taste_evaluation='별로'),
+        'nearby_restaurants': nearby_restaurants
     }
     return render(request, 'plates/detail.html', context)
 

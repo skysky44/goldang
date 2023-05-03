@@ -14,6 +14,7 @@ class Post(models.Model):
     title = models.CharField('식당 이름', max_length=100)
     description = models.TextField('설명')
     address = models.CharField('주소', max_length=200)
+    address_city = models.CharField('시군구', max_length=50, blank=True)
     restaurant_type = models.CharField('식당 종류', max_length=50)
     loc = models.CharField('위치', max_length=50)
     created_at = models.DateTimeField('작성일', auto_now_add=True)
@@ -26,7 +27,15 @@ class Post(models.Model):
     closed_days = models.CharField('휴무일',blank=True, max_length=50)
     rating = models.IntegerField('평점', default=0, blank=True)
 
-    # images = models.ManyToManyField(to='PostImage', verbose_name='다중이미지', blank=True, related_name='post_images')
+
+
+    def save(self, *args, **kwargs):
+        # 주소에서 시군구 정보 추출해서 address_city 필드에 저장
+        if self.address:
+            address_list = self.address.split(' ')
+            if len(address_list) >= 2:
+                self.address_city = ' '.join(address_list[:2])
+        super().save(*args, **kwargs)
 
     
     def __str__(self):
