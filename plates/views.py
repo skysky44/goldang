@@ -16,18 +16,17 @@ def detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     review_form = ReviewForm()
     comment_form = CommentForm()
-    taste_evaluation = request.GET.get('taste_evaluation')  # 맛평가 버튼 클릭 시 해당 맛평가를 가져옴
-    post_images = post.post_images.all()
-    if taste_evaluation:
-        reviews = post.review_set.filter(taste_evaluation=taste_evaluation)
-    else:
-        reviews = post.review_set.all()
+    reviews = post.review_set.all()
+    
     context = {
         'post': post,
         'post_images': post_images,
         'review_form': review_form,
         'reviews': reviews,
         'comment_form': comment_form,
+        '맛있다': post.review_set.filter(taste_evaluation='맛있다'),
+        '괜찮다': post.review_set.filter(taste_evaluation='괜찮다'),
+        '별로': post.review_set.filter(taste_evaluation='별로'),
     }
     return render(request, 'plates/detail.html', context)
 
