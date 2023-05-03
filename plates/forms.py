@@ -13,7 +13,7 @@ class PostForm(forms.ModelForm):
             'restaurant_type',
             'address',
             'loc',
-            'image',
+            # 'image',
             'parking',
             'price_range',
             'phone_number',

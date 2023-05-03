@@ -18,7 +18,7 @@ def detail(request, post_pk):
     review_form = ReviewForm()
     comment_form = CommentForm()
     reviews = post.review_set.all()
-
+    post_images = PostImage.objects.filter(post=post)
     nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)
 
     context = {
@@ -118,7 +118,7 @@ def review_create(request, post_pk):
             review.save()
 
             for image in request.FILES.getlist('image'):
-                ReviewImage.objects.create(post=post, image=image)
+                ReviewImage.objects.create(review=review, image=image)
 
             return redirect('plates:detail', post.pk)
     else:
