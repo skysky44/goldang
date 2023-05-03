@@ -77,15 +77,14 @@ class Review(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
     content = models.TextField('내용')
-    rating = models.IntegerField('평점') # 활용하기
     created_at = models.DateTimeField('업로드 날짜', auto_now_add=True,)
     updated_at = models.DateTimeField('수정 날짜', auto_now=True,)
     TASTE_EVALUATION_CHOICES = (
-        ('맛있다', '맛있다'),
-        ('괜찮다', '괜찮다'),
-        ('별로', '별로'),
+        (5, '맛있다'),
+        (3, '괜찮다'),
+        (1, '별로'),
     )
-    taste_evaluation= models.CharField(max_length=10, choices=TASTE_EVALUATION_CHOICES)
+    taste_evaluation= models.IntegerField(choices=TASTE_EVALUATION_CHOICES)
     
     def post_image_path(instance, filename):
         return f'posts/{instance.user}/{filename}'

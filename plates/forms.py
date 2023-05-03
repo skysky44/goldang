@@ -13,7 +13,6 @@ class PostForm(forms.ModelForm):
             'restaurant_type',
             'address',
             'loc',
-            # 'image',
             'parking',
             'price_range',
             'phone_number',
@@ -39,7 +38,7 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = (
             'content',
-            'rating',
+            # 'rating',
             'taste_evaluation',
             # 'image',
         )
