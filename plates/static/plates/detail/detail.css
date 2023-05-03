@@ -334,7 +334,6 @@ dd {
 }
 
 .Detail__Review__List {
-  position: relative;
   border-bottom: 1px solid #DBDBDB;
 }
 
@@ -367,8 +366,8 @@ dd {
   margin-bottom: 5px;
   border-style: solid 1px black;
   border-radius: 50%;
-  overflow: hidden;
-  background-color: #DBDBDB;
+  /* overflow: hidden; */
+  /* background-color: #DBDBDB; */
 }
 
 .Detail__Review__User__Img {
@@ -467,4 +466,30 @@ dd {
   height: 44px;
   background-size: cover;
   background-image: url("sad.png");
+}
+
+.Detail__Review__MoreReview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 130px;
+  height: 72px;
+  margin: 0 auto;
+  font-size: 19px;
+  color: #ff792a;
+  cursor: pointer;
+}
+
+.Detail__Review__MoreReview:before {
+  background-image: url("down_Arrow.png");
+  width: 22px;
+  height: 22px;
+  margin-right: 17px;
+}
+
+.Detail__Review__MoreReview:after {
+  background-image: url("down_Arrow.png");
+  width: 22px;
+  height: 22px;
+  margin-right: 17px;
 }
