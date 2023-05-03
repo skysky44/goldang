@@ -6,7 +6,7 @@ from imagekit.processors import ResizeToFill
 class User(AbstractUser):
     def get_image_path(instance, filename):
         return f'profile/{instance.username}/{filename}'
-    nickname = models.CharField('닉네임', max_length=150)
+    nickname = models.CharField('닉네임', max_length=150, blank=True, null=True)
     email = models.EmailField('이메일', max_length=150)
     profile_image_url = models.URLField(blank=True, null=True)
     picture = ProcessedImageField(
