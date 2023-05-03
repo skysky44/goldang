@@ -131,14 +131,17 @@ Detail
                   <p class="Detail__Review__Text">{{ review.content }}</p>
                 </div>
                 <div class="Detail__Review__TasteEvaluationBox">
-                  {% if review.taste_evaluation == '맛있다' %}
+                  {% if review.taste_evaluation == 5 %}
                     <i class="Detail__Review__TasteEvaluation--Delicious"></i>
-                  {% elif review.taste_evaluation == '괜찮다' %}
+                    <span class="Detail__Review__TasteEvaluationText">맛있다</span>
+                  {% elif review.taste_evaluation == 3 %}
                     <i class="Detail__Review__TasteEvaluation--Smile"></i>
-                  {% elif review.taste_evaluation == '별로' %}
+                    <span class="Detail__Review__TasteEvaluationText">괜찮다</span>
+                  {% elif review.taste_evaluation == 1 %}
                     <i class="Detail__Review__TasteEvaluation--Sad"></i>
+                    <span class="Detail__Review__TasteEvaluationText">별로</span>
                   {% endif %}                  
-                  <span class="Detail__Review__TasteEvaluationText">{{ review.taste_evaluation }}</span>
+                  
                 </div>
               </a>
             </li>
