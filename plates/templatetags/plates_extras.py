@@ -5,7 +5,7 @@ register = template.Library()
 @register.filter
 def get_rating(obj):
     if obj.review_set.exists():
-        rating = obj.review_set.aggregate(Avg('rating')).get('rating__avg')
+        rating = obj.review_set.aggregate(Avg('taste_evaluation')).get('taste_evaluation__avg')
     else:
         rating = 0.0
     return round(rating, 1)
