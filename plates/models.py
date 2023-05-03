@@ -48,6 +48,7 @@ class PostImage(models.Model):
         processors=[ResizeToFill(800, 800)],
         format='JPEG',
         options={'quality': 90},
+        # default=
     )
     
     def __str__(self):
