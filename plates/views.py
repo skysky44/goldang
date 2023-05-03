@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Post, Review, Comment
 from .forms import PostForm, ReviewForm, CommentForm
 
+
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
@@ -176,9 +177,6 @@ def comment_delete(request, post_pk, review_pk, comment_pk):
     if request.user == comment.user:
         comment.delete()
     return redirect('plates:detail', post_pk)
-
-
-
 
 
 

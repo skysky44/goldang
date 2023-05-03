@@ -32,6 +32,14 @@ dd {
   padding: 0;
 }
 
+button {
+  appearance: none;
+  cursor: pointer;
+  border: 0px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
 .Detail__Container {
   width: 70%;
   margin-top: 45px;
@@ -333,6 +341,53 @@ dd {
   text-align: left;
 }
 
+.Detail__Review__ListTitle {
+  font-size: 18px;
+  line-height: 1.2;
+  color: #4F4F4F;
+}
+
+.Detail__Review__ListCount {
+  color: #7F7F7F;
+}
+
+.Detail__Review__FilterList {
+  display: flex;
+  margin-left: auto;
+}
+
+.Detail__Review__FilterItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Detail__Review__FilterItem::after {
+  content: '|';
+  margin: 0 7px;
+  color: #9b9b9b;
+}
+
+.Detail__Review__FilterButton {
+  padding-right: 3px;
+  font-size: 16px;
+  color: #9b9b9b;
+}
+
+.Detail__Review__FilterButton--Selected {
+  color: #ff792a;
+}
+
+.RestaurantReviewList__ReviewCount::before{
+  display: inline;
+  content: '('
+}
+
+.RestaurantReviewList__ReviewCount::after{
+  display: inline;
+  content: ')'
+}
+
 .Detail__Review__List {
   border-bottom: 1px solid #DBDBDB;
 }
@@ -472,7 +527,7 @@ dd {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 130px;
+  width: 150px;
   height: 72px;
   margin: 0 auto;
   font-size: 19px;
@@ -480,16 +535,16 @@ dd {
   cursor: pointer;
 }
 
-.Detail__Review__MoreReview:before {
+.Detail__Review__MoreReview--before {
   background-image: url("down_Arrow.png");
-  width: 22px;
+  width: 24px;
   height: 22px;
-  margin-right: 17px;
+  margin-right: 8px;
 }
 
-.Detail__Review__MoreReview:after {
+.Detail__Review__MoreReview--after {
   background-image: url("down_Arrow.png");
-  width: 22px;
+  width: 24px;
   height: 22px;
-  margin-right: 17px;
+  margin-left: 8px;
 }
