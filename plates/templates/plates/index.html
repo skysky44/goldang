@@ -47,17 +47,19 @@ Index
   </div>
 
   <div class="d-flex container">
-    <div class="row row-cols-2 row-cols-md-4 justify-content-center">
+    <div class="row row-cols-2 row-cols-md-4">
       {% for post in posts %}
-      <div class="col">
-        <a href="{% url 'plates:detail' post.pk %}">
-          <div class="card border-0 m-3 p-0" style="width: 18rem;">
-            {% if post.image %}
+
+        <a href="{% url 'plates:detail' post.pk %}" style="text-decoration: none;">
+          <div class="col card border-0 m-3" >
+            {% if post.post_images.first %}
               <img class="card-img-top rounded-0 img-size" src="{{ post.image.url }}" alt="img">
+
             {% else %}
               <img class="card-img-top rounded-0 img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
             {% endif %}
-            <div class="card-body">
+
+            <div class="card-body" style="width: 220px;">
               <div class="d-flex">
                 <div class="me-3 title-font text-truncate">{{ post.title }}</div>
                 {% if post|get_rating is not None %}
@@ -70,7 +72,6 @@ Index
             </div>
           </div>
         </a>
-      </div>
       {% endfor %}
     </div>
   </div>    

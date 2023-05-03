@@ -32,13 +32,107 @@
       border: 2px solid #ff792a;
     }
 
-    .nav-dropdown-account-box {
+    .nav-dropdown-container {
       width: 320px;
-      height:500px;
+      height: 500px;
+    }
+    
+    .post-like-head {
+      width: 320px;
+      height: 50px;
+      color: #ff792a;
+      font-size: 16px;
+      text-align: center;
+      line-height: 2.5rem;
+      border-bottom: 2px solid #ff792a;
+    }
+    
+    .post-like-content {
+      height: 413px;
+      overflow: auto;
+      padding: 15px;
+    }
+  
+    .nav-dropdown-prorile-font {
+      text-decoration: none;
+      font-size: 15px;
+      color: #7f7f7f;
+    }
+    
+    .post-like-img {
+      width: 70px;
+      height: 70px;
+      margin-right: 16px;
+    }
+    
+    .post-like-title > a {
+      font-size: 16px;
+      color: #000000;
+      text-decoration: none;
+      width: 95px;
+    }
+    
+    .post-like-rating {
+      margin-left: 5px;
+      font-size: 16px;
+      color: #ff792a;
+    }
+    
+    .post-like-loc {
+      font-size: 12px;
+      color: #6a6a6a;
+    }
+    
+    
+    .post-like-type {
+      
+    }
+    
+    .post-like-star {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .star-icon {
+      width: 92.5px;
+      height: 89.5px;
+      margin-bottom: 28px;
+      margin-top: 55px;
+    }
+    
+    .star-icon-text1 {
+      margin-bottom: 14px;
+      font-size: 23px;
+      line-height: 25px;
+      color: #4F4F4F;
+      
+    }
+    
+    .star-icon-text2 {
+      padding: 0 20px;
+      box-sizing: border-box;
+      font-size: 17px;
+      line-height: 25px;
+      text-align: center;
+      color: #ff792a;
+    }
+    
+    .nav-dropdown-profile-box {
+      min-height: 40px;
+      position: absolute;  
+      bottom: 0px;
+      right: 20px;
+      z-index: 100;
+      background-color: #FFFFFF;
+    }
+
+    .nav-dropdown-account-box {
+      padding-top: 20px;
     }
 
     .nav-dropdown-account-box > li {
       padding: 10px 16px;
+      margin-bottom: 20px;
     }
 
     .nav-dropdown-account-font {
@@ -94,72 +188,119 @@
   </style>
 </head>
 <body>
-  <!--Navigation Bar--> 
-  <nav class="navbar shadow-sm sticky-top nav-detail">
-    <div class="container p-1">
-      <a class="navbar-brand" href="{% url 'plates:index' %}">
-        <img src="{% static 'plates/logo_Mangoplate.png' %}" alt="로고" class="logo">
-      </a>
-      <div>
-        {% if request.user.is_authenticated %}
-          <div>
-            <div class="dropdown">
-
-              {% if user.picture %}
-                <img class="nav-profile-img dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" src="{{ user.picture.url }}" alt="profile-img">
-              {% else %}
-                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                </svg>
-              {% endif %}
-
-              <ul class="dropdown-menu dropdown-menu-end rounded-0">
-                <div>
-                  <div>
-                    가고싶다
-                  </div>
-                  <div>
-                    {% comment %} {{ person.like_posts.all }} {% endcomment %}
-                  </div>
-                </div>
-                <div class="nav-dropdown-account-box">
-                  <li>
-                    <a href="{% url 'accounts:profile' user.username %}">내정보</a>
-                  </li>
-                </div>
-              </ul>
-            </div>
-          </div>
-
-        {% else %}
+<!--Navigation Bar--> 
+<nav class="navbar shadow-sm sticky-top nav-detail">
+  <div class="container p-1">
+    <a class="navbar-brand" href="{% url 'plates:index' %}">
+      <img src="{% static 'plates/logo_Mangoplate.png' %}" alt="로고" class="logo">
+    </a>
+    <!--nav_dropdown 시작-->
+    <div>
+      {% if request.user.is_authenticated %}
+        <div>
           <div class="dropdown">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black" class="bi bi-person" viewBox="0 0 16 16" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-            </svg>
+
+            {% if user.picture %}
+              <img class="nav-profile-img dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" src="{{ user.picture.url }}" alt="profile-img">
+            {% else %}
+              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+              </svg>
+            {% endif %}
+
             <ul class="dropdown-menu dropdown-menu-end rounded-0">
-              <div>
-                <div>
+              <div class="nav-dropdown-container">
+                <div class="post-like-head">
                   가고싶다
                 </div>
-                <div>
-                  {% comment %} {{ person.like_posts.all }} {% endcomment %}
+
+                {% if user.like_posts.all %}
+                  <div class="post-like-content">
+                    {% for like_post in user.like_posts.all %}
+                    <div class="d-flex">
+                      <div style="width:86px; height:86px;">
+                        <a href="{% url 'plates:detail' like_post.pk %}" style="text-decoration:none;">
+                          {% if like_post.image %}
+                            <img class="post-like-img" src="{{ like_post.image.url }}" alt="like_post_image">
+                          {% else %}
+                            <img class="post-like-img" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+                          {% endif %}
+                        </a>
+                      </div>
+                      <div style="width:123px; height:86px; margin-right:40px;">
+                        <div class="d-flex" >
+                          <div class="post-like-title text-truncate"><a href="{% url 'plates:detail' like_post.pk %}">{{ like_post.title }}</a></div>
+                          <div class="post-like-rating">{{ like_post.rating }}</div>
+                        </div>
+                        <div class="post-like-loc text-truncate">{{ like_post.loc }} - {{ like_post.restaurant_type }}</div>
+                      </div>
+
+                      <!--별 아이콘-->
+                      <div>
+                        <img src="{% static 'plates/detail/bookmark_active.png' %}" alt="like-star-icon" class="post-like-star">
+                        
+                        {% comment %} <form action="{% url 'plates:likes' post.pk %}" method="POST">
+                          {% csrf_token %}
+                          {% if request.user in post.like_users.all %}
+                          <div>
+                            <button type="submit"></button>
+                          </div>
+                          {% else %}
+                          <div>
+                            <button type="submit"></button>
+                          </div>
+                          {% endif %}
+                        </form> {% endcomment %}
+
+                      </div>
+                    </div>                  
+                    {% endfor %}
+                  </div>
+
+                {% else %}
+                  <div class="text-center">
+                    <img src="{% static 'plates/star.png' %}" alt="star-icon" class="star-icon">
+                    <p class="star-icon-text1">격하게 가고싶다..</p>
+                    <p class="star-icon-text2">식당의 ‘별’ 아이콘을 누르면 가고싶은 곳을 쉽게 저장할 수 있습니다.</p>
+                  </div>
+                  
+                {% endif %}
+
+                <div class="nav-dropdown-profile-box">
+                  <li><a href="{% url 'accounts:profile' user.username %}" class="nav-dropdown-prorile-font">내정보</a></li>
                 </div>
               </div>
+            </ul>
+          </div>
+        </div>
+
+      <!--로그인 안했을때-->
+      {% else %}
+        <div class="dropdown">
+          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black" class="bi bi-person" viewBox="0 0 16 16" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+          </svg>
+          <ul class="dropdown-menu dropdown-menu-end rounded-0">
+            <div class="nav-dropdown-container">
               <div class="nav-dropdown-account-box">
                 <li>
-                  <a href="{% provider_login_url 'kakao' method='oauth2' %}" class="nav-dropdown-account-font">로그인</a>
+                  <a href="{% url 'accounts:login' %}" class="nav-dropdown-account-font">로그인</a>
                 </li>
                 <li>
                   <a href="{% url 'accounts:signup' %}" class="nav-dropdown-account-font">회원가입</a>
                 </li>
+                <li>
+                  <a href="{% provider_login_url 'kakao' method='oauth2' %}" class="nav-dropdown-account-font">카카오톡 로그인</a>
+                </li>
               </div>
-            </ul>
-          </div>
-        {% endif %}
-      </div>
+            </div>
+          </ul>
+        </div>
+      {% endif %}
     </div>
-  </nav>
+  </div>
+</nav>
   <main>
     {% block content %}
     {% endblock content %}

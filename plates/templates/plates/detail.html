@@ -13,20 +13,12 @@ Detail
 
 
 {% block content %}
-
 <div class="d-flex flex-row">
+  {% for post_image in post_images %}
   <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+    <img class="card-img-top" src="{{ post_image.image.url }}" alt="대체이미지">
   </div>
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-  </div>
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-  </div>
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-  </div>
+  {% endfor %}
 </div>
 <div>
   <div class="d-flex flex-row" style="width:100%; margin-left: 50px;">
