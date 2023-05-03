@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Post, Review, Comment
-from .forms import PostForm, ReviewForm, CommentForm
+from .models import Post, Review, Comment, PostImage, ReviewImage
+from .forms import PostForm, ReviewForm, CommentForm, PostImageForm, ReviewImageForm
 
 # Create your views here.
 def index(request):
@@ -18,9 +18,12 @@ def detail(request, post_pk):
     review_form = ReviewForm()
     comment_form = CommentForm()
     reviews = post.review_set.all()
+
     nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)
+
     context = {
         'post': post,
+        'post_images': post_images,
         'review_form': review_form,
         'reviews': reviews,
         'comment_form': comment_form,
@@ -37,15 +40,21 @@ def detail(request, post_pk):
 def create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
+        imageForm = PostImageForm(request.POST, request.FILES)
+        if form.is_valid() and imageForm.is_valid():
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+
+            for image in request.FILES.getlist('image'): # s 없나
+                PostImage.objects.create(post=post, image=image)
             return redirect('plates:detail', post.pk)
     else:
         form = PostForm()
+        imageForm = PostImageForm()
     context = {
         'form': form,
+        'imageForm': imageForm,
     }
     return render(request, 'plates/create.html', context)
 
@@ -98,21 +107,28 @@ def update(request, post_pk):
 def review_create(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     post_form = PostForm(request.POST)
+    imageForm = ReviewImageForm(request.POST, request.FILES)
+
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
-        if review_form.is_valid():
+        if review_form.is_valid() and imageForm.is_valid():
             review = review_form.save(commit=False)
             review.post = post
             review.user = request.user
             review.save()
+
+            for image in request.FILES.getlist('image'):
+                ReviewImage.objects.create(post=post, image=image)
+
             return redirect('plates:detail', post.pk)
     else:
         review_form = ReviewForm()
-
+        imageForm = ReviewImageForm()
     context = {
         'post': post,
         'post_form': post_form,
         'review_form': review_form,
+        'imageForm': imageForm,
     }
     return render(request, 'plates/review.html', context)
 

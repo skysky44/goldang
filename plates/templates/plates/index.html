@@ -52,8 +52,8 @@ Index
       <div class="col">
         <a href="{% url 'plates:detail' post.pk %}">
           <div class="card border-0 m-3 p-0" style="width: 18rem;">
-            {% if post.image %}
-              <img class="card-img-top rounded-0 img-size" src="{{ post.image.url }}" alt="img">
+            {% if post.post_images.first %}
+              <img class="card-img-top rounded-0 img-size" src="{{ post.post_images.first.image.url }}" alt="img">
             {% else %}
               <img class="card-img-top rounded-0 img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
             {% endif %}

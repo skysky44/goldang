@@ -26,7 +26,6 @@ class Migration(migrations.Migration):
                 ('address_city', models.CharField(blank=True, max_length=50, verbose_name='시군구')),
                 ('restaurant_type', models.CharField(max_length=50, verbose_name='식당 종류')),
                 ('loc', models.CharField(max_length=50, verbose_name='위치')),
-                ('image', imagekit.models.fields.ProcessedImageField(blank=True, null=True, upload_to=plates.models.Post.post_image_path)),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='작성일')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='최종수정일')),
                 ('parking', models.BooleanField(default=False, verbose_name='주차가능')),
@@ -62,6 +61,14 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='수정 날짜')),
                 ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plates.post')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='PostImage',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('image', imagekit.models.fields.ProcessedImageField(default=plates.models.PostImage.default_image, upload_to='posts/images')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='post_images', to='plates.post')),
             ],
         ),
         migrations.CreateModel(

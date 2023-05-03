@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Post, Review, Comment, QuestionAndAnswer
+from .models import Post, Review, PostImage, ReviewImage, Comment, QuestionAndAnswer
 
 
 class PostForm(forms.ModelForm):
@@ -18,8 +18,20 @@ class PostForm(forms.ModelForm):
             'price_range',
             'phone_number',
             'closed_days',
-        )
 
+        )
+    def save(self, commit=True):
+        instance = super().save(commit)
+        if self.cleaned_data.get('images'):
+            for image in self.cleaned_data.get('images'):
+                PostImage.objects.create(post=instance, image=image)
+        return instance
+
+class PostImageForm(forms.ModelForm):
+    class Meta:
+        model = PostImage
+        fields = ('image',)
+        widgets = {'image': forms.FileInput(attrs={'multiple': True})}
 
 class ReviewForm(forms.ModelForm):
     
@@ -29,7 +41,7 @@ class ReviewForm(forms.ModelForm):
             'content',
             'rating',
             'taste_evaluation',
-            'image',
+            # 'image',
         )
         widgets = {
             'content': forms.Textarea(attrs={
@@ -41,6 +53,20 @@ class ReviewForm(forms.ModelForm):
             }),
         }
 
+class ReviewImageForm(forms.ModelForm):
+    class Meta:
+        model = ReviewImage
+        fields = ('image',)
+        widgets = {
+            'image': forms.FileInput(attrs={'multiple': True}),
+        }
+
+    def save(self, commit=True):
+        instance = super().save(commit)
+        if self.cleaned_data.get('images'):
+            for image in self.cleaned_data.get('images'):
+                ReviewImage.objects.create(post=instance, image=image)
+        return instance
 
 class CommentForm(forms.ModelForm):
     
