@@ -17,13 +17,11 @@ def detail(request, post_pk):
     review_form = ReviewForm()
     comment_form = CommentForm()
     taste_evaluation = request.GET.get('taste_evaluation')  # 맛평가 버튼 클릭 시 해당 맛평가를 가져옴
-    print(taste_evaluation)
     if taste_evaluation:
         reviews = post.review_set.filter(taste_evaluation=taste_evaluation)
     else:
         reviews = post.review_set.all()
 
-    print(reviews)
     context = {
         'post': post,
         'review_form': review_form,
