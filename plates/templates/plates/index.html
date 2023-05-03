@@ -49,10 +49,12 @@ Index
   <div class="d-flex container">
     <div class="row row-cols-2 row-cols-md-4">
       {% for post in posts %}
+
         <a href="{% url 'plates:detail' post.pk %}" style="text-decoration: none;">
           <div class="col card border-0 m-3" >
-            {% if post.image %}
+            {% if post.post_images.first %}
               <img class="card-img-top rounded-0 img-size" src="{{ post.image.url }}" alt="img">
+
             {% else %}
               <img class="card-img-top rounded-0 img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
             {% endif %}

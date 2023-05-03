@@ -13,20 +13,12 @@ Detail
 
 
 {% block content %}
-
 <div class="d-flex flex-row">
+  {% for post_image in post_images %}
   <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+    <img class="card-img-top" src="{{ post_image.image.url }}" alt="대체이미지">
   </div>
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-  </div>
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-  </div>
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-  </div>
+  {% endfor %}
 </div>
 <div>
   <div class="d-flex flex-row" style="width:100%; margin-left: 50px;">
@@ -115,7 +107,7 @@ Detail
             리뷰 ({{ reviews|length }})
             </div>
             <div>
-              전체({{ reviews|length }}) / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=good">맛있다()</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=normal">괜찮다()</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=bad">별로()</a>
+              전체({{ reviews|length }}) / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=맛있다">맛있다({{ 맛있다_cnt }})</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=괜찮다">괜찮다({{ 괜찮다_cnt }})</a> / <a href="{% url 'plates:detail' post.pk %}?taste_evaluation=별로">별로({{ 별로_cnt }})</a>
             </div>
             <div>
               

@@ -14,17 +14,9 @@ class Post(models.Model):
     title = models.CharField('식당 이름', max_length=100)
     description = models.TextField('설명')
     address = models.CharField('주소', max_length=200)
+    address_city = models.CharField('시군구', max_length=50, blank=True)
     restaurant_type = models.CharField('식당 종류', max_length=50)
     loc = models.CharField('위치', max_length=50)
-    image = ProcessedImageField(
-        upload_to=post_image_path,
-        processors=[ResizeToFill(230, 230)],
-        format='JPEG',
-        options={'quality': 100},
-        blank=True,
-        null=True,
-    )
-    
     created_at = models.DateTimeField('작성일', auto_now_add=True)
     updated_at = models.DateTimeField('최종수정일', auto_now=True)
 
@@ -37,31 +29,33 @@ class Post(models.Model):
 
 
 
+    def save(self, *args, **kwargs):
+        # 주소에서 시군구 정보 추출해서 address_city 필드에 저장
+        if self.address:
+            address_list = self.address.split(' ')
+            if len(address_list) >= 2:
+                self.address_city = ' '.join(address_list[:2])
+        super().save(*args, **kwargs)
+
     
     def __str__(self):
         return self.title
 
-
-# class Picture(models.Model):
-#     def post_image_path(instance, filename):
-#         return f'posts/{instance.title}/{filename}'
+class PostImage(models.Model):
+    def default_image():
+        return "default_image_path.jpg"
+    post = models.ForeignKey(to=Post, on_delete=models.CASCADE, related_name='post_images')
+    image = ProcessedImageField(
+        upload_to='posts/images',
+        processors=[ResizeToFill(800, 800)],
+        format='JPEG',
+        options={'quality': 90},
+        default=default_image,
+    )
     
-#     image = ProcessedImageField(
-#         upload_to=post_image_path,
-#         processors=[ResizeToFill(230, 230)],
-#         format='JPEG',
-#         options={'quality': 100},
-#         blank=True,
-#         null=True,
-#     )
+    def __str__(self):
+        return f'{self.post.title} - {self.id}'
 
-#     post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE, blank=True)
-#     review = models.ForeignKey(to='plates.Review', on_delete=models.CASCADE, blank=True)   # 순서 확인
-#     created_at = models.DateTimeField('업로드 날짜', auto_now_add=False)
-#     updated_at = models.DateTimeField('수정 날짜', auto_now=True)
-
-#     def __str__(self):
-#         return self.title
 
 
 class QuestionAndAnswer(models.Model):
@@ -84,8 +78,8 @@ class Review(models.Model):
     post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
     content = models.TextField('내용')
     rating = models.IntegerField('평점') # 활용하기
-    created_at = models.DateTimeField('업로드 날짜', auto_now_add=True)
-    updated_at = models.DateTimeField('수정 날짜', auto_now=True)
+    created_at = models.DateTimeField('업로드 날짜', auto_now_add=True,)
+    updated_at = models.DateTimeField('수정 날짜', auto_now=True,)
     TASTE_EVALUATION_CHOICES = (
         ('맛있다', '맛있다'),
         ('괜찮다', '괜찮다'),
@@ -96,18 +90,24 @@ class Review(models.Model):
     def post_image_path(instance, filename):
         return f'posts/{instance.user}/{filename}'
 
-    image = ProcessedImageField(
-        upload_to=post_image_path,
-        processors=[ResizeToFill(230, 230)],
-        format='JPEG',
-        options={'quality': 100},
-        blank=True,
-        null=True,
-    )
-
 
     def __str__(self):
-        return self.title
+        return self.content
+
+class ReviewImage(models.Model):
+    def default_image():
+        return "default_image_path.jpg"
+    review = models.ForeignKey(to='plates.Review', on_delete=models.CASCADE, related_name='review_images')
+    image = ProcessedImageField(
+        upload_to='posts/images',
+        processors=[ResizeToFill(800, 800)],
+        format='JPEG',
+        options={'quality': 90},
+        default=default_image,
+        blank=True,
+        null=True,
+        )
+
 
 
 class Comment(models.Model):
