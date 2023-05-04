@@ -1,0 +1,26 @@
+{% load static %}
+{% load plates_extras %}
+
+<a href="{% url 'plates:detail' post.pk %}" style="text-decoration: none;">
+  <div class="col card border-0 m-3 mb-0" >
+    {% if post.post_images.first %}
+      <img class="card-img-top rounded-0 card-img-size" src="{{ post.post_images.first.image.url }}" alt="img">
+
+    {% else %}
+      <img class="card-img-top rounded-0 card-img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+    {% endif %}
+
+    <div class="card-body" style="width: 220px;">
+      <div class="d-flex">
+        <div class="me-3 card-title-font text-truncate">{{ post.title }}</div>
+        {% if post|get_rating != 0.0 %}
+          <div class="card-rating">{{ post|get_rating }}</div>
+        {% else %}
+          <div class="card-no-rating">0.0</div>
+        {% endif %}
+      </div>
+      <div class="card-loc-font text-truncate">{{ post.address_city }} - {{ post.restaurant_type}}</div>
+    </div>
+  </div>
+</a>
+

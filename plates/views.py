@@ -6,8 +6,12 @@ from .forms import PostForm, ReviewForm, CommentForm, PostImageForm, ReviewImage
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
+    지역별_맛집 = Post.objects.filter(address_city='서울시 마포구')[:8]
+    조회수_맛집  = Post.objects.order_by('-visited')[:8]
     context = {
         'posts': posts,
+        '지역별_맛집': 지역별_맛집,
+        '조회수_맛집': 조회수_맛집,
     }
     return render(request, 'plates/index.html', context)
 
