@@ -21,10 +21,12 @@ def detail(request, post_pk):
     comment_form = CommentForm()
     reviews = post.review_set.all()
 
+    print(reviews)
+
     # 템플릿 페이징
-    taste_good = post.review_set.filter(taste_evaluation='맛있다')
-    taste_okey = post.review_set.filter(taste_evaluation='괜찮다')
-    taste_bad = post.review_set.filter(taste_evaluation='별로')
+    taste_good = post.review_set.filter(taste_evaluation=5)
+    taste_okey = post.review_set.filter(taste_evaluation=3)
+    taste_bad = post.review_set.filter(taste_evaluation=1)
 
     items_per_page = 5
     paginator = Paginator(reviews, items_per_page)
@@ -43,33 +45,36 @@ def detail(request, post_pk):
 
 
     post_images = PostImage.objects.filter(post=post)
+    # review_images = ReviewImage.objects.filter(review=reviews)
+    
+
     nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)
     post.visited += 1
     post.save()
 
     context = {
         'post': post,
-        # 'post_images': post_images,
+        'post_images': post_images,
         'review_form': review_form,
         'reviews': reviews,
         'comment_form': comment_form,
         '맛있다': taste_good,
         '괜찮다': taste_okey,
         '별로': taste_bad,
+        # 'review_images': review_images,
+
         'nearby_restaurants': nearby_restaurants,
+
         # 페이지네이션 context
         'page_obj': page_obj,
         'num_pages': num_pages,
         'num_pages1': num_pages1,
         'num_pages2': num_pages2,
         'num_pages3': num_pages3,
-        '맛있다': post.review_set.filter(taste_evaluation=5),
-        '괜찮다': post.review_set.filter(taste_evaluation=3),
-        '별로': post.review_set.filter(taste_evaluation=1),
-        'nearby_restaurants': nearby_restaurants
     }
 
     return render(request, 'plates/detail.html', context)
+
 
 
 
@@ -234,7 +239,9 @@ def comment_delete(request, post_pk, review_pk, comment_pk):
 
 def review_detail(request, post_pk, review_pk):
     review = Review.objects.get(pk=review_pk)
+    review_images = ReviewImage.objects.filter(review=review)
     context = {
-        'review': review,        
+        'review': review,
+        'review_images': review_images,
     }
     return render(request, 'plates/review_detail.html', context)
