@@ -17,14 +17,16 @@ table {
 }
 
 table td {
-  width: 30px;
+  width: 15px;
   height: 30px;
+  padding-bottom: 15px;
 }
 
 table tr th {
-  width: 30px;
+  width: 15px;
   height: 30px;
   color: #9B9B9B;
+  padding-bottom: 15px;
 }
 
 dd {
@@ -32,8 +34,16 @@ dd {
   padding: 0;
 }
 
+button {
+  appearance: none;
+  cursor: pointer;
+  border: 0px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
 .Detail__Container {
-  width: 70%;
+  width: 800px;
   margin-top: 45px;
   display: flex;
   flex-direction: column;
@@ -162,7 +172,7 @@ dd {
 .Detail__Status {
   display: flex;
   flex-direction: row;
-  margin: 30px 0 10px;
+  margin: 10px 0 10px;
   font-size: 0.8rem;
   margin-left: 2px;
   color: #9b9b9b;
@@ -333,8 +343,54 @@ dd {
   text-align: left;
 }
 
+.Detail__Review__ListTitle {
+  font-size: 18px;
+  line-height: 1.2;
+  color: #4F4F4F;
+}
+
+.Detail__Review__ListCount {
+  color: #7F7F7F;
+}
+
+.Detail__Review__FilterList {
+  display: flex;
+  margin-left: auto;
+}
+
+.Detail__Review__FilterItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Detail__Review__FilterItem::after {
+  content: '|';
+  margin: 0 7px;
+  color: #9b9b9b;
+}
+
+.Detail__Review__FilterButton {
+  padding-right: 3px;
+  font-size: 16px;
+  color: #9b9b9b;
+}
+
+.Detail__Review__FilterButton--Selected {
+  color: #ff792a;
+}
+
+.RestaurantReviewList__ReviewCount::before{
+  display: inline;
+  content: '('
+}
+
+.RestaurantReviewList__ReviewCount::after{
+  display: inline;
+  content: ')'
+}
+
 .Detail__Review__List {
-  position: relative;
   border-bottom: 1px solid #DBDBDB;
 }
 
@@ -342,13 +398,6 @@ dd {
   display: flex;
   flex-direction: row;
   padding: 20px 0 52px 0;
-}
-
-.Detail__Review__Detail {
-  display: flex;
-  flex-direction: row;
-  padding: 20px 0 52px 0;
-  background-color: #FFFFFF
 }
 
 .Detail__Review__Link:hover {
@@ -367,16 +416,16 @@ dd {
   margin-bottom: 5px;
   border-style: solid 1px black;
   border-radius: 50%;
-  overflow: hidden;
-  background-color: #DBDBDB;
+  /* overflow: hidden; */
+  /* background-color: #DBDBDB; */
 }
 
 .Detail__Review__User__Img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  opacity: 0;
   object-fit: cover;
+  padding-bottom: 10px;
 }
 
 .Detail__Review__User__Name {
@@ -389,6 +438,8 @@ dd {
 .Detail__Review__User__Stat {
   display: flex;
   flex-direction: row;
+  padding-left: 9px;
+  padding-right: 9px;
   justify-content: space-between;
 }
 
@@ -429,6 +480,23 @@ dd {
   color: #000000;
 }
 
+.Detail__Review__PictureList {
+  display: flex;
+  margin-top: 15px;
+}
+
+.Detail__Review__PictureItem {
+  margin-right: 10px;
+}
+
+.Detail__Review__PictureImg {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  background-color: #E9E9E9;
+  background-size: cover;
+}
+
 .Detail__Review__TasteEvaluationBox {
   display: flex;
   flex-direction: column;
@@ -467,4 +535,93 @@ dd {
   height: 44px;
   background-size: cover;
   background-image: url("sad.png");
+}
+
+.Detail__Review__MoreReview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+  height: 72px;
+  margin: 0 auto;
+  font-size: 19px;
+  color: #ff792a;
+  cursor: pointer;
+}
+
+.Detail__Review__MoreReview--before {
+  background-image: url("down_Arrow.png");
+  width: 24px;
+  height: 22px;
+  margin-right: 8px;
+}
+
+.Detail__Review__MoreReview--after {
+  background-image: url("down_Arrow.png");
+  width: 24px;
+  height: 22px;
+  margin-left: 8px;
+}
+
+
+
+/* review_detail_CSS */
+.Detail__Review__Detail {
+  padding: 20px 0 52px 0;
+  background-color: #FFFFFF
+}
+
+.Detail__Review__Detail__User {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Detail__Review__Detail__UserImg {
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+  border-radius: 100%;
+  background-size: cover;
+}
+
+.Detail__Review__Detail__UserInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Detail__Review__Detail__UserName {
+  font-size: 16px;
+  color: #595959;
+}
+
+.Detail__Review__Detail__Count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 12px;
+  color: #CBCBCB;
+  margin-right: 5px;
+}
+
+.Detail__Review__Detail__TastEvaluation {
+  display: flex;
+  flex-direction: column;
+  width: 45px;
+}
+
+.Detail__Review__Detail__ImgContainer {
+  position: relative;
+  margin-bottom: 8px;
+  overflow-x: auto;
+}
+
+.Detail__Review__Detail__Img {
+  width: 170px;
+  height: 170px;
+  display: inline-block;
+  margin-right: 6px;
+  background-size: cover;
+  cursor: pointer;
 }

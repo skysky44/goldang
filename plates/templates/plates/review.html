@@ -55,8 +55,9 @@ Review
           <span>별로</span>
         </option>
       </select>   
-      {% comment %} </form> {% endcomment %}
-      {% comment %} {{ review_form.rating }} {% endcomment %}
+        
+      {{ review_form.rating }}
+      {{ imageForm }}
       <div class="ReviewWriting__Main__Text">
         {{ review_form.content }}
       </div>

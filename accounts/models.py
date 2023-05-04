@@ -20,3 +20,4 @@ class User(AbstractUser):
     address = models.CharField('집주소', max_length=150, blank=True)
     company_address = models.CharField('회사 위치', max_length=150, blank=True)
     followers = models.ManyToManyField('self', related_name='followings', symmetrical=False, blank=True)
+    

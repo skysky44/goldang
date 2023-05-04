@@ -4,37 +4,74 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static "plates/detail/detail.css" %}">
+<style>
+  body {
+    background-color: #E9E9E9;
+  }
+</style>
 {% endblock style %}
 
 {% block content %}
-<div style="height: 750px; background-color: #F9F9F9;">
-  <div class="Review__Detail__Container">
-    <div class="Review__Detail__Card">
-      <div class="Detail__Review__Detail">
-        <div class="Detail__Review__User">
-          <div class="Detail__Review__User__Img"><img src="{{ user.image.url }}" alt=""></div>
-          <span class="Detail__Review__User__Name">{{ request.user }}</span>
-          <ul class="Detail__Review__User__Stat">
-            <span class="Detail__Review__User__StatItem--Review"></span><li class="Detail__Review__User__StatItem">1</li>
-            <span class="Detail__Review__User__StatItem--Follower"></span><li class="Detail__Review__User__StatItem">1</li>
-          </ul>
-        </div>
-        <div>
-          <span class="Detail__Review__Date">{{ review.created_at }}</span>
-          <p class="Detail__Review__Text">{{ review.content }}</p>
-        </div>
-        <div class="Detail__Review__TasteEvaluationBox">
-          {% if review.taste_evaluation == '맛있다' %}
+{% for review in reviews  %}
+{% for image in reviews.review_images_set.all %}
+
+{% endfor %}
+{% endfor %}
+<div class="Review__Detail__Container" style="width: 720px;">
+  <div class="Review__Detail__Card">
+    <div class="Detail__Review__Detail" style="padding: 0;">
+      <div class="Detail__Review__Detail__User">
+        <a href="{% url 'accounts:profile' review.user %}">
+          <div class="d-flex flex-row">
+            {% if review.user.picture %}
+            <div ><img class="Detail__Review__Detail__UserImg" src="{{ review.user.picture.url }}" alt="프로필이미지"></div>
+            {% else %}
+            <div><img class="Detail__Review__Detail__UserImg" src="{% static 'plates/no_image.png' %}" alt="대체이미지"></div>
+            {% endif %}
+            <div class="Detail__Review__Detail__UserInfo">
+              <span class="Detail__Review__Detail__UserName">{{ review.user }}</span>
+              <ul class="Detail__Review__Detail__Count">
+                <span class="Detail__Review__User__StatItem--Review" style="margin-right: 5px;"></span><li class="" style="margin-right: 5px;">{{ review.user.review_set.all|length }}</li>
+                <span class="Detail__Review__User__StatItem--Follower" style="margin-right: 5px;"></span><li class="" style="margin-right: 5px;">{{ person.followers.all|length }}</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+        <div class="Detail__Review__Detail__TastEvaluation">
+          {% if review.taste_evaluation == 5 %}
             <i class="Detail__Review__TasteEvaluation--Delicious"></i>
-          {% elif review.taste_evaluation == '괜찮다' %}
+            <span class="Detail__Review__TasteEvaluationText">맛있다</span>
+          {% elif review.taste_evaluation == 3 %}
             <i class="Detail__Review__TasteEvaluation--Smile"></i>
-          {% elif review.taste_evaluation == '별로' %}
+            <span class="Detail__Review__TasteEvaluationText">괜찮다</span>
+          {% elif review.taste_evaluation == 1 %}
             <i class="Detail__Review__TasteEvaluation--Sad"></i>
+            <span class="Detail__Review__TasteEvaluationText">별로</span>
           {% endif %}                  
-          <span class="Detail__Review__TasteEvaluationText">{{ review.taste_evaluation }}</span>
         </div>
       </div>
+      <div>  
+        <p class="Detail__Review__Text">{{ review.content }}</p>
+      </div>
+      <div class="Detail__Review__Detail__ImgContainer draggable">
+        {% if review_images %}
+          {% for image in review_images %}
+            <img class="Detail__Review__Detail__Img" src="{{ image.image.url }}" alt="리뷰이미지">
+          {% endfor %}
+        {% else %}
+          <img class="Detail__Review__Detail__Img" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+        {% endif %}
+      </div>
+      <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
     </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".draggable").draggable();
+  });
+</script>
 {% endblock content %}

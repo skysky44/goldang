@@ -2,18 +2,20 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Post, Review, Comment, PostImage, ReviewImage
 from .forms import PostForm, ReviewForm, CommentForm, PostImageForm, ReviewImageForm
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
     지역별_맛집 = Post.objects.filter(address_city='서울시 마포구')[:8]
     조회수_맛집  = Post.objects.order_by('-visited')[:8]
-    # 평점_4이상_맛집 = Post.objects.filter(rating__gte=4)[:8]
+
     context = {
         'posts': posts,
         '지역별_맛집': 지역별_맛집,
         '조회수_맛집': 조회수_맛집,
-        # '평점_4이상_맛집': 평점_4이상_맛집,
+
     }
     return render(request, 'plates/index.html', context)
 
@@ -24,7 +26,34 @@ def detail(request, post_pk):
     review_form = ReviewForm()
     comment_form = CommentForm()
     reviews = post.review_set.all()
+
+    print(reviews)
+
+    # 템플릿 페이징
+    taste_good = post.review_set.filter(taste_evaluation=5)
+    taste_okey = post.review_set.filter(taste_evaluation=3)
+    taste_bad = post.review_set.filter(taste_evaluation=1)
+
+    items_per_page = 5
+    paginator = Paginator(reviews, items_per_page)
+    taste_good1 = Paginator(taste_good, items_per_page)
+    taste_okey1 = Paginator(taste_okey, items_per_page)
+    taste_bad1 = Paginator(taste_bad, items_per_page)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    num_pages = paginator.num_pages
+    num_pages1 = taste_good1.num_pages if taste_good1.num_pages > 0 else 1
+    num_pages2 = taste_okey1.num_pages if taste_okey1.num_pages > 0 else 1
+    num_pages3 = taste_bad1.num_pages if taste_bad1.num_pages > 0 else 1
+    
+
+
     post_images = PostImage.objects.filter(post=post)
+    # review_images = ReviewImage.objects.filter(review=reviews)
+    
+
     nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)
     post.visited += 1
     post.save()
@@ -35,13 +64,23 @@ def detail(request, post_pk):
         'review_form': review_form,
         'reviews': reviews,
         'comment_form': comment_form,
-        '맛있다': post.review_set.filter(taste_evaluation=5),
-        '괜찮다': post.review_set.filter(taste_evaluation=3),
-        '별로': post.review_set.filter(taste_evaluation=1),
-        'nearby_restaurants': nearby_restaurants
+        '맛있다': taste_good,
+        '괜찮다': taste_okey,
+        '별로': taste_bad,
+        # 'review_images': review_images,
+
+        'nearby_restaurants': nearby_restaurants,
+
+        # 페이지네이션 context
+        'page_obj': page_obj,
+        'num_pages': num_pages,
+        'num_pages1': num_pages1,
+        'num_pages2': num_pages2,
+        'num_pages3': num_pages3,
     }
 
     return render(request, 'plates/detail.html', context)
+
 
 
 
@@ -204,12 +243,11 @@ def comment_delete(request, post_pk, review_pk, comment_pk):
 
 
 
-
-
-
 def review_detail(request, post_pk, review_pk):
     review = Review.objects.get(pk=review_pk)
+    review_images = ReviewImage.objects.filter(review=review)
     context = {
-        'review': review,        
+        'review': review,
+        'review_images': review_images,
     }
     return render(request, 'plates/review_detail.html', context)
