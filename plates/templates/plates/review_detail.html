@@ -21,17 +21,17 @@
   <div class="Review__Detail__Card">
     <div class="Detail__Review__Detail" style="padding: 0;">
       <div class="Detail__Review__Detail__User">
-        <a href="{% url 'accounts:profile' user %}">
+        <a href="{% url 'accounts:profile' review.user %}">
           <div class="d-flex flex-row">
-            {% if user.picture %}
-            <div ><img class="Detail__Review__Detail__UserImg" src="{{ user.picture.url }}" alt="프로필이미지"></div>
+            {% if review.user.picture %}
+            <div ><img class="Detail__Review__Detail__UserImg" src="{{ review.user.picture.url }}" alt="프로필이미지"></div>
             {% else %}
             <div><img class="Detail__Review__Detail__UserImg" src="{% static 'plates/no_image.png' %}" alt="대체이미지"></div>
             {% endif %}
             <div class="Detail__Review__Detail__UserInfo">
-              <span class="Detail__Review__Detail__UserName">{{ request.user }}</span>
+              <span class="Detail__Review__Detail__UserName">{{ review.user }}</span>
               <ul class="Detail__Review__Detail__Count">
-                <span class="Detail__Review__User__StatItem--Review" style="margin-right: 5px;"></span><li class="" style="margin-right: 5px;">{{ user.review_set.all|length }}</li>
+                <span class="Detail__Review__User__StatItem--Review" style="margin-right: 5px;"></span><li class="" style="margin-right: 5px;">{{ review.user.review_set.all|length }}</li>
                 <span class="Detail__Review__User__StatItem--Follower" style="margin-right: 5px;"></span><li class="" style="margin-right: 5px;">{{ person.followers.all|length }}</li>
               </ul>
             </div>
