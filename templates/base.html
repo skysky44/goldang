@@ -1,6 +1,7 @@
 {% load static %}
 {% load socialaccount %}
 {% load plates_extras %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -297,12 +298,12 @@
           <ul class="dropdown-menu dropdown-menu-end rounded-0">
             <div class="nav-dropdown-container">
               <div class="nav-dropdown-account-box">
-                <li>
+                {% comment %} <li>
                   <a href="{% url 'accounts:login' %}" class="nav-dropdown-account-font">로그인</a>
                 </li>
                 <li>
                   <a href="{% url 'accounts:signup' %}" class="nav-dropdown-account-font">회원가입</a>
-                </li>
+                </li> {% endcomment %}
                 <li>
                   <a href="{% provider_login_url 'kakao' method='oauth2' %}" class="nav-dropdown-account-font">카카오톡 로그인</a>
                 </li>
