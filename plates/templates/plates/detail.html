@@ -139,8 +139,8 @@ Detail
                   {% if review.taste_evaluation == 5 %}
                   <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 맛있다">
                     <div class="Detail__Review__User">
-                      {% if user.picture %}
-                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ user.picture.url }}" alt="유저 이미지"></div>
+                      {% if review.user.picture %}
+                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ review.user.picture.url }}" alt="유저 이미지"></div>
                       {% else %}
                         <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{% static 'plates/no_image.png' %}" alt="유저 이미지"></div>
                       {% endif %}
@@ -167,8 +167,8 @@ Detail
                   {% elif review.taste_evaluation == 3 %}
                   <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 괜찮다">
                     <div class="Detail__Review__User">
-                      {% if user.picture %}
-                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ user.picture.url }}" alt="유저 이미지"></div>
+                      {% if review.user.picture %}
+                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ review.user.picture.url }}" alt="유저 이미지"></div>
                       {% else %}
                         <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{% static 'plates/no_image.png' %}" alt="유저 이미지"></div>
                       {% endif %}
@@ -190,8 +190,8 @@ Detail
                   {% elif review.taste_evaluation == 1 %}
                   <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 별로">
                     <div class="Detail__Review__User">
-                      {% if user.picture %}
-                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ user.picture.url }}" alt="유저 이미지"></div>
+                      {% if review.user.picture %}
+                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ review.user.picture.url }}" alt="유저 이미지"></div>
                       {% else %}
                         <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{% static 'plates/no_image.png' %}" alt="유저 이미지"></div>
                       {% endif %}
