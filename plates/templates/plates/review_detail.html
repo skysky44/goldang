@@ -23,8 +23,8 @@
       <div class="Detail__Review__Detail__User">
         <a href="{% url 'accounts:profile' user %}">
           <div class="d-flex flex-row">
-            {% if user.picture %}
-            <div ><img class="Detail__Review__Detail__UserImg" src="{{ user.picture.url }}" alt="프로필이미지"></div>
+            {% if review.user.picture %}
+            <div ><img class="Detail__Review__Detail__UserImg" src="{{ review.user.picture.url }}" alt="프로필이미지"></div>
             {% else %}
             <div><img class="Detail__Review__Detail__UserImg" src="{% static 'plates/no_image.png' %}" alt="대체이미지"></div>
             {% endif %}
