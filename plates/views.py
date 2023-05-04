@@ -20,6 +20,8 @@ def detail(request, post_pk):
     reviews = post.review_set.all()
     post_images = PostImage.objects.filter(post=post)
     nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)
+    post.visited += 1
+    post.save()
 
     context = {
         'post': post,
@@ -32,6 +34,7 @@ def detail(request, post_pk):
         '별로': post.review_set.filter(taste_evaluation=1),
         'nearby_restaurants': nearby_restaurants
     }
+
     return render(request, 'plates/detail.html', context)
 
 

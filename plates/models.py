@@ -17,6 +17,7 @@ class Post(models.Model):
     address_city = models.CharField('시군구', max_length=50, blank=True)
     restaurant_type = models.CharField('식당 종류', max_length=50)
     loc = models.CharField('위치', max_length=50)
+    visited = models.IntegerField(default=0)
     created_at = models.DateTimeField('작성일', auto_now_add=True)
     updated_at = models.DateTimeField('최종수정일', auto_now=True)
 
