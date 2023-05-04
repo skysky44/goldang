@@ -4,31 +4,40 @@
 
 {% block style %}
 <style>
-  .img-size {
+  .index-filter-title {
+    padding: 38px 90px 27px;
+    font-size: 1.438rem;
+    color: #ff792a;
+    line-height: 1.2em;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .card-img-size {
     width: 220px;
     height: 150px;
   }
 
-  .title-font {
+  .card-title-font {
     font-size: 1.3rem;
     font-weight: 800;
     color: #555;
   }
 
-  .rating {
+  .card-rating {
     line-height: 36px;
     font-size: 1.37rem;
     font-weight: 600;
     color: #ff792a;
   }
 
-  .no-rating {
+  .card-no-rating {
     line-height: 36px;
     font-size: 1.37rem;
     color: #e9e9e9;
   }
 
-  .loc-font {
+  .card-loc-font {
     font-size: 0.9rem;
     color: #9b9b9b;
   }
@@ -46,49 +55,46 @@ Index
     <a href="{% url 'plates:create' %}">게시글 작성</a>
   </div>
 
+  <div class="index-filter-title">
+    마포 인기 맛집
+  </div>
   <div class="d-flex container">
     <div class="row row-cols-2 row-cols-md-4">
-      {% for post in posts %}
-
-        <a href="{% url 'plates:detail' post.pk %}" style="text-decoration: none;">
-          <div class="col card border-0 m-3" >
-            {% if post.post_images.first %}
-              <img class="card-img-top rounded-0 img-size" src="{{ post.post_images.first.image.url }}" alt="img">
-
-            {% else %}
-              <img class="card-img-top rounded-0 img-size" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
-            {% endif %}
-
-            <div class="card-body" style="width: 220px;">
-              <div class="d-flex">
-                <div class="me-3 title-font text-truncate">{{ post.title }}</div>
-                {% if post|get_rating != 0.0 %}
-                  <div class="rating">{{ post|get_rating }}</div>
-                {% else %}
-                  <div class="no-rating">0.0</div>
-                {% endif %}
-              </div>
-              <div class="loc-font text-truncate">{{ post.address_city }} - {{ post.restaurant_type}}</div>
-            </div>
-          </div>
-        </a>
-
+      {% for post in 지역별_맛집 %}
+        {% include 'index-card.html' %}
       {% endfor %}
     </div>
   </div>    
+
+  <hr>
+
+  <div class="index-filter-title">
+    조회수 높은 인기 식당
+  </div>
+  <div class="d-flex container">
+    <div class="row row-cols-2 row-cols-md-4">
+      {% for post in 조회수_맛집 %}
+        {% include 'index-card.html' %}
+      {% endfor %}
+    </div>
+  </div>    
+
+  <hr>
+
+  <div class="index-filter-title">
+    평점이 높은 인기 식당
+  </div>
+  <div class="d-flex container">
+    <div class="row row-cols-2 row-cols-md-4">
+      {% for post in posts %}
+        {% if post|get_rating >= 4 %}
+          {% include 'index-card.html' %}
+
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div> 
 </div>
-
-
-
-{% for post in posts %}
-
-  {% if post.address_city == "서울시 마포구" %}
-  {{ post.address_city}}
-  {% endif %}
-
-{% endfor %}
-
-
 
 {% include 'footer.html' %}
 
