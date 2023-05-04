@@ -1,35 +1,28 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
-
 {% block content %}
-<div>테스트용</div>
-    <div>
-      {% comment %} <strong>{% trans "Menu:" %}</strong> {% endcomment %}
-
+<div>
       <ul>
         {% if user.is_authenticated %}
-        <a href="{% url 'account_email' %}"  class="nav-dropdown-account-font">{% trans "Change E-mail" %}</a></i>
-        <a href="{% url 'account_logout' %}"  class="nav-dropdown-account-font">{% trans "Sign Out" %}</a></li>
+        <div>
+          <a href="{% url 'account_email' %}" class="nav-dropdown-account-font">{% trans "Change E-mail" %}</a></i>
+          <a href="{% url 'account_logout' %}" class="nav-dropdown-account-font">{% trans "Sign Out" %}</a></li>
+        </div>
         {% else %}
-        <a href="{% url 'account_login' %}"  class="nav-dropdown-account-font">{% trans "Sign In" %}</a></li>
-        <a href="{% url 'account_signup' %}"  class="nav-dropdown-account-font">{% trans "Sign Up" %}</a></li>
-        {% endif %}
+        <div>
+          <a href="{% url 'account_login' %}" class="nav-dropdown-account-font">{% trans "Sign In" %}</a></li>
+          <a href="{% url 'account_signup' %}" class="nav-dropdown-account-font">{% trans "Sign Up" %}</a></li>
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-dropdown-account-font">{% trans "카카오 로그인" %}</button>
+          </form>
+          {% endif %}
+        </div>
+        
       </ul>
     </div>
-{% if process == "connect" %}
-<h1>{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h1>
 
-<p>{% blocktrans with provider.name as provider %}You are about to connect a new third party account from {{ provider }}.{% endblocktrans %}</p>
-{% else %}
-{% comment %} <h1>{% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}</h1> {% endcomment %}
 
-{% comment %} <p>{% blocktrans with provider.name as provider %}You are about to sign in using a third party account from {{ provider }}.{% endblocktrans %}</p> {% endcomment %}
-{% endif %}
 
-<form method="post">
-  {% csrf_token %}
-  <button type="submit" class="nav-dropdown-account-font">{% trans "카카오 로그인" %}</button>
-</form>
-{% endblock %}
+{% endblock content %}
