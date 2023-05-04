@@ -12,6 +12,7 @@ Detail
 {% endblock style %}
 
 {% block content %}
+
 <div class="d-flex flex-row">
   {% for post_image in post_images %}
   <div class="headimg" style="margin: 5px;">
@@ -470,8 +471,8 @@ Detail
   // 주소-좌표 변환 객체를 생성합니다
   var geocoder = new kakao.maps.services.Geocoder()
 
-  // 주소로 좌표를 검색합니다
-  geocoder.addressSearch('{{ post.address }}', function(result, status) {
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('경기 의정부시 회룡로 185', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
     if (status === kakao.maps.services.Status.OK) {

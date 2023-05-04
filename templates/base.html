@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+{% load plates_extras %}
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -76,6 +77,12 @@
       margin-left: 5px;
       font-size: 16px;
       color: #ff792a;
+    }
+
+    .post-like-no-rating {
+      margin-left: 5px;
+      font-size: 16px;
+      color: #e9e9e9;
     }
     
     .post-like-loc {
@@ -221,8 +228,8 @@
                     <div class="d-flex">
                       <div style="width:86px; height:86px;">
                         <a href="{% url 'plates:detail' like_post.pk %}" style="text-decoration:none;">
-                          {% if like_post.image %}
-                            <img class="post-like-img" src="{{ like_post.image.url }}" alt="like_post_image">
+                          {% if like_post.post_images.first %}
+                            <img class="post-like-img" src="{{ like_post.post_images.first.image.url }}" alt="like_post_image">
                           {% else %}
                             <img class="post-like-img" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
                           {% endif %}
@@ -231,7 +238,13 @@
                       <div style="width:123px; height:86px; margin-right:40px;">
                         <div class="d-flex" >
                           <div class="post-like-title text-truncate"><a href="{% url 'plates:detail' like_post.pk %}">{{ like_post.title }}</a></div>
-                          <div class="post-like-rating">{{ like_post.rating }}</div>
+                          <div>
+                            {% if like_post|get_rating != 0.0 %}
+                              <div class="post-like-rating">{{ like_post|get_rating }}</div>
+                            {% else %}
+                              <div class="post-like-no-rating">0.0</div>
+                            {% endif %}                     
+                          </div>
                         </div>
                         <div class="post-like-loc text-truncate">{{ like_post.loc }} - {{ like_post.restaurant_type }}</div>
                       </div>

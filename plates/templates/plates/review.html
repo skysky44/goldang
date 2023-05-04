@@ -39,18 +39,18 @@ Review
         
       <select name="taste_evaluation" id="taste_evaluation">
       
-        <option type="button" class="ReviewWriting__Main__Rating__DeliciousButton" value='맛있다'>
+        <option type="button" class="ReviewWriting__Main__Rating__DeliciousButton" value='5'>
           <i class="ReviewWriting__Main__RatingImage--Delicious ReviewWriting__Main__RatingImage--Delicious--None"></i>
           <span>맛있다</span>
         </option>
       
       
-        <option type="button" class="ReviewWriting__Main__Rating__SmileButton" value='괜찮다'>
+        <option type="button" class="ReviewWriting__Main__Rating__SmileButton" value='3'>
           <i class="ReviewWriting__Main__RatingImage--Smile ReviewWriting__Main__RatingImage--Smile--None"></i>
           <span>괜찮다</span>
         </option>
       
-        <option type="button" class="ReviewWriting__Main__Rating__SadButton" value='별로'>
+        <option type="button" class="ReviewWriting__Main__Rating__SadButton" value='1'>
           <i class="ReviewWriting__Main__RatingImage--Sad ReviewWriting__Main__RatingImage--Sad--None"></i>
           <span>별로</span>
         </option>
@@ -73,6 +73,7 @@ Review
         <span>/</span>
         <span>30</span>
       </div>
+      {{ imageForm }}
       <ul class="Review__PictureContainer">
         <li class="Review__PictureItem">
           <button type="button" class="Review__PictureContainer__AddButton">

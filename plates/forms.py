@@ -39,7 +39,7 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = (
             'content',
-            'rating',
+            # 'rating',
             'taste_evaluation',
             # 'image',
         )
