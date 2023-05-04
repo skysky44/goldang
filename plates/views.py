@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Post, Review, Comment, PostImage, ReviewImage
 from .forms import PostForm, ReviewForm, CommentForm, PostImageForm, ReviewImageForm
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -20,18 +21,45 @@ def detail(request, post_pk):
     comment_form = CommentForm()
     reviews = post.review_set.all()
 
+    # 템플릿 페이징
+    taste_good = post.review_set.filter(taste_evaluation='맛있다')
+    taste_okey = post.review_set.filter(taste_evaluation='괜찮다')
+    taste_bad = post.review_set.filter(taste_evaluation='별로')
+
+    items_per_page = 5
+    paginator = Paginator(reviews, items_per_page)
+    taste_good1 = Paginator(taste_good, items_per_page)
+    taste_okey1 = Paginator(taste_okey, items_per_page)
+    taste_bad1 = Paginator(taste_bad, items_per_page)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    num_pages = paginator.num_pages
+    num_pages1 = taste_good1.num_pages if taste_good1.num_pages > 0 else 1
+    num_pages2 = taste_okey1.num_pages if taste_okey1.num_pages > 0 else 1
+    num_pages3 = taste_bad1.num_pages if taste_bad1.num_pages > 0 else 1
+    
+
+
     nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)
 
     context = {
         'post': post,
-        'post_images': post_images,
+        # 'post_images': post_images,
         'review_form': review_form,
         'reviews': reviews,
         'comment_form': comment_form,
-        '맛있다': post.review_set.filter(taste_evaluation='맛있다'),
-        '괜찮다': post.review_set.filter(taste_evaluation='괜찮다'),
-        '별로': post.review_set.filter(taste_evaluation='별로'),
-        'nearby_restaurants': nearby_restaurants
+        '맛있다': taste_good,
+        '괜찮다': taste_okey,
+        '별로': taste_bad,
+        'nearby_restaurants': nearby_restaurants,
+        # 페이지네이션 context
+        'page_obj': page_obj,
+        'num_pages': num_pages,
+        'num_pages1': num_pages1,
+        'num_pages2': num_pages2,
+        'num_pages3': num_pages3,
     }
     return render(request, 'plates/detail.html', context)
 
@@ -119,7 +147,7 @@ def review_create(request, post_pk):
             review.save()
 
             for image in request.FILES.getlist('image'):
-                ReviewImage.objects.create(post=post, image=image)
+                ReviewImage.objects.create(review=review, image=image)
 
             return redirect('plates:detail', post.pk)
     else:
