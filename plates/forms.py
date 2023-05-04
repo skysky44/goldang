@@ -12,7 +12,6 @@ class PostForm(forms.ModelForm):
             'description',
             'restaurant_type',
             'address',
-            'loc',
             'parking',
             'price_range',
             'phone_number',
