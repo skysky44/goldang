@@ -91,7 +91,6 @@
       color: #6a6a6a;
     }
     
-    
     .post-like-type {
       
     }
@@ -265,20 +264,6 @@
                       <!--별 아이콘-->
                       <div>
                         <img src="{% static 'plates/detail/bookmark_active.png' %}" alt="like-star-icon" class="post-like-star">
-                        
-                        {% comment %} <form action="{% url 'plates:likes' post.pk %}" method="POST">
-                          {% csrf_token %}
-                          {% if request.user in post.like_users.all %}
-                          <div>
-                            <button type="submit"></button>
-                          </div>
-                          {% else %}
-                          <div>
-                            <button type="submit"></button>
-                          </div>
-                          {% endif %}
-                        </form> {% endcomment %}
-
                       </div>
                     </div>                  
                     {% endfor %}
@@ -289,8 +274,7 @@
                     <img src="{% static 'plates/star.png' %}" alt="star-icon" class="star-icon">
                     <p class="star-icon-text1">격하게 가고싶다..</p>
                     <p class="star-icon-text2">식당의 ‘별’ 아이콘을 누르면 가고싶은 곳을 쉽게 저장할 수 있습니다.</p>
-                  </div>
-                  
+                  </div>              
                 {% endif %}
 
                 <div class="nav-dropdown-profile-box">
@@ -309,17 +293,23 @@
           </svg>
           <ul class="dropdown-menu dropdown-menu-end rounded-0">
             <div class="nav-dropdown-container">
-              <div class="nav-dropdown-account-box">
-                {% comment %} <li>
-                  <a href="{% url 'accounts:login' %}" class="nav-dropdown-account-font">로그인</a>
-                </li>
+              <div class="post-like-head">
+                가고싶다
+              </div>
+              <div class="text-center">
+                <a href="{% provider_login_url 'kakao' method='oauth2' %}"  style="text-decoration: none;">
+                  <img src="{% static 'plates/star.png' %}" alt="star-icon" class="star-icon">
+                  <p class="star-icon-text1">격하게 가고싶다..</p>
+                  <p class="star-icon-text2">식당의 ‘별’ 아이콘을 누르면 가고싶은 곳을 쉽게 저장할 수 있습니다.</p>
+                </a>
+              </div>              
+
+              <div class="nav-dropdown-account-box" style="margin-top: 100px;">
                 <li>
-                  <a href="{% url 'accounts:signup' %}" class="nav-dropdown-account-font">회원가입</a>
-                </li> {% endcomment %}
-                <li>
-                  <a href="{% provider_login_url 'kakao' method='oauth2' %}" class="nav-dropdown-account-font">카카오톡 로그인</a>
+                  <a href="{% provider_login_url 'kakao' method='oauth2' %}" class="nav-dropdown-account-font">로그인</a>
                 </li>
               </div>
+
             </div>
           </ul>
         </div>
@@ -327,10 +317,10 @@
     </div>
   </div>
 </nav>
-  <main>
-    {% block content %}
-    {% endblock content %}
-  </main>
+<main>
+  {% block content %}
+  {% endblock content %}
+</main>
 
   {% block script %}
   {% endblock script %}
