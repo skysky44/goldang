@@ -87,9 +87,6 @@ class Review(models.Model):
         (1, '별로'),
     )
     taste_evaluation= models.IntegerField(choices=TASTE_EVALUATION_CHOICES)
-    
-    def post_image_path(instance, filename):
-        return f'posts/{instance.user}/{filename}'
 
 
     def __str__(self):
@@ -101,7 +98,7 @@ class ReviewImage(models.Model):
         return "default_image_path.jpg"
     review = models.ForeignKey(to='plates.Review', on_delete=models.CASCADE, related_name='review_images')
     image = ProcessedImageField(
-        upload_to='posts/images',
+        upload_to='reviews/images',
         processors=[ResizeToFill(800, 800)],
         format='JPEG',
         options={'quality': 90},
