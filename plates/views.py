@@ -8,12 +8,14 @@ from django.core.paginator import Paginator
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
-    지역별_맛집 = Post.objects.filter(address_city='서울시 마포구')[:8]
+    지역별_맛집 = Post.objects.filter(address_city='서울시 마포구' or '서울특별시 마포구')[:8]
     조회수_맛집  = Post.objects.order_by('-visited')[:8]
+
     context = {
         'posts': posts,
         '지역별_맛집': 지역별_맛집,
         '조회수_맛집': 조회수_맛집,
+
     }
     return render(request, 'plates/index.html', context)
 
