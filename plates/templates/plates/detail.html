@@ -17,10 +17,12 @@ Detail
 
 
 <div class="d-flex flex-row">
-  {% for post_image in post_images %}
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{{ post_image.image.url }}" alt="대체이미지">
-  </div>
+  {% for review in reviews %}
+    {% for review_image  in review.review_images.all %}
+      <div class="headimg" style="margin: 5px;">
+        <img class="card-img-top" src="{{ review_image.image.url }}" alt="대체이미지">
+      </div>
+    {% endfor %}
   {% endfor %}
 </div>
 <div>
