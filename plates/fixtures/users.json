@@ -1,0 +1,26 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$bpOL8nTiVuT4ubV6GiDkXO$h1a0KVMV/CyW9qbzJTka2QWuQbNKlThwyJb3V840FeY=",
+        "last_login": "2023-05-04T11:28:52.080Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-05-04T11:28:43.107Z",
+        "nickname": null,
+        "email": "admin@email.com",
+        "profile_image_url": null,
+        "picture": "",
+        "address": "",
+        "company_address": "",
+        "groups": [],
+        "user_permissions": [],
+        "followers": []
+    }
+}
+]

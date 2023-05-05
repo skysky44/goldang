@@ -154,8 +154,8 @@ Detail
                       <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
                       <p class="Detail__Review__Text">{{ review.content }}</p>
                       <ul class="Detail__Review__PictureList">
-                        {% for image in review.review_images_set.all %}
-                          <img src="{{ image.image.url }}" alt="이미지">
+                        {% for image in review.review_images.all %}
+                          <img style = 'width: 200px' src="{{ image.image.url }}" alt="이미지">
                         {% endfor %}
                       </ul>
                     </div>
