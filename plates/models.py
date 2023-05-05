@@ -6,6 +6,7 @@ from imagekit.processors import ResizeToFill
 
 # S3 파일 관련
 from django.dispatch import receiver
+from django.core.files.storage import default_storage
 from django.db.models.signals import pre_delete, pre_save
 from storages.backends.s3boto3 import S3Boto3Storage
 
@@ -125,60 +126,20 @@ class Comment(models.Model):
 
 # 레코드 삭제/업데이트시 S3에 저장된 파일 삭제하는 함수들
 @receiver(pre_delete, sender=Post)
-def delete_file_from_s3(sender, instance, **kwargs):
-    '''
-    레코드 삭제시 S3에 있는 파일 삭제하는 함수
-    '''
-    storage = S3Boto3Storage()
-    storage.delete(instance.file.name)
-
-
-@receiver(pre_save, sender=Post)
-def delete_previous_file_from_s3(sender, instance, **kwargs):
-    '''
-    레코드 수정시 S3에 있는 기존 파일 삭제하는 함수
-    '''
-    if not instance.pk:
-        return False
-
-    try:
-        old_file = Post.objects.get(pk=instance.pk).file
-    except Post.DoesNotExist:
-        return False
-
-    new_file = instance.file
-    if not old_file == new_file:
-        storage = S3Boto3Storage()
-        storage.delete(old_file.name)
-
-
-# PostImage관련
-@receiver(pre_delete, sender=PostImage)
 def delete_post_images(sender, instance, **kwargs):
     '''
     Post 인스턴스 삭제시 해당 게시물에 등록된 이미지들 삭제하는 함수
     '''
     for post_image in instance.post_images.all():
-        
-    my_model = instance.my_model
-    storage = my_model.file.storage
-    storage.delete(my_model.file.name)
+        default_storage.delete(post_image.image.name)
+        post_image.delete()
 
 
-# @receiver(pre_save, sender=PostImage)
-# def delete_previous_file_from_s3(sender, instance, **kwargs):
-#     '''
-#     레코드 수정시 S3에 있는 기존 파일 삭제하는 함수
-#     '''
-#     if not instance.pk:
-#         return False
-
-#     try:
-#         old_file = Post.objects.get(pk=instance.pk).file
-#     except Post.DoesNotExist:
-#         return False
-
-#     new_file = instance.file
-#     if not old_file == new_file:
-#         storage = S3Boto3Storage()
-#         storage.delete(old_file.name)
+@receiver(pre_delete, sender=Review)
+def delete_post_images(sender, instance, **kwargs):
+    '''
+    Review 인스턴스 삭제시 해당 게시물에 등록된 이미지들 삭제하는 함수
+    '''
+    for review_image in instance.review_images.all():
+        default_storage.delete(review_image.image.name)
+        review_image.delete()
