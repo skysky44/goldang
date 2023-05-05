@@ -154,29 +154,31 @@ def delete_previous_file_from_s3(sender, instance, **kwargs):
 
 # PostImage관련
 @receiver(pre_delete, sender=PostImage)
-def delete_my_model_file(sender, instance, **kwargs):
+def delete_post_images(sender, instance, **kwargs):
     '''
     Post 인스턴스 삭제시 해당 게시물에 등록된 이미지들 삭제하는 함수
     '''
+    for post_image in instance.post_images.all():
+        
     my_model = instance.my_model
     storage = my_model.file.storage
     storage.delete(my_model.file.name)
 
 
-@receiver(pre_save, sender=PostImage)
-def delete_previous_file_from_s3(sender, instance, **kwargs):
-    '''
-    레코드 수정시 S3에 있는 기존 파일 삭제하는 함수
-    '''
-    if not instance.pk:
-        return False
+# @receiver(pre_save, sender=PostImage)
+# def delete_previous_file_from_s3(sender, instance, **kwargs):
+#     '''
+#     레코드 수정시 S3에 있는 기존 파일 삭제하는 함수
+#     '''
+#     if not instance.pk:
+#         return False
 
-    try:
-        old_file = Post.objects.get(pk=instance.pk).file
-    except Post.DoesNotExist:
-        return False
+#     try:
+#         old_file = Post.objects.get(pk=instance.pk).file
+#     except Post.DoesNotExist:
+#         return False
 
-    new_file = instance.file
-    if not old_file == new_file:
-        storage = S3Boto3Storage()
-        storage.delete(old_file.name)
+#     new_file = instance.file
+#     if not old_file == new_file:
+#         storage = S3Boto3Storage()
+#         storage.delete(old_file.name)
