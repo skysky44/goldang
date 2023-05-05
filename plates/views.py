@@ -171,7 +171,7 @@ def review_update(request, post_pk, review_pk):
 
 # @login_required
 def review_delete(request, post_pk, review_pk):
-    review = review.objects.get(pk=review_pk)
+    review = Review.objects.get(pk=review_pk)
 
     if request.user == review.user:
         review.delete()
