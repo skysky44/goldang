@@ -17,10 +17,12 @@ Detail
 
 
 <div class="d-flex flex-row">
-  {% for post_image in post_images %}
-  <div class="headimg" style="margin: 5px;">
-    <img class="card-img-top" src="{{ post_image.image.url }}" alt="대체이미지">
-  </div>
+  {% for review in reviews %}
+    {% for review_image  in review.review_images.all %}
+      <div class="headimg" style="margin: 5px;">
+        <img class="card-img-top" src="{{ review_image.image.url }}" alt="대체이미지">
+      </div>
+    {% endfor %}
   {% endfor %}
 </div>
 <div>
@@ -159,8 +161,8 @@ Detail
                       <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
                       <p class="Detail__Review__Text">{{ review.content }}</p>
                       <ul class="Detail__Review__PictureList">
-                        {% for image in review.review_images_set.all %}
-                          <img src="{{ image.image.url }}" alt="이미지">
+                        {% for image in review.review_images.all %}
+                          <img style = 'width: 200px' src="{{ image.image.url }}" alt="이미지">
                         {% endfor %}
                       </ul>
                     </div>
