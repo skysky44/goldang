@@ -136,7 +136,7 @@ def delete_post_images(sender, instance, **kwargs):
 
 
 @receiver(pre_delete, sender=Review)
-def delete_post_images(sender, instance, **kwargs):
+def delete_reivew_images(sender, instance, **kwargs):
     '''
     Review 인스턴스 삭제시 해당 게시물에 등록된 이미지들 삭제하는 함수
     '''
