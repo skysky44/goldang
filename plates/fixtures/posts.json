@@ -1,0 +1,682 @@
+[
+{
+    "model": "plates.post",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "title": "이안정",
+        "description": "상수역 근처 스시오마카세",
+        "address": "서울특별시 마포구 독막로15길 3-3 2F 101호",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "회 / 스시",
+        "visited": 5,
+        "created_at": "2023-05-04T11:30:51.022Z",
+        "updated_at": "2023-05-04T14:12:01.773Z",
+        "parking": false,
+        "price_range": 30000,
+        "phone_number": "070-8615-5521",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "title": "쉐시몽",
+        "description": "쉐시몽",
+        "address": "서울특별시 마포구 월드컵로10길 48 동궁빌딩 1F",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "프랑스 음식",
+        "visited": 3,
+        "created_at": "2023-05-04T11:32:39.223Z",
+        "updated_at": "2023-05-04T15:30:22.524Z",
+        "parking": true,
+        "price_range": 40000,
+        "phone_number": "02-730-1045",
+        "closed_days": "월요일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "title": "은하루",
+        "description": "은하루",
+        "address": "서울특별시 마포구 월드컵로3길 56",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "정통 중식 / 일반 중식",
+        "visited": 3,
+        "created_at": "2023-05-04T11:34:04.591Z",
+        "updated_at": "2023-05-04T16:29:24.325Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "02-322-4508",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 4,
+    "fields": {
+        "user": 1,
+        "title": "프롬하노이",
+        "description": "프롬하노이",
+        "address": "서울특별시 마포구 월드컵로13길 55-5 1F",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "베트남 음식",
+        "visited": 2,
+        "created_at": "2023-05-04T11:35:27.266Z",
+        "updated_at": "2023-05-04T16:01:39.882Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "070-4010-8076",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 5,
+    "fields": {
+        "user": 1,
+        "title": "쿠시파파",
+        "description": "쿠시파파",
+        "address": "서울특별시 마포구 동교로 245-4 B1",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "이자카야 / 오뎅 / 꼬치",
+        "visited": 1,
+        "created_at": "2023-05-04T11:36:48.123Z",
+        "updated_at": "2023-05-04T11:36:49.754Z",
+        "parking": false,
+        "price_range": 30000,
+        "phone_number": "02-332-3889",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 6,
+    "fields": {
+        "user": 1,
+        "title": "당도",
+        "description": "당도",
+        "address": "서울특별시 마포구 포은로 106",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "카페 / 디저트",
+        "visited": 1,
+        "created_at": "2023-05-04T11:38:09.576Z",
+        "updated_at": "2023-05-04T11:38:10.358Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "070-8690-1099",
+        "closed_days": "월요일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 7,
+    "fields": {
+        "user": 1,
+        "title": "카카오다다",
+        "description": "카카오다다",
+        "address": "서울특별시 마포구 희우정로10길 15",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "카페 / 디저트",
+        "visited": 2,
+        "created_at": "2023-05-04T11:39:38.760Z",
+        "updated_at": "2023-05-04T14:14:32.359Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "02-3446-7007",
+        "closed_days": "일, 월, 화, 수",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 8,
+    "fields": {
+        "user": 1,
+        "title": "키오스크",
+        "description": "키오스크",
+        "address": "서울특별시 마포구 월드컵로19길 74 2F",
+        "address_city": "서울특별시 마포구",
+        "restaurant_type": "카페 / 디저트",
+        "visited": 1,
+        "created_at": "2023-05-04T11:40:55.399Z",
+        "updated_at": "2023-05-04T11:40:56.314Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "",
+        "closed_days": "일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 9,
+    "fields": {
+        "user": 1,
+        "title": "세이류",
+        "description": "세이류",
+        "address": "서울특별시 송파구 올림픽로35가길 9 B1 B35호",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "정통 일식 / 일반 일식",
+        "visited": 1,
+        "created_at": "2023-05-04T11:42:45.287Z",
+        "updated_at": "2023-05-04T11:42:46.124Z",
+        "parking": true,
+        "price_range": 40000,
+        "phone_number": "02-418-2288",
+        "closed_days": "일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 10,
+    "fields": {
+        "user": 1,
+        "title": "앨리스리틀이태리",
+        "description": "**예약 불가능",
+        "address": "서울특별시 송파구 백제고분로41길 43-21 SANDONG빌딩",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "기타 양식",
+        "visited": 1,
+        "created_at": "2023-05-04T11:44:24.123Z",
+        "updated_at": "2023-05-04T11:44:25.165Z",
+        "parking": false,
+        "price_range": 30000,
+        "phone_number": "010-6545-1410",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 11,
+    "fields": {
+        "user": 1,
+        "title": "미강식당",
+        "description": "미강식당",
+        "address": "서울특별시 송파구 백제고분로 122 103호",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "고기 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T11:45:37.613Z",
+        "updated_at": "2023-05-04T11:45:38.654Z",
+        "parking": true,
+        "price_range": 20000,
+        "phone_number": "02-422-4624",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 12,
+    "fields": {
+        "user": 1,
+        "title": "해목",
+        "description": "해목",
+        "address": "서울특별시 송파구 올림픽로 300 롯데월드몰 6F",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "정통 일식 / 일반 일식",
+        "visited": 1,
+        "created_at": "2023-05-04T11:47:41.364Z",
+        "updated_at": "2023-05-04T11:47:42.800Z",
+        "parking": true,
+        "price_range": 30000,
+        "phone_number": "02-3213-4658",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 13,
+    "fields": {
+        "user": 1,
+        "title": "네기우나기야",
+        "description": "네기우나기야",
+        "address": "서울특별시 송파구 잠실로 209 소피텔앰배서더 2F",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "해산물 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T11:48:45.771Z",
+        "updated_at": "2023-05-04T11:48:46.638Z",
+        "parking": true,
+        "price_range": 30000,
+        "phone_number": "02-417-0805",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 14,
+    "fields": {
+        "user": 1,
+        "title": "쟈뎅디베르",
+        "description": "쟈뎅디베르",
+        "address": "서울특별시 송파구 잠실로 209",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "베이커리",
+        "visited": 1,
+        "created_at": "2023-05-04T11:50:12.300Z",
+        "updated_at": "2023-05-04T11:50:13.092Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "02-2092-6106",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 15,
+    "fields": {
+        "user": 1,
+        "title": "알라딘의양고기",
+        "description": "알라딘의양고기",
+        "address": "서울특별시 송파구 백제고분로7길 42-16 정빌딩",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "기타 중식",
+        "visited": 1,
+        "created_at": "2023-05-04T11:51:55.600Z",
+        "updated_at": "2023-05-04T11:51:56.926Z",
+        "parking": true,
+        "price_range": 30000,
+        "phone_number": "02-421-5534",
+        "closed_days": "셋째 일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 16,
+    "fields": {
+        "user": 1,
+        "title": "묘사 서울",
+        "description": "묘사 서울",
+        "address": "서울특별시 송파구 올림픽로 300 롯데월드몰 2F",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "카페 / 디저트",
+        "visited": 1,
+        "created_at": "2023-05-04T11:53:33.303Z",
+        "updated_at": "2023-05-04T11:53:34.251Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 17,
+    "fields": {
+        "user": 1,
+        "title": "콩당콩당",
+        "description": "콩당콩당",
+        "address": "서울특별시 송파구 올림픽로4길 17 아시아선수촌아파트 C상가 2F",
+        "address_city": "서울특별시 송파구",
+        "restaurant_type": "카페 / 디저트",
+        "visited": 1,
+        "created_at": "2023-05-04T11:54:55.381Z",
+        "updated_at": "2023-05-04T11:54:56.198Z",
+        "parking": true,
+        "price_range": 10000,
+        "phone_number": "02-2203-1214",
+        "closed_days": "일, 월",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 18,
+    "fields": {
+        "user": 1,
+        "title": "오코노미야키식당하나",
+        "description": "오코노미야키식당하나",
+        "address": "서울특별시 광진구 능동로13길 111",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "철판 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T12:11:37.828Z",
+        "updated_at": "2023-05-04T12:11:38.943Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "02-469-8884",
+        "closed_days": "화",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 19,
+    "fields": {
+        "user": 1,
+        "title": "송화양꼬치",
+        "description": "송화양꼬치",
+        "address": "서울특별시 광진구 동일로18길 70",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "기타 중식",
+        "visited": 1,
+        "created_at": "2023-05-04T12:12:48.882Z",
+        "updated_at": "2023-05-04T12:12:49.930Z",
+        "parking": true,
+        "price_range": 20000,
+        "phone_number": "02-462-7826",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 20,
+    "fields": {
+        "user": 1,
+        "title": "남한강민물매운탕",
+        "description": "남한강민물매운탕",
+        "address": "서울특별시 광진구 동일로 150",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "해산물 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T12:13:52.502Z",
+        "updated_at": "2023-05-04T12:13:53.482Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "02-464-7568",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 21,
+    "fields": {
+        "user": 1,
+        "title": "이이요",
+        "description": "이이요",
+        "address": "서울특별시 광진구 능동로32길 6",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "회 / 스시",
+        "visited": 1,
+        "created_at": "2023-05-04T12:14:55.206Z",
+        "updated_at": "2023-05-04T12:14:56.377Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "02-3437-2225",
+        "closed_days": "일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 23,
+    "fields": {
+        "user": 1,
+        "title": "서북면옥",
+        "description": "서북면옥",
+        "address": "서울특별시 광진구 자양로 199-1",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "국수 / 면 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T12:17:57.732Z",
+        "updated_at": "2023-05-04T12:17:58.575Z",
+        "parking": true,
+        "price_range": 10000,
+        "phone_number": "02-457-8319",
+        "closed_days": "일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 24,
+    "fields": {
+        "user": 1,
+        "title": "비에이치테이블",
+        "description": "비에이치테이블",
+        "address": "서울특별시 광진구 아차산로45길 16",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "브런치 / 버거 / 샌드위치",
+        "visited": 1,
+        "created_at": "2023-05-04T12:18:48.031Z",
+        "updated_at": "2023-05-04T12:18:48.830Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "010-7171-7671",
+        "closed_days": "월, 화",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 25,
+    "fields": {
+        "user": 1,
+        "title": "드로잉레시피",
+        "description": "드로잉레시피",
+        "address": "서울특별시 광진구 뚝섬로33길 45 상석빌딩",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "퓨전 양식",
+        "visited": 1,
+        "created_at": "2023-05-04T12:19:58.878Z",
+        "updated_at": "2023-05-04T12:19:59.892Z",
+        "parking": true,
+        "price_range": 20000,
+        "phone_number": "0507-1412-5334",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 26,
+    "fields": {
+        "user": 1,
+        "title": "우마이도",
+        "description": "우마이도",
+        "address": "서울특별시 광진구 능동로 135-2",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "라멘 / 소바 / 우동",
+        "visited": 1,
+        "created_at": "2023-05-04T12:20:53.525Z",
+        "updated_at": "2023-05-04T12:20:54.272Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "02-457-8788",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 27,
+    "fields": {
+        "user": 1,
+        "title": "미식반점",
+        "description": "미식반점",
+        "address": "서울특별시 광진구 군자로 70 1F",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "정통 중식 / 일반 중식",
+        "visited": 1,
+        "created_at": "2023-05-04T12:21:54.042Z",
+        "updated_at": "2023-05-04T12:21:55.108Z",
+        "parking": true,
+        "price_range": 10000,
+        "phone_number": "02-466-2020",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 28,
+    "fields": {
+        "user": 1,
+        "title": "포비",
+        "description": "포비",
+        "address": "서울특별시 광진구 동일로26길 57 1F",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "철판 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T12:22:51.726Z",
+        "updated_at": "2023-05-04T12:22:52.950Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "02-497-8555",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 29,
+    "fields": {
+        "user": 1,
+        "title": "이씨주방",
+        "description": "이씨주방",
+        "address": "서울특별시 광진구 자양번영로6길 5 1동 101호",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "일반 주점",
+        "visited": 1,
+        "created_at": "2023-05-04T12:24:06.943Z",
+        "updated_at": "2023-05-04T12:24:07.804Z",
+        "parking": true,
+        "price_range": 20000,
+        "phone_number": "02-453-9391",
+        "closed_days": "일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 30,
+    "fields": {
+        "user": 1,
+        "title": "샤오롱바오",
+        "description": "샤오롱바오",
+        "address": "서울특별시 광진구 자양번영로 20 1F",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "딤섬 / 만두",
+        "visited": 1,
+        "created_at": "2023-05-04T12:24:59.487Z",
+        "updated_at": "2023-05-04T12:25:00.328Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "010-8716-7643",
+        "closed_days": "월",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 31,
+    "fields": {
+        "user": 1,
+        "title": "소바쿠",
+        "description": "소바쿠",
+        "address": "서울특별시 광진구 천호대로 650",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "라멘 / 소바 / 우동",
+        "visited": 1,
+        "created_at": "2023-05-04T12:25:58.202Z",
+        "updated_at": "2023-05-04T12:25:59.171Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "02-447-1470",
+        "closed_days": "수",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 32,
+    "fields": {
+        "user": 1,
+        "title": "마우로아",
+        "description": "마우로아",
+        "address": "서울특별시 광진구 능동로 320 1F",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "칵테일 / 와인",
+        "visited": 1,
+        "created_at": "2023-05-04T12:26:50.473Z",
+        "updated_at": "2023-05-04T12:26:51.226Z",
+        "parking": false,
+        "price_range": 40000,
+        "phone_number": "0507-1401-0635",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 33,
+    "fields": {
+        "user": 1,
+        "title": "계탄집",
+        "description": "계탄집",
+        "address": "서울특별시 광진구 능동로 31",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "닭 / 오리 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T12:27:41.512Z",
+        "updated_at": "2023-05-04T12:27:42.545Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "02-464-6804",
+        "closed_days": "",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 34,
+    "fields": {
+        "user": 1,
+        "title": "텐동한",
+        "description": "텐동한",
+        "address": "서울특별시 광진구 능동로38길 32 1F",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "돈부리 / 일본 카레 / 벤토",
+        "visited": 1,
+        "created_at": "2023-05-04T12:28:28.900Z",
+        "updated_at": "2023-05-04T12:28:29.855Z",
+        "parking": false,
+        "price_range": 10000,
+        "phone_number": "02-6080-5856",
+        "closed_days": "일",
+        "like_users": []
+    }
+},
+{
+    "model": "plates.post",
+    "pk": 35,
+    "fields": {
+        "user": 1,
+        "title": "태천면옥",
+        "description": "태천면옥",
+        "address": "서울특별시 광진구 광장로 49",
+        "address_city": "서울특별시 광진구",
+        "restaurant_type": "국수 / 면 요리",
+        "visited": 1,
+        "created_at": "2023-05-04T12:29:17.386Z",
+        "updated_at": "2023-05-04T12:29:18.488Z",
+        "parking": false,
+        "price_range": 20000,
+        "phone_number": "02-466-7224",
+        "closed_days": "",
+        "like_users": []
+    }
+}
+]
