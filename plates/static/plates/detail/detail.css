@@ -17,7 +17,7 @@ table {
 }
 
 table td {
-  width: 15px;
+  width: 50px;
   height: 30px;
   padding-bottom: 15px;
 }
@@ -38,6 +38,7 @@ button {
   appearance: none;
   cursor: pointer;
   border: 0px;
+  padding: 0;
   border-radius: 0;
   background-color: transparent;
 }
@@ -182,8 +183,8 @@ button {
   display: flex;
   flex-direction: row;
   margin-right: 15px; 
-  width: 30px;
-  justify-content: space-between;
+  width: 45px;
+  white-space: nowrap;
 }
 
 .Detail__Status__Visitor {
@@ -192,6 +193,7 @@ button {
   background-size: cover;
   width: 15px;
   height: 15px;
+  margin-right: 6px;
 }
 
 .Detail__Status__Review {
@@ -200,6 +202,7 @@ button {
   background-size: cover;
   width: 15px;
   height: 15px;
+  margin-right: 6px;
 }
 
 .Detail__Status__Bookmark {
@@ -208,6 +211,7 @@ button {
   background-size: cover;
   width: 15px;
   height: 15px;
+  margin-right: 6px;
 }
 
 .Detail__Status__Text {
@@ -614,7 +618,12 @@ button {
 .Detail__Review__Detail__ImgContainer {
   position: relative;
   margin-bottom: 8px;
-  overflow-x: auto;
+  white-space: nowrap;
+  overflow: auto;
+}
+
+.Detail__Review__Detail__ImgBox {
+  overflow: auto;
 }
 
 .Detail__Review__Detail__Img {
@@ -622,6 +631,64 @@ button {
   height: 170px;
   display: inline-block;
   margin-right: 6px;
-  background-size: cover;
   cursor: pointer;
+  background-size: cover;
+  
+}
+
+.Carousel__Indicators {
+  height: 75px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin-top: 35px;
+  margin-right: 15%;
+  margin-bottom: 1rem;
+  margin-left: 15%;
+}
+
+.Review__Detail__CarouselImg {
+  width: auto;
+  height: 610px;
+  top: 0;
+  background-size: cover;
+}
+
+.Review__Detail__Footerbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.Review__Detail__FooterImgbox {
+  position: relative;
+  width: 64px;
+  height: 64px; 
+  overflow: hidden;
+}
+
+.Review__Detail__FooterImgbox > .active {
+  opacity: 1;
+}
+.Review__Detail__FooterImgbox > .active-none {
+  opacity: 0.5;
+}
+
+.Review__Detail__FooterImg {
+  position: static;
+  width: 100%;
+  height: 100%px;
+  object-fit: cover;  
+}
+
+.carousel-inner .carousel-item:first-child .carousel-control-prev {
+  display: none;
+}
+
+.carousel-inner .carousel-item:last-child .carousel-control-next {
+  display: none;
 }
