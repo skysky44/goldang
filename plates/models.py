@@ -1,8 +1,13 @@
+import os
 from django.db import models
 from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
+# S3 파일 관련
+from django.dispatch import receiver
+from django.db.models.signals import pre_delete, pre_save
+from storages.backends.s3boto3 import S3Boto3Storage
 
 class Post(models.Model):
     def post_image_path(instance, filename):
@@ -24,8 +29,6 @@ class Post(models.Model):
     closed_days = models.CharField('휴무일',blank=True, max_length=50)
 
 
-
-
     def save(self, *args, **kwargs):
         # 주소에서 시군구 정보 추출해서 address_city 필드에 저장
         if self.address:
@@ -34,9 +37,10 @@ class Post(models.Model):
                 self.address_city = ' '.join(address_list[:2])
         super().save(*args, **kwargs)
 
-    
+   
     def __str__(self):
         return self.title
+
 
 class PostImage(models.Model):
     def default_image():
@@ -90,6 +94,7 @@ class Review(models.Model):
     def __str__(self):
         return self.content
 
+
 class ReviewImage(models.Model):
     def default_image():
         return "default_image_path.jpg"
@@ -115,3 +120,63 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.title
+
+
+
+# 레코드 삭제/업데이트시 S3에 저장된 파일 삭제하는 함수들
+@receiver(pre_delete, sender=Post)
+def delete_file_from_s3(sender, instance, **kwargs):
+    '''
+    레코드 삭제시 S3에 있는 파일 삭제하는 함수
+    '''
+    storage = S3Boto3Storage()
+    storage.delete(instance.file.name)
+
+
+@receiver(pre_save, sender=Post)
+def delete_previous_file_from_s3(sender, instance, **kwargs):
+    '''
+    레코드 수정시 S3에 있는 기존 파일 삭제하는 함수
+    '''
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = Post.objects.get(pk=instance.pk).file
+    except Post.DoesNotExist:
+        return False
+
+    new_file = instance.file
+    if not old_file == new_file:
+        storage = S3Boto3Storage()
+        storage.delete(old_file.name)
+
+
+# PostImage관련
+@receiver(pre_delete, sender=PostImage)
+def delete_my_model_file(sender, instance, **kwargs):
+    '''
+    Post 인스턴스 삭제시 해당 게시물에 등록된 이미지들 삭제하는 함수
+    '''
+    my_model = instance.my_model
+    storage = my_model.file.storage
+    storage.delete(my_model.file.name)
+
+
+@receiver(pre_save, sender=PostImage)
+def delete_previous_file_from_s3(sender, instance, **kwargs):
+    '''
+    레코드 수정시 S3에 있는 기존 파일 삭제하는 함수
+    '''
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = Post.objects.get(pk=instance.pk).file
+    except Post.DoesNotExist:
+        return False
+
+    new_file = instance.file
+    if not old_file == new_file:
+        storage = S3Boto3Storage()
+        storage.delete(old_file.name)
