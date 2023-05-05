@@ -4,12 +4,16 @@
 {% block content %}
 <div>
       <ul>
-        {% comment %} {% if user.is_authenticated %}
+
+        {% if user.is_authenticated %}
+
         <div>
           <a href="{% url 'account_email' %}" class="nav-dropdown-account-font">{% trans "Change E-mail" %}</a></i>
           <a href="{% url 'account_logout' %}" class="nav-dropdown-account-font">{% trans "Sign Out" %}</a></li>
         </div>
-        {% else %} {% endcomment %}
+
+        {% else %}
+
         <div>
           <a href="{% url 'account_login' %}" class="nav-dropdown-account-font">{% trans "Sign In" %}</a></li>
           <a href="{% url 'account_signup' %}" class="nav-dropdown-account-font">{% trans "Sign Up" %}</a></li>
@@ -17,7 +21,9 @@
             {% csrf_token %}
             <button type="submit" class="nav-dropdown-account-font">{% trans "카카오 로그인" %}</button>
           </form>
-          {% comment %} {% endif %} {% endcomment %}
+
+          {% endif %}
+
         </div>
         
       </ul>
@@ -25,4 +31,6 @@
 
 
 
+
 {% endblock content %}
+
