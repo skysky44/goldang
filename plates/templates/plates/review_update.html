@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-Review
+Review Update
 {% endblock title %}
 
 {% block style %}
@@ -11,7 +11,7 @@ Review
 {% endblock style %}
 
 {% block content %}
-<form id="uploadForm" action="{% url 'plates:review_create' post.pk %}" method="POST" enctype="multipart/form-data">
+<form id="uploadForm" action="{% url 'plates:review_update' post.pk review.pk %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="ReviewWriting__Container">
     <div class="ReviewWriting__head">
@@ -57,11 +57,13 @@ Review
   </div>
 </form>
 
-
+{% block script %}
 <script type="text/javascript" src="{% static 'plates/review/review.js' %}"></script>
 <script
   src="https://code.jquery.com/jquery-3.6.4.js"
   integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
   crossorigin="anonymous"></script>
+{% endblock script %}
+
 
 {% endblock content %}

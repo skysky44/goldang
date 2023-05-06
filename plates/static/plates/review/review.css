@@ -155,7 +155,8 @@ ul {
   display: block;
   touch-action: none;
   user-select: none;
-  position: absolute;
+  /* position: inherit; */
+  margin-top: 10px;
   margin-right: 9px;
   margin-bottom: 9px;
 }
@@ -189,8 +190,8 @@ ul {
   text-align: right;
   font-size: 12px;
   color: #7F7F7F;
-  top: 93px;
-  left: 89px;
+  top: 133px;
+  left: 40px;
 }
 
 .Review__ButtonsContainer {
@@ -247,79 +248,3 @@ ul {
   cursor: not-allowed;
 }
 
-/* 사용x
-.ReviewWriting__Main__RatingImage--Delicious {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  margin-right: 8px;
-  background-size: cover;
-}
-
-.ReviewWriting__Main__RatingImage--Delicious--None {
-  background-image: url("delicious_none.png");
-}
-
-.ReviewWriting__Main__RatingImage--Delicious--Active {
-  background-image: url("delicious_active.png");
-}
-
-.ReviewWriting__Main__RatingImage--Smile {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  margin-right: 8px;
-  background-size: cover;
-}
-
-.ReviewWriting__Main__RatingImage--Smile--None {
-  background-image: url("smile_none.png");
-}
-
-.ReviewWriting__Main__RatingImage--Smile--Active {
-  background-image: url("smile_active.png");
-}
-
-.ReviewWriting__Main__RatingImage--Sad {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  margin-right: 8px;
-  background-size: cover;
-}
-
-.ReviewWriting__Main__RatingImage--Sad--None {
-  background-image: url("sad_none.png");
-}
-
-.ReviewWriting__Main__RatingImage--Sad--Active {
-  background-image: url("sad_active.png");
-}
-
-#ReviewWriting__Main__Rating__Star fieldset {
-  display: inline-block;
-  direction: rtl;
-  border:0;
-}
-
-#ReviewWriting__Main__Rating__Star input[type=radio]{
-  display: none;
-}
-
-#ReviewWriting__Main__Rating__Star label{
-  font-size: 2em;
-  color: transparent;
-  text-shadow: 0 0 0 #f0f0f0;
-}
-
-#ReviewWriting__Main__Rating__Star label:hover{
-  text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-
-#ReviewWriting__Main__Rating__Star label:hover ~ label{
-  text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-
-#ReviewWriting__Main__Rating__Star input[type=radio]:checked ~ label{
-  text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-} */
