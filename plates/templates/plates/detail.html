@@ -13,17 +13,24 @@ Detail
 {% endblock style %}
 
 {% block content %}
-
-
-
-<div class="d-flex flex-row">
-  {% for review in reviews %}
-    {% for review_image  in review.review_images.all %}
-      <div class="headimg" style="margin: 5px;">
-        <img class="card-img-top" src="{{ review_image.image.url }}" alt="대체이미지">
-      </div>
+<div class="Nav__ImgContainer">
+  <div class="Nav__ImgContainer__ImgBox">
+    {% for i in "12345" %}
+      {% if review_images_reversed|length > forloop.counter0 %}
+        {% for review_image in review_images_reversed|slice:":5" %}
+          {% if forloop.counter0 == forloop.parentloop.counter0 %}
+            <div class="headimg">
+              <img class="Nav__ImgContainer__Img" src="{{ review_image.image.url }}" alt="리뷰이미지">
+            </div>
+            {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="headimg">
+          <img class="Nav__ImgContainer__Img" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+        </div>
+      {% endif %}
     {% endfor %}
-  {% endfor %}
+  </div>
 </div>
 <div>
   <div class="d-flex flex-row" style="width:100%; margin-left: 50px;">
@@ -48,12 +55,12 @@ Detail
               {% csrf_token %}
               {% if request.user in post.like_users.all %}
               <div class="Detail__Title__Bookmark">
-                <button class="Detail__Title__BookmarkImg--Active" type="submit"></button>
+                <button class="Detail__Title__BookmarkImg--Active" type="submit" data-postPk="{{ post.pk }}"></button>
                 <span class="Detail__Title__BookmarkText--Active">가고싶다</span>
               </div>
               {% else %}
               <div class="Detail__Title__Bookmark">
-                <button class="Detail__Title__BookmarkImg" type="submit"></button>
+                <button class="Detail__Title__BookmarkImg" type="submit" data-postPk="{{ post.pk }}"></button>
                 <span class="Detail__Title__BookmarkText">가고싶다</span>
               </div>
               {% endif %}
@@ -95,7 +102,6 @@ Detail
               </tr>
             </tbody>
           </table>
-
           <div class="Detail__Main__Update">업데이트:{{ post.updated_at|date:"Y. m. d" }}</div>
           <hr>
           <table>
@@ -137,59 +143,100 @@ Detail
             <ul id="reviews_container">
               <div id="reviews_test">
                 {% for review in reviews reversed %}
-                <li class="Detail__Review__List review-item" data-review-id="{{review.pk}}">
-                  {% if review.taste_evaluation == 5 %}
-                  <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 맛있다">
-                  {% elif review.taste_evaluation == 3 %}
-                  <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 괜찮다">
-                  {% elif review.taste_evaluation == 1 %}
-                  <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 별로">
-                  {% endif %}
-                    <div class="Detail__Review__User">
-                      {% if review.user.picture %}
-                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ review.user.picture.url }}" alt="유저 이미지"></div>
-                      {% else %}
-                        <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{% static 'plates/no_image.png' %}" alt="유저 이미지"></div>
-                      {% endif %}
-                      <span class="Detail__Review__User__Name">{{ review.user }}</span>
-                      <ul class="Detail__Review__User__Stat">
-                        <span class="Detail__Review__User__StatItem--Review"></span><li class="Detail__Review__User__StatItem">{{ review.user.review_set.all|length }}</li>
-                        <span class="Detail__Review__User__StatItem--Follower"></span><li class="Detail__Review__User__StatItem">{{ person.followers.all|length }}</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
-                      <p class="Detail__Review__Text">{{ review.content }}</p>
-                      <ul class="Detail__Review__PictureList">
-                        {% for image in review.review_images.all %}
-                          <img style = 'width: 200px' src="{{ image.image.url }}" alt="이미지">
-                        {% endfor %}
-                      </ul>
-                    </div>
-                    <div class="Detail__Review__TasteEvaluationBox">
-                      <i class="Detail__Review__TasteEvaluation--Delicious"></i>
-                      {% if review.taste_evaluation == 5 %}
-                      <span class="Detail__Review__TasteEvaluationText">맛있다</span>
-                      {% elif review.taste_evaluation == 3 %}
-                      <span class="Detail__Review__TasteEvaluationText">괜찮다</span>
-                      {% elif review.taste_evaluation == 1 %}
-                      <span class="Detail__Review__TasteEvaluationText">별로</span>
-                      {% endif %}
-                    </div>
-                  </a>
-                </li>
+                  <li class="Detail__Review__List review-item" data-review-id="{{review.pk}}">
+                    {% if review.taste_evaluation == 5 %}
+                    <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 맛있다">
+                    {% elif review.taste_evaluation == 3 %}
+                    <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 괜찮다">
+                    {% elif review.taste_evaluation == 1 %}
+                    <a href="{% url 'plates:review_detail' post.pk review.pk %}" class="Detail__Review__Link 별로">
+                    {% endif %}
+                      <div class="Detail__Review__User">
+                        {% if review.user.picture %}
+                          <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ review.user.picture.url }}" alt="유저 이미지"></div>
+                        {% else %}
+                          <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{% static 'plates/no_image.png' %}" alt="대체 이미지"></div>
+                        {% endif %}
+                        <span class="Detail__Review__User__Name">{{ review.user }}</span>
+                        <ul class="Detail__Review__User__Stat">
+                          <span class="Detail__Review__User__StatItem--Review"></span><li class="Detail__Review__User__StatItem">{{ review.user.review_set.all|length }}</li>
+                          <span class="Detail__Review__User__StatItem--Follower"></span><li class="Detail__Review__User__StatItem">{{ person.followers.all|length }}</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
+                        <p class="Detail__Review__Text">{{ review.content }}</p>
+                        <ul class="Detail__Review__PictureList">
+                          {% for image in review.review_images.all %}
+                          <li class="Detail__Review__PictureItem">
+                            <div class="{% if forloop.counter <= 4 %}Detail__Review__PictureImgBox{% else %} Detail__Review__PictureImgBoxHidden{% endif %}">
+                              <img class="Detail__Review__PictureImg" src="{{ image.image.url }}" alt="이미지">
+                              {% if forloop.counter == 4 %}
+                              <div class="Detail__Review__PictureImgMore">+{{ forloop.revcounter0 }}</div>
+                              {% endif %}
+                            </div>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                      <div class="Detail__Review__TasteEvaluationBox">
+                        <i class="Detail__Review__TasteEvaluation--Delicious"></i>
+                        {% if review.taste_evaluation == 5 %}
+                        <span class="Detail__Review__TasteEvaluationText">맛있다</span>
+                        {% elif review.taste_evaluation == 3 %}
+                        <span class="Detail__Review__TasteEvaluationText">괜찮다</span>
+                        {% elif review.taste_evaluation == 1 %}
+                        <span class="Detail__Review__TasteEvaluationText">별로</span>
+                        {% endif %}
+                      </div>
+                    </a>
+                    {% if request.user == review.user %}
+                      <div class="d-flex justify-content-end" style="margin-bottom: 5px;">
+                        <div class="pe-2">
+                          <a href="{% url 'plates:review_update' post.pk review.pk %}" style="color: #9B9B9B;">수정</a>
+                        </div>
+                        <div class="pe-2" style="color: #9B9B9B;">
+                          ·
+                        </div>
+                        <div class="pe-2">
+                          <form action="{% url 'plates:review_delete' post.pk review.pk %}" method="POST">
+                            {% csrf_token %}
+                            <!-- 삭제 Button trigger modal -->
+                              <button type="button" data-bs-toggle="modal" data-bs-target="#reviewDelete" style="color: #9B9B9B;">
+                                삭제
+                              </button>
+                              <!-- 삭제 Modal -->
+                              <div class="modal fade" id="reviewDelete" tabindex="-1" aria-labelledby="reviewDeleteLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="reviewDeleteLabel">사용자가 리뷰를 삭제하려고 합니다.</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      선택하신 리뷰를 삭제 하시겠습니까?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="Detail__Review__DeleteButton--Cancel" data-bs-dismiss="modal">취소</button>
+                                      <button type="submit" class="Detail__Review__DeleteButton--Active">삭제</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </form>                      
+                        </div>
+                      </div>
+                    {% endif %}
+                  </li>
                 {% endfor %}          
               </div>
-              {% comment %} <div id="load_more_reviews" class="Detail__Review__MoreReview" role="button">
-                <span class="Detail__Review__MoreReview--before"></span>더보기<span class="Detail__Review__MoreReview--after"></span>
-              </div>{% endcomment %}
             </ul>
           </div>
         </div>
       </div>
     </div>
     <div class="Detail__Sidevar">
-      <div id="map" style="width:100%; height:300px;"></div>
+      <div id="map" data-address="{{ post.address }}" style="width:100%; height:300px;"></div>
       <div class="Detail__Sidevar__inner">
         <div style="padding-top: 30px;">
           <span class="Detail__Sidevar__innerTitle">주변 인기 식당</span>
@@ -197,15 +244,13 @@ Detail
             {% for post in nearby_restaurants %}
             <li class="Detail__Sidevar__innerRestaurant__List">
               <div class="Detail__Sidevar__innerRestaurant__ImgAndContent">
-                {% if post.image %}
                 <a href="{% url 'plates:detail' post.pk %}">
-                  <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{% static 'plates/detail/example.jpg' %}" alt="">
+                  {% if post.image %}
+                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{{ post.image.first.image.url }}" alt="">
+                  {% else %}
+                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{% static 'plates/no_image.png' %}" alt="">
+                  {% endif %}
                 </a>
-                {% else %}
-                <a href="{% url 'plates:detail' post.pk %}">
-                  <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{% static 'plates/no_image.png' %}" alt="">
-                </a>
-                {% endif %}
                 <div class="Detail__Sidevar__innerRestaurant__Content">
                   <div class="Detail__Sidevar__innerRestaurant__NameBox">
                     <a class="Detail__Sidevar__innerRestaurant__Name" href="{% url 'plates:detail' post.pk %}">{{ post.title }}</a>
@@ -231,143 +276,20 @@ Detail
             {% endfor %}
           </ul>
         </div>
-        <div class="Detail__Sidevar__innerRestaurant__TagBox">
-          {% comment %} <span class="Detail__Sidevar__innerRestaurant__TagTitle">이 식당 관련 태그</span> {% endcomment %}
-        </div>  
       </div>
     </div>
   </div>
 </div>
 
 
-{% block script %}
 
 <script type="text/javascript" src="/static/plates/detail/detail.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3a80ca4c67db3a146bfd38d3aeab33b&libraries=services"></script>
+<script type="text/javascript" src="{% static 'plates/detail/detail.js' %}"></script>
 <script
   src="https://code.jquery.com/jquery-3.6.4.js"
   integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
   crossorigin="anonymous"></script>
-
-<script>
-  function onHover()
-  {
-      $('#ReviewIcon').attr('class', 'Detail__Title__ReviewImg--Hover')
-  }
-
-  function offHover()
-  {
-      $('#ReviewIcon').attr('class', 'Detail__Title__ReviewImg')
-  }
-
-  // 리뷰 필터링
-  // 색 변경(기본 값)
-  document.getElementById("전체_btn").style.color = '#ff7100'
-
-  // 전체 버튼 클릭 시
-  document.getElementById("전체_btn").addEventListener("click", function() {
-    setButtonColor("전체_btn");
-    showAllReviews();
-  });
-
-  // 맛있다 버튼 클릭 시
-  document.getElementById("맛있다_btn").addEventListener("click", function() {
-    setButtonColor("맛있다_btn");
-    showReviews('맛있다');
-  });
-
-  // 괜찮다 버튼 클릭 시
-  document.getElementById("괜찮다_btn").addEventListener("click", function() {
-    setButtonColor("괜찮다_btn");
-    showReviews('괜찮다');
-  });
-
-  // 별로 버튼 클릭 시
-  document.getElementById("별로_btn").addEventListener("click", function() {
-    setButtonColor("별로_btn");
-    showReviews('별로');
-  });
-
-  // 버튼 색상 설정 함수
-  function setButtonColor(activeButtonId) {
-    var buttonIds = ["전체_btn", "맛있다_btn", "괜찮다_btn", "별로_btn"];
-    var activeColor = '#ff7100';
-    var inactiveColor = '#9b9b9b';
-
-    buttonIds.forEach(function(buttonId) {
-      var button = document.getElementById(buttonId);
-      button.style.color = (buttonId === activeButtonId) ? activeColor : inactiveColor;
-    });
-  }
-
-  // 전체 리뷰 출력 함수
-  function showAllReviews() {
-    var reviewItems = document.getElementsByClassName("review-item");
-    
-    // 모든 리뷰 아이템 보여주기
-    for (var i = 0; i < reviewItems.length; i++) {
-      reviewItems[i].style.display = 'block';
-    }
-  }
-
-  // 필터별 리뷰 출력 함수
-  function showReviews(tasteEvaluation) {
-    var reviewItems = document.getElementsByClassName("review-item");
-
-    // 모든 리뷰 아이템 숨기기
-    for (var i = 0; i < reviewItems.length; i++) {
-      reviewItems[i].style.display = 'none';
-    }
-
-    // 해당 분류의 리뷰 아이템 보여주기
-    var targetItems = document.getElementsByClassName(tasteEvaluation);
-    for (var j = 0; j < targetItems.length; j++) {
-      targetItems[j].style.display = 'flex';
-      var parentDiv = targetItems[j].parentNode;
-      parentDiv.style.display = 'block';
-    }
-  }
-
-
-  // 카카오 맵 api 이용
-  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-  mapOption = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-      level: 3 // 지도의 확대 레벨
-  }
-
-  // 지도를 생성합니다    
-  var map = new kakao.maps.Map(mapContainer, mapOption)
-
-  // 주소-좌표 변환 객체를 생성합니다
-  var geocoder = new kakao.maps.services.Geocoder()
-
-  // 주소로 좌표를 검색합니다
-  geocoder.addressSearch('{{ post.address }}', function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-    if (status === kakao.maps.services.Status.OK) {
-
-      var coords = new kakao.maps.LatLng(result[0].y, result[0].x)
-
-      // 결과값으로 받은 위치를 마커로 표시합니다
-      var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords
-      })
-
-      // 인포윈도우로 장소에 대한 설명을 표시합니다
-      var infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;"> {{ post.title }} </div>'
-      });
-      infowindow.open(map, marker)
-
-      // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-      map.setCenter(coords)
-    } 
-  })
-</script>
-{% endblock script %}
 
 {% include 'footer.html' %}
 
