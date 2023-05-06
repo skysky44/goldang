@@ -125,8 +125,11 @@ class Comment(models.Model):
 @receiver(pre_delete, sender=Post)
 def delete_post_images(sender, instance, **kwargs):
     '''
-    Post 인스턴스 삭제시 해당 게시물에 등록된 이미지들 삭제하는 함수
+    Post 인스턴스 삭제시 해당 게시물에 등록된 리뷰, 이미지들 삭제하는 함수
     '''
+    for review in instance.review_set.all():
+        review.delete()
+
     for post_image in instance.post_images.all():
         default_storage.delete(post_image.image.name)
         post_image.delete()
