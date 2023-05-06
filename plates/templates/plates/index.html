@@ -4,6 +4,10 @@
 
 {% block style %}
 <style>
+  .index-top-img {
+    width: 100%;
+  }
+
   .index-filter-title {
     padding: 38px 90px 27px;
     font-size: 1.438rem;
@@ -51,6 +55,10 @@ Index
 {% block content %}
 
 <div>
+  <img src="{% static 'index-top-photo.png' %}" alt="top-img" class="index-top-img">
+</div>
+<div>
+
   <div>
     <a href="{% url 'plates:create' %}">게시글 작성</a>
   </div>

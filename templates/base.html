@@ -211,7 +211,7 @@
 <nav class="navbar shadow-sm sticky-top nav-detail">
   <div class="container p-1">
     <a class="navbar-brand" href="{% url 'plates:index' %}">
-      <img src="{% static 'plates/logo_Mangoplate.png' %}" alt="로고" class="logo">
+      <img src="{% static 'logo_Mangoplate.png' %}" alt="로고" class="logo">
     </a>
     <!--nav_dropdown 시작-->
     <div>
@@ -243,7 +243,7 @@
                           {% if like_post.post_images.first %}
                             <img class="post-like-img" src="{{ like_post.post_images.first.image.url }}" alt="like_post_image">
                           {% else %}
-                            <img class="post-like-img" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+                            <img class="post-like-img" src="{% static 'no_image.png' %}" alt="대체이미지">
                           {% endif %}
                         </a>
                       </div>
@@ -271,7 +271,7 @@
 
                 {% else %}
                   <div class="text-center">
-                    <img src="{% static 'plates/star.png' %}" alt="star-icon" class="star-icon">
+                    <img src="{% static 'star.png' %}" alt="star-icon" class="star-icon">
                     <p class="star-icon-text1">격하게 가고싶다..</p>
                     <p class="star-icon-text2">식당의 ‘별’ 아이콘을 누르면 가고싶은 곳을 쉽게 저장할 수 있습니다.</p>
                   </div>              
@@ -298,7 +298,7 @@
               </div>
               <div class="text-center">
                 <a href="{% provider_login_url 'kakao' method='oauth2' %}"  style="text-decoration: none;">
-                  <img src="{% static 'plates/star.png' %}" alt="star-icon" class="star-icon">
+                  <img src="{% static 'star.png' %}" alt="star-icon" class="star-icon">
                   <p class="star-icon-text1">격하게 가고싶다..</p>
                   <p class="star-icon-text2">식당의 ‘별’ 아이콘을 누르면 가고싶은 곳을 쉽게 저장할 수 있습니다.</p>
                 </a>
