@@ -8,8 +8,9 @@ from django.core.paginator import Paginator
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
-    지역별_맛집 = Post.objects.filter(address_city='서울시 마포구')[:8]
-    조회수_맛집  = Post.objects.order_by('-visited')[:8]
+    지역별_맛집 = Post.objects.filter(address_city__in=["서울시 마포구", "서울특별시 마포구"])[:8]
+    조회수_맛집 = Post.objects.order_by("-visited")[:8]
+
     context = {
         'posts': posts,
         '지역별_맛집': 지역별_맛집,
@@ -180,7 +181,7 @@ def review_update(request, post_pk, review_pk):
 
 # @login_required
 def review_delete(request, post_pk, review_pk):
-    review = Review.objects.get(pk=review_pk)
+    review = review.objects.get(pk=review_pk)
 
     if request.user == review.user:
         review.delete()

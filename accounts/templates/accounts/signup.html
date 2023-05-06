@@ -27,7 +27,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <h2 class="mb-4">회원가입</h2>
-      <form method="post">
+      <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group my-3">
           {{ form.username.label }}
@@ -36,6 +36,10 @@
         <div class="form-group my-3">
           {{ form.email.label }}
           {{ form.email }}
+        </div>
+        <div class="form-group my-3">
+          {{ form.picture.label }}
+          {{ form.picture }}
         </div>
         <div class="form-group my-3">
           {{ form.password1.label }}
