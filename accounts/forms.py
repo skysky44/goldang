@@ -53,9 +53,20 @@ class CustomUserCreationForm(UserCreationForm):
         ),
     )
 
+    picture = forms.ImageField(
+        label="사진",
+        widget=forms.FileInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "사진을 선택하세요",
+                "style": "width: 400px;",
+            }
+        ),
+    )
+
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "email", "picture", "password1", "password2")
 
 
 # class CustomPasswordResetForm(PasswordResetForm):
