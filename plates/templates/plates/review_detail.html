@@ -55,8 +55,6 @@
             <img class="Detail__Review__Detail__Img" src="{{ image.image.url }}" alt="리뷰이미지">            
           </button>
           {% endfor %}
-        {% else %}
-          <img class="Detail__Review__Detail__Img" src="{% static 'no_image.png' %}" alt="대체이미지">
         {% endif %}
       </div>
       <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
@@ -110,7 +108,7 @@
             <button class="carousel-control-next" type="button" data-bs-target="#ReviewDetailImgIndicators" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"+3-00.3+0></span>
               <span class="visually-hidden">Next</span>
-            </button>           
+            </button>
           </div>
         </div>
       </div>
