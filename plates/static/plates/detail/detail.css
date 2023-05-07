@@ -436,9 +436,9 @@ button {
   margin: 15px 35px 0 8px;
 }
 
-.Detail__Review__User__ImgBox {
-  width: 70px;
-  height: 70px;
+.Detail__Review__User__ImgBox {  
+  width: 64px;
+  height: 64px;
   margin-bottom: 5px;
   border-style: solid 1px black;
   border-radius: 50%;
@@ -451,7 +451,6 @@ button {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  padding-bottom: 10px;
 }
 
 .Detail__Review__User__Name {
