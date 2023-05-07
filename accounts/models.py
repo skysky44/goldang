@@ -21,3 +21,10 @@ class User(AbstractUser):
     company_address = models.CharField('회사 위치', max_length=150, blank=True)
     followers = models.ManyToManyField('self', related_name='followings', symmetrical=False, blank=True)
     
+    @receiver(pre_delete, sender=User)
+    def delete_post_images(sender, instance, **kwargs):
+        '''
+        User 인스턴스 삭제시 등록한 글 삭제
+        '''
+        for review in instance.review_set.all():
+            review.delete()
