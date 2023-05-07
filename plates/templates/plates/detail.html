@@ -26,7 +26,7 @@ Detail
         {% endfor %}
       {% else %}
         <div class="headimg">
-          <img class="Nav__ImgContainer__Img" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+          <img class="Nav__ImgContainer__Img" src="{% static 'no_image.png' %}" alt="대체이미지">
         </div>
       {% endif %}
     {% endfor %}
@@ -155,7 +155,7 @@ Detail
                         {% if review.user.picture %}
                           <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{{ review.user.picture.url }}" alt="유저 이미지"></div>
                         {% else %}
-                          <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{% static 'plates/no_image.png' %}" alt="대체 이미지"></div>
+                          <div class="Detail__Review__User__ImgBox"><img class="Detail__Review__User__Img" src="{% static 'no_image.png' %}" alt="대체 이미지"></div>
                         {% endif %}
                         <span class="Detail__Review__User__Name">{{ review.user }}</span>
                         <ul class="Detail__Review__User__Stat">
@@ -163,7 +163,7 @@ Detail
                           <span class="Detail__Review__User__StatItem--Follower"></span><li class="Detail__Review__User__StatItem">{{ person.followers.all|length }}</li>
                         </ul>
                       </div>
-                      <div>
+                      <div class="Detail__Review__ContentBox">
                         <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
                         <p class="Detail__Review__Text">{{ review.content }}</p>
                         <ul class="Detail__Review__PictureList">
@@ -172,7 +172,9 @@ Detail
                             <div class="{% if forloop.counter <= 4 %}Detail__Review__PictureImgBox{% else %} Detail__Review__PictureImgBoxHidden{% endif %}">
                               <img class="Detail__Review__PictureImg" src="{{ image.image.url }}" alt="이미지">
                               {% if forloop.counter == 4 %}
-                              <div class="Detail__Review__PictureImgMore">+{{ forloop.revcounter0 }}</div>
+                                {% if forloop.revcounter0 > 0 %}
+                                  <div class="Detail__Review__PictureImgMore">+{{ forloop.revcounter0 }}</div>
+                                {% endif %}
                               {% endif %}
                             </div>
                           </li>
@@ -180,12 +182,14 @@ Detail
                         </ul>
                       </div>
                       <div class="Detail__Review__TasteEvaluationBox">
-                        <i class="Detail__Review__TasteEvaluation--Delicious"></i>
                         {% if review.taste_evaluation == 5 %}
+                        <i class="Detail__Review__TasteEvaluation--Delicious"></i>
                         <span class="Detail__Review__TasteEvaluationText">맛있다</span>
                         {% elif review.taste_evaluation == 3 %}
+                        <i class="Detail__Review__TasteEvaluation--Smile"></i>
                         <span class="Detail__Review__TasteEvaluationText">괜찮다</span>
                         {% elif review.taste_evaluation == 1 %}
+                        <i class="Detail__Review__TasteEvaluation--Sad"></i>
                         <span class="Detail__Review__TasteEvaluationText">별로</span>
                         {% endif %}
                       </div>
@@ -236,7 +240,7 @@ Detail
       </div>
     </div>
     <div class="Detail__Sidevar">
-      <div id="map" data-address="{{ post.address }}" style="width:100%; height:300px;"></div>
+      <div id="map" data-address="{{ post.address }}" data-title="{{ post.title }}" style="width:100%; height:300px;"></div>
       <div class="Detail__Sidevar__inner">
         <div style="padding-top: 30px;">
           <span class="Detail__Sidevar__innerTitle">주변 인기 식당</span>
@@ -245,10 +249,10 @@ Detail
             <li class="Detail__Sidevar__innerRestaurant__List">
               <div class="Detail__Sidevar__innerRestaurant__ImgAndContent">
                 <a href="{% url 'plates:detail' post.pk %}">
-                  {% if post.image %}
-                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{{ post.image.first.image.url }}" alt="">
+                  {% if post.post_images %}
+                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{{ post.post_images.first.image.url }}" alt="">
                   {% else %}
-                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{% static 'plates/no_image.png' %}" alt="">
+                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{% static 'no_image.png' %}" alt="">
                   {% endif %}
                 </a>
                 <div class="Detail__Sidevar__innerRestaurant__Content">

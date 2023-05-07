@@ -209,14 +209,14 @@
 <body>
 <!--Navigation Bar--> 
 <nav class="navbar shadow-sm sticky-top nav-detail">
-  <div class="container p-1">
+  <div class="container p-0 ms-4 me-0">
     <a class="navbar-brand" href="{% url 'plates:index' %}">
       <img src="{% static 'logo_Mangoplate.png' %}" alt="로고" class="logo">
     </a>
     <!--nav_dropdown 시작-->
     <div>
       {% if request.user.is_authenticated %}
-        <div>
+        <div style="position: absolute; right: 20px; top: 13px;">
           <div class="dropdown">
 
             {% if user.picture %}

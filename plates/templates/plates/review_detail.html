@@ -19,9 +19,9 @@
         <a href="{% url 'accounts:profile' review.user %}">
           <div class="d-flex flex-row">
             {% if review.user.picture %}
-            <div ><img class="Detail__Review__Detail__UserImg" src="{{ review.user.picture.url }}" alt="프로필이미지"></div>
+            <div><img class="Detail__Review__Detail__UserImg" src="{{ review.user.picture.url }}" alt="프로필이미지"></div>
             {% else %}
-            <div><img class="Detail__Review__Detail__UserImg" src="{% static 'plates/no_image.png' %}" alt="대체이미지"></div>
+            <div><img class="Detail__Review__Detail__UserImg" src="{% static 'no_image.png' %}" alt="대체이미지"></div>
             {% endif %}
             <div class="Detail__Review__Detail__UserInfo">
               <span class="Detail__Review__Detail__UserName">{{ review.user }}</span>
@@ -56,7 +56,7 @@
           </button>
           {% endfor %}
         {% else %}
-          <img class="Detail__Review__Detail__Img" src="{% static 'plates/no_image.png' %}" alt="대체이미지">
+          <img class="Detail__Review__Detail__Img" src="{% static 'no_image.png' %}" alt="대체이미지">
         {% endif %}
       </div>
       <span class="Detail__Review__Date">{{ review.created_at|date:"Y-m-d" }}</span>
@@ -108,7 +108,7 @@
               <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#ReviewDetailImgIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="carousel-control-next-icon" aria-hidden="true"+3-00.3+0></span>
               <span class="visually-hidden">Next</span>
             </button>           
           </div>

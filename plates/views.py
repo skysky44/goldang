@@ -26,7 +26,6 @@ def detail(request, post_pk):
     comment_form = CommentForm()
     reviews = post.review_set.all()
 
-    print(reviews)
     review_images = []
     post_images = PostImage.objects.filter(post=post)
     for review in reviews:
@@ -117,7 +116,6 @@ def review_create(request, post_pk):
     post_form = PostForm(request.POST)
     
     
-    print(post, post_form)
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
         imageForm = ReviewImageForm(request.POST, request.FILES)
@@ -126,7 +124,6 @@ def review_create(request, post_pk):
             review.post = post
             review.user = request.user
             review.save()
-            print(review.save())
 
             for image in request.FILES.getlist('image'):
                 ReviewImage.objects.create(review=review, image=image)
@@ -181,7 +178,7 @@ def review_update(request, post_pk, review_pk):
 
 # @login_required
 def review_delete(request, post_pk, review_pk):
-    review = review.objects.get(pk=review_pk)
+    review = Review.objects.get(pk=review_pk)
 
     if request.user == review.user:
         review.delete()

@@ -493,6 +493,11 @@ button {
   height: 12px;
 }
 
+.Detail__Review__ContentBox {
+  width: 70%;
+  margin-right: 20px;
+}
+
 .Detail__Review__Date {
   font-size: 14px;
   line-height: 1.2;
@@ -574,6 +579,7 @@ button {
 
 .Detail__Review__TasteEvaluationBox {
   display: flex;
+  justify-content: start;
   flex-direction: column;
   align-items: center;
   margin-left: auto;
