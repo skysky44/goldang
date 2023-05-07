@@ -92,6 +92,7 @@
 
   // data-address 속성 값을 가져옵니다
   var address = mapContainer.dataset.address;
+  var title = mapContainer.dataset.title;
 
   // 주소로 좌표를 검색합니다
   geocoder.addressSearch(address, function(result, status) {
@@ -109,7 +110,7 @@
 
       // 인포윈도우로 장소에 대한 설명을 표시합니다
       var infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;"> {{ post.title }} </div>'
+          content: '<div style="width:150px;text-align:center;padding:6px 0;">' + title + '</div>'
       });
       infowindow.open(map, marker)
 
