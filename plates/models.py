@@ -7,8 +7,7 @@ from imagekit.processors import ResizeToFill
 # S3 파일 관련
 from django.dispatch import receiver
 from django.core.files.storage import default_storage
-from django.db.models.signals import pre_delete, pre_save
-from storages.backends.s3boto3 import S3Boto3Storage
+from django.db.models.signals import pre_delete
 
 class Post(models.Model):
     def post_image_path(instance, filename):
@@ -59,23 +58,7 @@ class PostImage(models.Model):
         return f'{self.post.title} - {self.id}'
 
 
-
-class QuestionAndAnswer(models.Model):
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
-    title = models.CharField('제목', max_length=50)
-    content = models.TextField('내용')
-    created_at = models.DateTimeField('업로드 날짜', auto_now_add=False)
-    updated_at = models.DateTimeField('수정 날짜', auto_now=True)
-    
-
-    def __str__(self):
-        return self.title
-
-
 class Review(models.Model):
-
-    
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post = models.ForeignKey(to='plates.Post', on_delete=models.CASCADE)
     content = models.TextField('내용')
@@ -125,8 +108,11 @@ class Comment(models.Model):
 @receiver(pre_delete, sender=Post)
 def delete_post_images(sender, instance, **kwargs):
     '''
-    Post 인스턴스 삭제시 해당 게시물에 등록된 이미지들 삭제하는 함수
+    Post 인스턴스 삭제시 해당 게시물에 등록된 리뷰, 이미지들 삭제하는 함수
     '''
+    for review in instance.review_set.all():
+        review.delete()
+
     for post_image in instance.post_images.all():
         default_storage.delete(post_image.image.name)
         post_image.delete()

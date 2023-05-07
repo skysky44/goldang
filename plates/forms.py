@@ -1,10 +1,9 @@
 from django import forms
 
-from .models import Post, Review, PostImage, ReviewImage, Comment, QuestionAndAnswer
+from .models import Post, Review, PostImage, ReviewImage, Comment
 
 
 class PostForm(forms.ModelForm):
-    
     class Meta:
         model = Post
         fields = (
@@ -32,7 +31,6 @@ class PostImageForm(forms.ModelForm):
         widgets = {'image': forms.FileInput(attrs={'multiple': True})}
 
 class ReviewForm(forms.ModelForm):
-    
     class Meta:
         model = Review
         fields = (
@@ -51,6 +49,7 @@ class ReviewForm(forms.ModelForm):
             }),
         }
 
+
 class ReviewImageForm(forms.ModelForm):
     class Meta:
         model = ReviewImage
@@ -66,21 +65,10 @@ class ReviewImageForm(forms.ModelForm):
                 ReviewImage.objects.create(post=instance, image=image)
         return instance
 
+
 class CommentForm(forms.ModelForm):
-    
     class Meta:
         model = Comment
         fields = (
-            'content',
-        )
-
-
-
-class QuestionAndAnswerForm(forms.ModelForm):
-    
-    class Meta:
-        model = QuestionAndAnswer
-        fields = (
-            'title',
             'content',
         )
