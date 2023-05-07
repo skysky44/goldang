@@ -247,8 +247,8 @@ Detail
             <li class="Detail__Sidevar__innerRestaurant__List">
               <div class="Detail__Sidevar__innerRestaurant__ImgAndContent">
                 <a href="{% url 'plates:detail' post.pk %}">
-                  {% if post_images %}
-                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{{ post_images.first.image.url }}" alt="">
+                  {% if post.post_images %}
+                    <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{{ post.post_images.first.image.url }}" alt="">
                   {% else %}
                     <img class="Detail__Sidevar__innerRestaurant__ImgBox Detail_Sidevar__innerRestaurant__Img" src="{% static 'no_image.png' %}" alt="">
                   {% endif %}
