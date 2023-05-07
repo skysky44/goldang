@@ -182,12 +182,14 @@ Detail
                         </ul>
                       </div>
                       <div class="Detail__Review__TasteEvaluationBox">
-                        <i class="Detail__Review__TasteEvaluation--Delicious"></i>
                         {% if review.taste_evaluation == 5 %}
+                        <i class="Detail__Review__TasteEvaluation--Delicious"></i>
                         <span class="Detail__Review__TasteEvaluationText">맛있다</span>
                         {% elif review.taste_evaluation == 3 %}
+                        <i class="Detail__Review__TasteEvaluation--Smile"></i>
                         <span class="Detail__Review__TasteEvaluationText">괜찮다</span>
                         {% elif review.taste_evaluation == 1 %}
+                        <i class="Detail__Review__TasteEvaluation--Sad"></i>
                         <span class="Detail__Review__TasteEvaluationText">별로</span>
                         {% endif %}
                       </div>
