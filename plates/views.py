@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import F
 from django.contrib.auth.decorators import login_required
 from .models import Post, Review, Comment, PostImage, ReviewImage
 from .forms import PostForm, ReviewForm, CommentForm, PostImageForm, ReviewImageForm
@@ -36,8 +37,13 @@ def detail(request, post_pk):
     
 
     nearby_restaurants = posts.filter(address_city=post.address_city).exclude(pk=post_pk)[:5]
-    post.visited += 1
+    post.visited = F('visited') + 1
+    # post.visited += 1
     post.save()
+    '''다음 호출이 일어날 때 위 연산이 수행되는 것 같다.'''
+    # To access the new value saved this way, the object must be reloaded (3.2 Doc)
+    # post = Post.objects.get(pk=post_pk)
+    post.refresh_from_db()
 
     context = {
         'post': post,
